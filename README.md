@@ -1,5 +1,7 @@
 # Winding Metastability
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21776817.svg)](https://doi.org/10.5281/zenodo.21776817)
+
 **A verified research program on metastability of reversible diffusions
 on the torus T^(2N): winding-label persistence, exit laws, and the
 coupled label window.**
@@ -90,5 +92,7 @@ that are outside this repository's scope (see `EXPORT-MANIFEST.md`).
 
 Documents: CC BY 4.0 (`LICENSE`). Code (`scripts/`,
 `formal-framework/lean/`, `formal-framework/numerics/`): MIT
-(`LICENSE-CODE`). Cite via `CITATION.cff` (Zenodo DOI: pending first
-release).
+(`LICENSE-CODE`). Cite via `CITATION.cff`. Zenodo: concept DOI
+[10.5281/zenodo.21776817](https://doi.org/10.5281/zenodo.21776817)
+(all versions); this release (math-v2.0):
+[10.5281/zenodo.21776818](https://doi.org/10.5281/zenodo.21776818).
