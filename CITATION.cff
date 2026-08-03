@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use or discuss this work, please cite it as below."
+title: "Winding Metastability: a verified research program on metastability of reversible diffusions on the torus"
+authors:
+  - family-names: "Valdepenas"
+    given-names: "Cristobal"
+version: math-v2.0
+date-released: "2026-08-02"
+repository-code: "https://github.com/cvaldepenas/winding-metastability"
+license: CC-BY-4.0
+keywords:
+  - metastability
+  - reversible diffusions
+  - winding number
+  - large deviations
+  - AI-assisted mathematics
+  - adversarial verification

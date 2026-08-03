@@ -1,0 +1,139 @@
+import Mathlib
+
+open Real Finset MeasureTheory
+
+open scoped Real
+
+namespace LaneCT1
+
+instance : Fact (0 < 2 * π) := ⟨mul_pos two_pos Real.pi_pos⟩
+
+instance : MeasurableSpace Real.Angle :=
+  inferInstanceAs (MeasurableSpace (AddCircle (2 * π)))
+noncomputable instance : MeasureSpace Real.Angle :=
+  inferInstanceAs (MeasureSpace (AddCircle (2 * π)))
+
+instance : SigmaFinite (volume : Measure Real.Angle) :=
+  inferInstanceAs (SigmaFinite (volume : Measure (AddCircle (2 * π))))
+
+abbrev Config (N : ℕ) := Fin N → Real.Angle
+
+noncomputable def bond {N : ℕ} [NeZero N] (θ : Config N) (i : Fin N) : Real.Angle := θ (i + 1) - θ i
+
+noncomputable def J {N : ℕ} [NeZero N] (κ : ℝ) (θ : Config N) : ℝ :=
+  κ * ∑ i : Fin N, (1 - (bond θ i).cos)
+
+noncomputable def windSum {N : ℕ} [NeZero N] (θ : Config N) : ℝ :=
+  ∑ i : Fin N, (bond θ i).toReal
+
+def Delta (N : ℕ) [NeZero N] : Set (Config N) := {θ | ∃ i, bond θ i = (π : Real.Angle)}
+
+theorem sum_bond_eq_zero {N : ℕ} [NeZero N] (θ : Config N) :
+    ∑ i : Fin N, bond θ i = 0 := <proof elided>
+
+theorem winding_integer {N : ℕ} [NeZero N] (hN : 3 ≤ N) (θ : Config N) (hθ : θ ∉ Delta N) :
+    ∃ k : ℤ, windSum θ = 2 * π * k ∧ (k.natAbs : ℕ) ≤ (N - 1) / 2 := <proof elided>
+
+noncomputable def w {N : ℕ} [NeZero N] (hN : 3 ≤ N) (θ : Config N) : ℤ := by
+  classical
+  exact if h : θ ∉ Delta N then (winding_integer hN θ h).choose else 0
+
+private lemma continuousAt_angle_toReal {ψ : Real.Angle} (h : ψ ≠ (π : Real.Angle)) :
+    ContinuousAt Real.Angle.toReal ψ := by
+  have h' : ψ ≠ (((-π : ℝ) : Real.Angle)) := by
+    rw [Real.Angle.coe_neg, Real.Angle.neg_coe_pi]
+    exact h
+  have hc : ContinuousAt (fun x : AddCircle (2 * π) =>
+      ((AddCircle.equivIoc (2 * π) (-π) x : ℝ))) ψ :=
+    continuous_subtype_val.continuousAt.comp
+      (AddCircle.continuousAt_equivIoc (2 * π) (-π) h')
+  exact hc
+
+private lemma windSum_eq_two_pi_mul_w {N : ℕ} [NeZero N] (hN : 3 ≤ N) {θ : Config N}
+    (hθ : θ ∉ Delta N) : windSum θ = 2 * π * (w hN θ : ℝ) := by
+  have hw : w hN θ = (winding_integer hN θ hθ).choose := dif_pos hθ
+  rw [hw]
+  exact (winding_integer hN θ hθ).choose_spec.1
+
+private lemma continuousAt_windSum {N : ℕ} [NeZero N] {θ : Config N} (hθ : θ ∉ Delta N) :
+    ContinuousAt (windSum (N := N)) θ := by
+  have hbond : ∀ i : Fin N, bond θ i ≠ (π : Real.Angle) := fun i hi => hθ ⟨i, hi⟩
+  have hterm : ∀ i : Fin N, ContinuousAt (fun θ' : Config N => (bond θ' i).toReal) θ := by
+    intro i
+    have hb : Continuous (fun θ' : Config N => bond θ' i) := by
+      unfold bond
+      exact (continuous_apply (i + 1)).sub (continuous_apply i)
+    exact ContinuousAt.comp (x := θ) (f := fun θ' : Config N => bond θ' i)
+      (continuousAt_angle_toReal (hbond i)) hb.continuousAt
+  show Filter.Tendsto (fun θ' : Config N => ∑ i : Fin N, (bond θ' i).toReal)
+    (nhds θ) (nhds (∑ i : Fin N, (bond θ i).toReal))
+  exact tendsto_finsetSum Finset.univ (fun i _ => hterm i)
+
+theorem w_locallyConstant {N : ℕ} [NeZero N] (hN : 3 ≤ N) :
+    ∀ θ ∈ (Delta N)ᶜ, ∃ U ∈ nhds θ, ∀ θ' ∈ U, θ' ∈ (Delta N)ᶜ → w hN θ' = w hN θ := <proof elided>
+
+theorem isClosed_Delta {N : ℕ} [NeZero N] : IsClosed (Delta N) := <proof elided>
+
+theorem volume_Delta_eq_zero {N : ℕ} [NeZero N] (hN : 3 ≤ N) :
+    volume (Delta N) = 0 := <proof elided>
+
+theorem J_ge_two_kappa_on_Delta {N : ℕ} [NeZero N] {κ : ℝ} (hκ : 0 < κ) (θ : Config N)
+    (hθ : θ ∈ Delta N) : 2 * κ ≤ J κ θ := <proof elided>
+
+def Sigma0 (N : ℕ) [NeZero N] : Set (Config N) := {θ | θ ∉ Delta N ∧ ∀ h : 3 ≤ N, w h θ = 0}
+
+theorem path_meets_Delta {N : ℕ} [NeZero N] (hN : 3 ≤ N) (γ : ℝ → Config N)
+    (hγ : Continuous γ) (t₀ t₁ : ℝ) (h01 : t₀ ≤ t₁)
+    (h0 : γ t₀ ∈ Sigma0 N) (h1 : γ t₁ ∉ Delta N) (h1' : w hN (γ t₁) ≠ 0) :
+    ∃ t ∈ Set.Icc t₀ t₁, γ t ∈ Delta N := <proof elided>
+
+theorem barrier_along_path {N : ℕ} [NeZero N] {κ : ℝ} (hκ : 0 < κ) (hN : 3 ≤ N)
+    (γ : ℝ → Config N) (hγ : Continuous γ) (t₀ t₁ : ℝ) (h01 : t₀ ≤ t₁)
+    (h0 : γ t₀ ∈ Sigma0 N) (h1 : γ t₁ ∉ Delta N) (h1' : w hN (γ t₁) ≠ 0) :
+    ∃ t ∈ Set.Icc t₀ t₁, 2 * κ ≤ J κ (γ t) := <proof elided>
+
+noncomputable def refl (N : ℕ) : Config N → Config N := fun θ i => -(θ i)
+
+theorem bond_refl {N : ℕ} [NeZero N] (θ : Config N) (i : Fin N) :
+    bond (refl N θ) i = -(bond θ i) := <proof elided>
+
+theorem J_refl {N : ℕ} [NeZero N] (κ : ℝ) (θ : Config N) :
+    J κ (refl N θ) = J κ θ := <proof elided>
+
+theorem delta_refl {N : ℕ} [NeZero N] (θ : Config N) :
+    refl N θ ∈ Delta N ↔ θ ∈ Delta N := <proof elided>
+
+theorem windSum_refl {N : ℕ} [NeZero N] (θ : Config N) (hθ : θ ∉ Delta N) :
+    windSum (refl N θ) = -windSum θ := <proof elided>
+
+theorem sector_nonempty {N : ℕ} [NeZero N] (hN : 3 ≤ N) (k : ℕ) (hk : 2 * k < N) :
+    ∃ θ : Config N, θ ∉ Delta N ∧ windSum θ = 2 * π * k := <proof elided>
+
+theorem isOpen_sector {N : ℕ} [NeZero N] (hN : 3 ≤ N) (c : ℝ) :
+    IsOpen {θ : Config N | θ ∉ Delta N ∧ windSum θ = c} := <proof elided>
+
+theorem measurePreserving_refl {N : ℕ} :
+    MeasureTheory.MeasurePreserving (refl N)
+      MeasureTheory.volume MeasureTheory.volume := <proof elided>
+
+theorem no_measurable_readout_recovers_winding {N : ℕ} [NeZero N]
+    (hN : 3 ≤ N) {κ : ℝ} (hκ : 0 < κ) :
+    ¬ ∃ φ : ℝ → ℝ, Measurable φ ∧
+      (∀ᵐ θ : Config N ∂MeasureTheory.volume, φ (J κ θ) = windSum θ) := <proof elided>
+
+theorem J_nonneg {N : ℕ} [NeZero N] {κ : ℝ} (hκ : 0 ≤ κ) (θ : Config N) :
+    0 ≤ J κ θ := <proof elided>
+
+theorem exists_Sigma0_J_eq_zero {N : ℕ} [NeZero N] (hN : 3 ≤ N) (κ : ℝ) :
+    ∃ θ : Config N, θ ∈ Sigma0 N ∧ J κ θ = 0 := <proof elided>
+
+noncomputable def rhoBeta {N : ℕ} [NeZero N] (κ β : ℝ) : MeasureTheory.Measure (Config N) :=
+  MeasureTheory.volume.withDensity
+    (fun θ => ENNReal.ofReal (Real.exp (-β * J κ θ)))
+
+theorem no_measurable_readout_recovers_winding_rhoBeta {N : ℕ} [NeZero N]
+    (hN : 3 ≤ N) {κ : ℝ} (hκ : 0 < κ) (β : ℝ) :
+    ¬ ∃ φ : ℝ → ℝ, Measurable φ ∧
+      (∀ᵐ θ : Config N ∂(rhoBeta κ β), φ (J κ θ) = windSum θ) := <proof elided>
+
+end LaneCT1

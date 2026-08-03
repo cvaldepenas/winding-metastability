@@ -1,0 +1,234 @@
+{
+ "kappa": 1.0,
+ "k": 1,
+ "N_range": [
+  10,
+  200
+ ],
+ "lambdas": [
+  1.0001,
+  1.01,
+  1.05,
+  1.1,
+  1.2,
+  1.35,
+  1.5,
+  2.0,
+  3.0,
+  4.0
+ ],
+ "condition": "m_k + m_j(lambda) >= S_k + c_H (LEVEL, PE.5(a))",
+ "eps_term": "omitted (conservative: it raises trap floors; vanishes at j=k)",
+ "n_cells": 1910,
+ "n_violations_reachable": 1787,
+ "worst_reachable": {
+  "margin": -1.845978,
+  "N": 200,
+  "lam": 1.0001,
+  "j": 1
+ },
+ "violations_sample": [
+  {
+   "N": 15,
+   "lam": 1.0001,
+   "min_margin_all_j": -0.013756,
+   "argmin_j": 14,
+   "min_margin_reachable_j": -0.013756,
+   "argmin_reachable_j": 14,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 15,
+   "lam": 1.01,
+   "min_margin_all_j": -0.000917,
+   "argmin_j": 14,
+   "min_margin_reachable_j": -0.000917,
+   "argmin_reachable_j": 14,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 16,
+   "lam": 1.0001,
+   "min_margin_all_j": -0.131762,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.131762,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 16,
+   "lam": 1.01,
+   "min_margin_all_j": -0.119705,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.119705,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 16,
+   "lam": 1.05,
+   "min_margin_all_j": -0.070987,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.070987,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 16,
+   "lam": 1.1,
+   "min_margin_all_j": -0.010091,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.010091,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 17,
+   "lam": 1.0001,
+   "min_margin_all_j": -0.236774,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.236774,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 17,
+   "lam": 1.01,
+   "min_margin_all_j": -0.225409,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.225409,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 17,
+   "lam": 1.05,
+   "min_margin_all_j": -0.17949,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.17949,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 17,
+   "lam": 1.1,
+   "min_margin_all_j": -0.122091,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.122091,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 17,
+   "lam": 1.2,
+   "min_margin_all_j": -0.007294,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.007294,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 18,
+   "lam": 1.0001,
+   "min_margin_all_j": -0.330786,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.330786,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 18,
+   "lam": 1.01,
+   "min_margin_all_j": -0.320039,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.320039,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 18,
+   "lam": 1.05,
+   "min_margin_all_j": -0.276618,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.276618,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 18,
+   "lam": 1.1,
+   "min_margin_all_j": -0.222341,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.222341,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 18,
+   "lam": 1.2,
+   "min_margin_all_j": -0.113788,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.113788,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 19,
+   "lam": 1.0001,
+   "min_margin_all_j": -0.415413,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.415413,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 19,
+   "lam": 1.01,
+   "min_margin_all_j": -0.405222,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.405222,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 19,
+   "lam": 1.05,
+   "min_margin_all_j": -0.364043,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.364043,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  },
+  {
+   "N": 19,
+   "lam": 1.1,
+   "min_margin_all_j": -0.312569,
+   "argmin_j": 1,
+   "min_margin_reachable_j": -0.312569,
+   "argmin_reachable_j": 1,
+   "n_reachable_traps": 2
+  }
+ ],
+ "row_threshold_rescan_2026_07_21": {
+  "condition": "m_k + m_j(lambda) - S_k >= c_H/2 (the ROW-true net-exponent threshold; the earlier scan used the CONSERVATIVE doorway S_k + c_H)",
+  "n_violations": 1411,
+  "n_cells": 1528,
+  "first_failing_N_per_lambda": {
+   "1.0001": 16,
+   "1.05": 17,
+   "1.1": 17,
+   "1.2": 18,
+   "1.5": 21,
+   "2.0": 26,
+   "3.0": 36,
+   "4.0": 46
+  },
+  "worst": {
+   "N": 200,
+   "lam": 1.0001,
+   "margin": -1.8368,
+   "j": 1
+  },
+  "note": "the red-flag consequence is REFINED: the honest window is where THIS margin >= 0; the conservative doorway scan overstated the failing region"
+ }
+}

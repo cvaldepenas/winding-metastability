@@ -1,0 +1,117 @@
+{
+ "axioms": [
+  {
+   "member": "Wstar_corpus",
+   "N": 10,
+   "A2_min_v": 4.934901376429934e-10,
+   "A2_holds": true,
+   "A2prime_v0": 0.0,
+   "A4_vpp_at_consumed_tori": {
+    "0": 1.0,
+    "1": 0.8090169943749475
+   },
+   "A4_holds": true,
+   "A6_even": true
+  },
+  {
+   "member": "v_(1-cos)^2",
+   "N": 10,
+   "A2_min_v": 0.0,
+   "A2_holds": true,
+   "A2prime_v0": 0.0,
+   "A4_vpp_at_consumed_tori": {
+    "0": 0.0,
+    "1": 1.0
+   },
+   "A4_holds": true,
+   "A6_even": true
+  },
+  {
+   "member": "v_mix_1-cos+quarter(1-cos2x)",
+   "N": 10,
+   "A2_min_v": 9.869802197748356e-10,
+   "A2_holds": true,
+   "A2prime_v0": 0.0,
+   "A4_vpp_at_consumed_tori": {
+    "0": 2.0,
+    "1": 1.118033988749895
+   },
+   "A4_holds": true,
+   "A6_even": true
+  }
+ ],
+ "members": [
+  {
+   "member": "Wstar_corpus",
+   "N": 10,
+   "k": 1,
+   "lam": 1.5,
+   "eps": 0.05,
+   "verdict": "STANDS",
+   "C2_max_grad_on_Gk": 4.662936703425658e-16,
+   "C3_ground_identity_err": 4.440892098500626e-16,
+   "C4_kernel_dim": 2,
+   "C4_transverse_floor": 0.3236,
+   "C4_c1_reference": 0.309,
+   "C1_global_min_found": 4.2559605839542766e-11,
+   "C5_extra_criticals_in_Dk": [],
+   "C7_G_W_sample_estimate": 7.769,
+   "w_k": 1.9098
+  },
+  {
+   "member": "v_(1-cos)^2",
+   "N": 10,
+   "k": 1,
+   "lam": 1.5,
+   "eps": 0.05,
+   "verdict": "STANDS",
+   "C2_max_grad_on_Gk": 4.773959005888173e-16,
+   "C3_ground_identity_err": 2.220446049250313e-16,
+   "C4_kernel_dim": 2,
+   "C4_transverse_floor": 0.3267,
+   "C4_c1_reference": 0.309,
+   "C1_global_min_found": 2.0679097323395013e-11,
+   "C5_extra_criticals_in_Dk": [],
+   "C7_G_W_sample_estimate": 18.538,
+   "w_k": 0.3647
+  },
+  {
+   "member": "v_mix_1-cos+quarter(1-cos2x)",
+   "N": 10,
+   "k": 1,
+   "lam": 1.5,
+   "eps": 0.05,
+   "verdict": "STANDS",
+   "C2_max_grad_on_Gk": 4.773959005888173e-16,
+   "C3_ground_identity_err": 4.440892098500626e-16,
+   "C4_kernel_dim": 2,
+   "C4_transverse_floor": 0.3287,
+   "C4_c1_reference": 0.309,
+   "C1_global_min_found": 1.631153961900722e-11,
+   "C5_extra_criticals_in_Dk": [],
+   "C7_G_W_sample_estimate": 9.544,
+   "w_k": 3.6373
+  }
+ ],
+ "a2_shield": {
+  "probe": "A2 shield heuristic (open territory)",
+  "v_min_pointwise": -0.053871955701708885,
+  "W_min_found": -0.1719662,
+  "at_winding_diff": 2,
+  "shielded": false,
+  "params": {
+   "N": 10,
+   "depth": 0.05,
+   "conc": 40.0,
+   "x0": 2.3248,
+   "N_x0_mod_2pi": 4.3982
+  },
+  "honesty": "bounded search; a negative W_min DISPROVES shielding at these params, a nonnegative one only supports the heuristic (well-depth bound NOT proved in the corpus)"
+ },
+ "wall_seconds": 22.5,
+ "verdict_summary": {
+  "Wstar_corpus": "STANDS",
+  "v_(1-cos)^2": "STANDS",
+  "v_mix_1-cos+quarter(1-cos2x)": "STANDS"
+ }
+}

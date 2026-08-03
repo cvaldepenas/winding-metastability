@@ -1,0 +1,49 @@
+REGRESSION: Stage-0 scalars reproduce the corpus's printed 10 dp values. PASS
+
+F-1 ADJUDICATION (LEAD, 2026-08-02): the E6 instantiation point is
+eps = 0.0450000000. The design NAME eps = 0.05 stays as the printed vintage in
+the landed displays [V2:369, V2:430-432, PX:7412 physical]; it is NOT
+renumbered by this pass (disposition D4 + D1-deferred: the row is carried
+TYPED against the name, and the corpus renumbering decision rides to the
+external gate). Every sub-cap consumer (incl. E5's start domain D_k(eps))
+is instantiated at the adjudicated point below.
+
+  L-02  eps < (2 kappa - m_k)/w_k  [LP:431-433] : eps = 0.0450000000 vs cap = 0.0472135955 -> PASS (margin 0.0022135955)
+  C-07  eps < 1/8  [V2:433] : eps = 0.0450000000 vs cap = 0.1250000000 -> PASS (margin 0.0800000000)
+  C-06  eps < kappa/(4 g(10))  [V2:429-431] : eps = 0.0450000000 vs cap = 0.1309016994 -> PASS (margin 0.0859016994)
+  M2P support: 2 kappa > m_k + eps w_k reads 2.0000000000 > 1.9957724088 -> TRUE (margin 0.0042275912)
+
+ADJUDICATED eps-BEARING ROWS at eps = 0.0450000000 (design-vintage value in brackets):
+  err = eps g(10)                                                    = 0.0859423525   [was 0.0954915028]
+  eps w_k                                                            = 0.0859423525   [was 0.0954915028]
+  (THR) RHS = S_k + c_H - m_k - eps w_k                              = 0.9384079102   [was 0.9288587599]
+  m_k + eps w_k (A_tube's delta-free part; also (SML')/M2P support)  = 1.9957724088   [was 2.0053215591]
+  eps (S_k/kappa - w_k) (the round-sum rate's eps term)              = 0.0314610158   [was 0.0349566842]
+
+  Derived delta caps at the adjudicated point (Q := L_eps N delta^2/4):
+    C-08 c_plate > 0 : err_A = eps w_k + 2Q < Delta_door  <=>  Q < 0.4692039551
+      [was Q < 0.4644293800]; delta < 0.4332223240 / sqrt(L_eps)
+    C-09 (THR)       : Q < 0.9384079102   [was Q < 0.9288587599]
+    C-11             : Q < 0.9756497373   (unchanged; eps-free)
+  (E5-MARGIN) numeral S_k + c_H - 2 kappa = 0.9341803190 (eps-free, unchanged).
+  (E5-TRAPMARGIN) strict form m_k + m_1 - S_k - c_H - err = 0.7995374410 > 0
+      [was 0.7899882907 at the design vintage; both PASS, margin improves].
+  NUMERAL CONVENTION (adjudicated): all derived numerals are double-precision
+  evaluations of the landed closed forms rounded to 10 dp (the Stage-0 method,
+  under which the corpus's printed scalars reproduce exactly). Decimal
+  arithmetic on the printed 10-dp scalars differs by one final ulp on the
+  (E5-TRAPMARGIN) rows (giving 0.8854797936/0.7899882908/0.7995374411) and is
+  NOT the convention; recorded so the divergence is caught, not hidden.
+
+F-2 ADJUDICATION (LEAD, 2026-08-02): L-08 GOVERNS (disposition E1-operative).
+MM:3025-3039 is the corpus's mandated order-of-limits block: FIX (eps, delta,
+h = delta/2); beta -> infinity FIRST; THEN delta -> 0 and h -> 0 together.
+Under it the diffusive floor L-07 reads beta_0 = 16/h^2 = 64/delta^2 --
+the same delta^{-2} shape as beta_env, consistent with the order. The
+L-09 line (MM:344-345, 'delta <= h stays in force') is jointly unsatisfiable
+with h = delta/2 at every delta > 0 and is RECORDED AS A VARIANCE to be
+cured at the next MM-touching pass (one line); it is not read by this pass.
+Per-consumer schedule recording (disposition E2) is carried in the table for
+Gamma(h)/err(delta) consumers as a belt: each names L-08 as its schedule.
+
+END OF ADJUDICATION LAYER. exit 0

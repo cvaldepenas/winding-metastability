@@ -1,0 +1,1161 @@
+====================================================================================================
+E6 NUMERICAL INSTANTIATION PASS
+Flagship cell (N, kappa, lambda) = (10, 1, 1+), design eps = 0.05, delta -> 0 LAST.
+ASCII math only. Anchors: V2/MM/LP = PHYSICAL lines; PX = PRE-BANNER unless tagged
+'physical' (PHYSICAL = PRE-BANNER + 4, per V2 S8.1).
+====================================================================================================
+
+====================================================================================================
+STAGE 0 -- CELL SCALARS FROM (N, kappa, lambda) = (10, 1, 1+)  --  REGRESSION GATE
+====================================================================================================
+Closed forms recomputed here; asserted against the corpus's printed values.
+Any mismatch is a HARD FAIL and the pass aborts.
+[PROV] V2:370-373 (round-3 checker block, 10 dp); V2:362-364, V2:369, V2:381-384,
+       V2:394-404; PX:1430/3003/3409 (pre-banner) [CF1]; MM:1378; MM:1370; MM:116/125;
+       PX:7411-7413 (physical) (THR) RHS; LP:156-159 (c_H).
+
+  -- asserted rows (corpus printed value on the right) --
+    g(10)                              computed 1.9098300563     corpus 1.9098300563     PASS
+    m_k  (k=1, kappa=1, N=10)          computed 1.9098300563     corpus 1.9098300563     PASS
+    w_k  (= g(N) at k=1)               computed 1.9098300563     corpus 1.9098300563     PASS
+    m_1(lambda), lambda -> 1+          computed 1.9098300563     corpus 1.9098300563     PASS
+    S_1 = S_k                          computed 2.6089637399     corpus 2.6089637399     PASS
+    c_H                                computed 0.3252165791     corpus 0.3252165791     PASS
+    c_H/2                              computed 0.1626082895     corpus 0.1626082895     PASS
+    3 c_H                              computed 0.9756497373     corpus 0.9756497373     PASS
+    Delta_door = S_k + c_H - m_k       computed 1.0243502627     corpus 1.0243502627     PASS
+    (MRG)                              computed 0.8617419732     corpus 0.8617419732     PASS
+    (MRG) via lambda-free identity     computed 0.8617419732     corpus 0.8617419732     PASS
+    (ADJ-2) at (10, 1+)                computed 1.7472217667     corpus 1.7472217667     PASS
+    (ADJ-2) at (18, 1.05)              computed 1.0425473031     corpus 1.0425473031     PASS
+    (ADJ-2) at (46, 4)                 computed 1.6742434887     corpus 1.6742434887     PASS
+    (ADJ-2) at (200, 1.0001)           computed 0.0894771449     corpus 0.0894771449     PASS
+    flagship err = eps g(10)           computed 0.0954915028     corpus 0.0954915028     PASS
+    (THR) RHS                          computed 0.9288587599     corpus 0.9288587599     PASS
+    D_G product torus = pi sqrt(2N)  [G6] computed 14.0496294621    corpus 14.0496294621    PASS
+    D_G single loop  = pi sqrt(N)   [G6] computed 9.9345882658     corpus 9.9345882658     PASS
+    eps cap (2kappa - m_k)/w_k  [L-02] computed 0.0472135955     corpus 0.0472135955     PASS
+    eps cap kappa/(4 g(10)) [C-06, 7dp] computed 0.1309017        corpus 0.1309017        PASS
+
+  -- derived cell numerals used downstream (not part of the printed gate) --
+    S_k + c_H                                  2.9341803190
+    m_k + eps w_k  (A_tube's eps part)         2.0053215591
+    m_k + 2 kappa                              3.9098300563
+    S_k + 4 c_H                                3.9098300563
+    D_G max-norm reading (NOT USED) [G6]       3.1415926536
+
+  STAGE 0 RESULT: PASS -- 21 asserted rows, 21 reproduce the corpus's printed
+  values exactly (20 at 10 dp, C-06's cap at the corpus's own 7 dp printing).
+  Authority is this enumeration of 21 named rows; no exhaustiveness is claimed.
+
+====================================================================================================
+STAGE 1 -- SUPPLIED TYPED INPUTS -- FAIL CLOSED
+====================================================================================================
+Rule R5: no numeral is invented. A stage needing an unsupplied input emits a
+CONDITIONAL row whose closed form is printed with the missing symbols NAMED.
+
+  SUPPLIED (0): <none>
+
+  UNSUPPLIED (51) -- every dependent row below is CONDITIONAL:
+    G             L             L_eps         inj_M         V_M           omega_nm1     
+    c_N_delta     C_n_harnack   c_perp        r0            C_1           C_Z_tau       
+    gamma_2       C_w           C_B           C_ch          err_B         err_S         
+    T_sig         T_row         T_1           T_b           T_init        T_relax       
+    T_sub         C_s           K_abs         c_Z           C_Z           C_Z_prime     
+    lambda_u      Lambda_s      Lambda_min    C_N           c_1           C_fr          
+    L_fr          W_sup         c_shell       L_E           r_0_prime     eps_prime_0   
+    epsilon_0     epsilon_1     eps_2         s             s_prime       delta         
+    h_hop         theta_2       tau           
+
+  GATE COUNT: G and L (hence L_eps) are the two that gate the most rows and
+  neither has a landed numeral anywhere in V2 / MM / LP / PX for the flagship cell.
+  [PROV] V2:160, V2:3317 (G); V2:161, MM:132, MM:657 (L, L_eps)
+
+====================================================================================================
+STAGE 2 -- eps-ONLY CAPS -- C-07, C-06, L-02, then L-01 / L-03
+====================================================================================================
+Design scale under test: eps = 0.0500000000  [PROV] V2:430-432 ('the design scale eps = 0.05')
+This stage does NOT choose a different eps. A violated cap is a REPORTED FINDING
+for the lead, with dispositions listed; the disposition is a lead decision.
+
+[C-07] (SML') operative eps anchor B: eps < 1/8
+    class    : VERIFIED
+    closed   : eps < 1/8
+    computed : eps = 0.0500000000
+    required : eps < 0.1250000000
+    status   : PASS
+    [PROV]   : V2:433 ('the simpler eps < 1/8 condition below both')
+
+[C-06] (SML') operative eps anchor A: eps < kappa/(4 g(10))
+    class    : VERIFIED
+    closed   : eps < kappa / (4 g(10))
+    computed : eps = 0.0500000000 ; cap = kappa/(4 g(10)) = 0.1309016994
+    required : eps < 0.1309016994  (corpus prints 0.1309017)
+    status   : PASS
+    [PROV]   : V2:429-431 ('1/(4 g(10)) = 0.130901699... at kappa = 1; the inherited 0.130906 is a stale transcription and is not carried')
+
+[L-02] M2P third entry (epsilon_0 cap): eps < epsilon_0 <= (2 kappa - m_k)/w_k
+    class    : VERIFIED
+    closed   : eps < epsilon_0 <= (2 kappa - m_k) / w_k
+    computed : eps = 0.0500000000 ; cap = (2 kappa - m_k)/w_k = (2 - 1.9098300563)/1.9098300563 = 0.0472135955
+    required : eps < 0.0472135955
+    status   : FAIL
+    note     : VIOLATED by 0.0027864045 at the design eps.
+    note     : The substance: M2P's supporting inequality 2 kappa > m_k + eps w_k reads
+    note     : 2 kappa = 2.0000000000  vs  m_k + eps w_k = 2.0053215591  --  the inequality is FALSE at
+    note     : (N, kappa, eps) = (10, 1, 0.05) by 0.0053215591.
+    [PROV]   : LP:431-433
+
+[L-01] eps < eps_2, q in D_k(eps)  (the ONE smallness threshold cited by LP.3/LP.4/LP.5)
+    class    : CONDITIONAL
+    closed   : eps < eps_2
+    status   : CONDITIONAL  (missing: eps_2)
+    [PROV]   : LP:218-219, LP:211-212
+
+[L-03] eps_2 ledger, entry list (a MIN over the named entries, epsilon_0 among them)
+    class    : CONDITIONAL
+    closed   : eps_2 := min( epsilon_1(eps'_0), sqrt(eps'_0/C_inv), c_shell/(4 sqrt(2N)), c_cone r_0'^2/(2 W_sup), (S_k - 2 kappa - eps'_0)/(2 W_sup), [phi-desc] least entry with eps S_k/kappa + C_B eps^2 <= c_H AND C_ch eps^2 <= c_H, the corridor entries (C* + 8)(K_M + 1) r(C_inv eps^2) <= r_0' and (C* + 8)(K_M + 1) A_x eps <= r_0', epsilon_0 )
+    status   : CONDITIONAL  (missing: epsilon_1, eps_prime_0, C_Z, c_shell, lambda_u, r_0_prime, W_sup, C_B, C_ch, c_Z, epsilon_0, C_inv, c_cone, K_M, C*, A_x)
+    note     : eps_2 is a MIN that INCLUDES epsilon_0, so L-02's cap is inherited by eps_2:
+    note     : eps_2 <= epsilon_0 <= 0.0472135955. C-06 and C-07 are LOOSER and do NOT subsume it.
+    [PROV]   : LP:185-212
+
+[L-04] eps'_0 ledger: eps'_0 < S_k - 2 kappa ; eps'_0 <= 2 C_Z r_0'^2 ; eps'_0 <= c_cone r_0'^2/4
+    class    : CONDITIONAL
+    closed   : eps'_0 < S_k - 2 kappa ; eps'_0 <= 2 C_Z r_0'^2 ; eps'_0 <= c_cone r_0'^2 / 4
+    computed : landed leg computable: S_k - 2 kappa = 0.6089637399 (so eps'_0 < 0.6089637399)
+    status   : CONDITIONAL  (missing: C_Z, r_0_prime, lambda_u)
+    [PROV]   : LP:183-184
+
+----------------------------------------------------------------------------------------------------
+STAGE 2 BINDING eps CAP (argmin over the caps with landed numerals: C-07, C-06, L-02)
+    L-02   eps < (2 kappa - m_k)/w_k        cap = 0.0472135955    design eps = 0.0500000000  ->  FAIL
+    C-07   eps < 1/8                        cap = 0.1250000000    design eps = 0.0500000000  ->  PASS
+    C-06   eps < kappa/(4 g(10))            cap = 0.1309016994    design eps = 0.0500000000  ->  PASS
+    ARGMIN  : L-02  at cap = 0.0472135955
+    VERDICT : design eps = 0.0500000000 does NOT satisfy the binding cap.
+    (L-01 / L-03's eps_2 is a MIN that includes epsilon_0, hence cannot loosen it.)
+----------------------------------------------------------------------------------------------------
+
+FINDING F-1 (REPORTED TO THE LEAD, NOT ADJUDICATED HERE)
+  L-02's cap 0.0472135955 is violated by the design scale eps = 0.05.
+  N = 10 is the WORST cell for this cap: g(N) decreases in N, so 2 kappa - m_k
+  grows and the cap loosens with N. Recomputed here at the sampled cells:
+      N = 10   cap = (2 kappa - m_k)/w_k = 0.0472135955   design eps = 0.05 -> FAIL
+      N = 18   cap = (2 kappa - m_k)/w_k = 0.8424131932   design eps = 0.05 -> PASS
+      N = 46   cap = (2 kappa - m_k)/w_k = 3.6680275892   design eps = 0.05 -> PASS
+      N = 200  cap = (2 kappa - m_k)/w_k = 19.2659034774   design eps = 0.05 -> PASS
+  CANDIDATE DISPOSITIONS (the choice is the lead's):
+    D1  Retune the design eps below 0.0472135955 and re-run every eps-bearing row
+        (err = eps w_k, err_A, c_plate, (THR) RHS, A_tube, (SML')). Cheap arithmetic,
+        but 'eps = 0.05' is a NAMED numeral in landed displays [V2:369, V2:430-432,
+        PX:7412 (physical)], so it is a corpus-wide renumbering, not a local edit.
+    D2  Move the flagship cell off N = 10. The L-02 cap loosens with N, but (MRG) is
+        'LAMBDA-FREE AND INCREASING IN N, so N = 10 is the worst TRAP_2 cell'
+        [V2:381-384] -- moving N trades one worst-cell for another and requires
+        re-reading which cell is worst for which leg.
+    D3  Consumer walk: establish whether M2P's third entry is actually instantiated
+        at the flagship by the LP.5(c) / A6 consumer. LP:431-433 types epsilon_0 as
+        the support for 'points outside have E_eps >= 2 kappa > m_k + eps w_k'. If no
+        consumer instantiates M2P at N = 10 the cap may be out of scope here -- but
+        that is a walk to be performed, not an assertion to be made.
+    D4  Carry it as a TYPED row in the register, which is the corpus's own existing
+        device for exactly this situation (cf. T-3 / T-6's 'NOT VERIFIED against the
+        lane's standing delta' [V2:3245, V2:3248]).
+  NOTE: this pass does NOT silently substitute a compliant eps. Every downstream
+  row below is evaluated at the design eps = 0.05 as specified.
+
+====================================================================================================
+STAGE 3 -- delta ROWS -- CLOSED-FORM CAPS IN L_eps (delta NOT pinned; L_eps unsupplied)
+====================================================================================================
+Rule R2: this pass never evaluates at delta = 0. delta is left as a free positive
+scale and every cap is printed in the single quantity
+      Q := L_eps N delta^2 / 4   (= 2.5 L_eps delta^2 at N = 10),
+which is the form in which C-03, C-08, C-09, C-11 and C-12 all reduce.
+
+[C-08] c_plate > 0  [T-6]
+    class    : CONDITIONAL
+    closed   : c_plate := (S_k + c_H - m_k) - err_A,  err_A := c_0 + eps w_k + L_eps N delta^2/4 ; c_plate = 0.9288587599 - L_eps N delta^2/2 = 0.9288587599 - 2Q
+    computed : c_plate > 0  <=>  Q < 0.4644293800  <=>  delta < 0.4310124731 / sqrt(L_eps)
+    required : Q < 0.4644293800
+    status   : CONDITIONAL  (missing: L_eps)
+    note     : Self-typed in the corpus: 'NOT instantiated against a standing numerical delta either.'
+    [PROV]   : V2:3248 (S7.1 T-6); warrant V2:2600-2602
+
+[C-03] (H-SEP), N-corrected form  [T-4]
+    class    : CONDITIONAL
+    closed   : delta^2 < 2(S_k + c_H - m_k - eps w_k)/(N L_eps)
+    computed : <=>  Q < 0.4644293800  <=>  delta < 0.4310124731 / sqrt(L_eps)
+    required : Q < 0.4644293800
+    status   : CONDITIONAL  (missing: L_eps)
+    note     : OBSERVATION (computed here, not claimed by the corpus): C-03's cap and C-08's cap
+    note     : are the SAME number, 0.4644293800. The two rows TIE for binding. The inventory's
+    note     : tension (b) compares C-08 / C-09 / C-11 only and names C-08 binding; adding C-03
+    note     : makes it a TIE, not a change of binder. Both legs are carried; neither is dropped.
+    [PROV]   : V2:3246 (S7.1 T-4)
+
+[C-09] (THR), AM-R5-15's home
+    class    : CONDITIONAL
+    closed   : L_eps N delta^2/4  <  S_k + c_H - m_k - eps w_k
+    computed : <=>  Q < 0.9288587599  <=>  delta < 0.6095436850 / sqrt(L_eps)
+    required : Q < 0.9288587599
+    status   : CONDITIONAL  (missing: L_eps)
+    [PROV]   : PX:7411 physical (= PX:7407 pre-banner); AM-R5-15 at PX:9239 physical
+
+[C-11] 3 c_H - 2 eta > 0  [T-27; beta_1^weak's existence]
+    class    : CONDITIONAL
+    closed   : L_eps N delta^2/4 < 3 c_H
+    computed : <=>  Q < 0.9756497373  <=>  delta < 0.6247078476 / sqrt(L_eps)
+    required : Q < 0.9756497373
+    status   : CONDITIONAL  (missing: L_eps)
+    note     : This is the positivity that makes beta_1^weak EXIST and be beta-free (V2:177-180).
+    [PROV]   : V2:3290 (T-27), V2:1832, V2:2395
+
+[C-12] (MARGIN-GEN): c_0 - eta = L_eps N delta^2/8 > 0
+    class    : VERIFIED
+    closed   : c_0 - eta = L_eps N delta^2 / 8 = Q/2
+    computed : Q/2 > 0 for every L_eps > 0 and every delta > 0
+    required : Q/2 > 0
+    status   : PASS
+    note     : Structural: no numeral needed. It FAILS only at delta = 0, which R2 forbids.
+    [PROV]   : V2:277, V2:1716
+
+[C-13] (NEARS-ERR) [T-17], CASE-2 ONLY: (ENTRY-MARGIN) reads c_0 - eta - err_S > 0
+    class    : CONDITIONAL
+    closed   : c_0 - eta - err_S > 0, i.e. L_eps N delta^2/8 > err_S, i.e. Q/2 > err_S
+    computed : the LHS reduces to Q/2 by C-12; the row is a comparison of TWO err-class quantities, so no landed numeral decides it
+    required : Q/2 > err_S
+    status   : CONDITIONAL  (missing: err_S, L_eps, delta)
+    note     : err_S is the loss from replacing S by S' := B_{delta/8}(g*). The corpus's landed licence
+    note     : is qualitative: 'sup_S E_eps and sup_{S'} E_eps differ by O(delta^2) inside the same err
+    note     : class. No exponent moves.' -- an err-class statement, NOT a numerically instantiated
+    note     : margin. SCOPE: CASE 2 only, and per B-09 the halved-plate branch is the NONCONSUMED
+    note     : near-S branch, so this row conditions no consumed display in the flagship instantiation.
+    [PROV]   : V2:3264 (T-17)
+
+[C-20] delta < pi (label well-definedness on S^+)
+    class    : CONDITIONAL
+    closed   : delta < pi
+    computed : cap = 3.1415926536 (LANDED numeral; delta itself is not pinned by this pass)
+    required : delta < 3.1415926536
+    status   : CONDITIONAL  (missing: delta)
+    note     : The CAP is landed and needs nothing supplied; only the comparison awaits a pinned
+    note     : delta. It is the LOOSEST delta cap in the inventory by a wide margin -- the binding
+    note     : cap is C-08 / C-03's.
+    [PROV]   : PX:7399 physical
+
+[C-21] delta/2 <= r0  (UP-QUAD applicability on the GROUND tube U = T_{r0}(G_k))
+    class    : CONDITIONAL
+    closed   : delta/2 <= r0
+    status   : CONDITIONAL  (missing: r0, delta)
+    note     : r0 additionally carries L-11's r0 <= inj(M)/4, so this row chains to inj(M).
+    [PROV]   : PX:7405-7406 physical
+
+[C-05] (SML')  [T-5]: eps w_k + O(N L_eps delta^2) + s + s' < RHS
+    class    : CONDITIONAL
+    closed   : eps w_k + O(N L_eps delta^2) + s + s' < RHS
+    computed : eps w_k = 0.0954915028 ; the O(.) constant is NOT displayed, so the delta part is not evaluable
+    required : RHS(flagship reading) = (MRG) = 0.8617419732  ->  slack for O(N L_eps delta^2) + s + s' is 0.7662504704 ; RHS(as printed) = 0.0894771449
+    status   : CONDITIONAL  (missing: <the O(N L_eps delta^2) constant>, L_eps, delta, s, s')
+    note     : OBSERVATION (computed here): the constant PRINTED in the display, 0.0894771449, is the
+    note     : (ADJ-2) value at the WORST SAMPLED CELL (200, 1.0001) [V2:394-404], not the
+    note     : flagship RHS. V2:426-427 states the flagship reading explicitly: 'at the flagship
+    note     : cell the same condition clears against 0.861742 with room'. Read at the flagship
+    note     : the row PASSES with slack 0.7662504704 before the err terms. Read with the flagship
+    note     : eps w_k = 0.0954915028 against the PRINTED 0.0894771449 it would FAIL by 0.0060143580 -- but that mixes the
+    note     : flagship's eps w_k with another cell's RHS, which is a category error, not a
+    note     : corpus defect: at (200, 1.0001) the same row reads eps w_k = eps g(200) = 0.0049343963.
+    note     : The pass therefore evaluates (SML') at the FLAGSHIP RHS and flags the vintage.
+    [PROV]   : V2:425 (display), V2:426-427 (flagship reading), V2:3247 (T-5)
+
+[C-01] (T4) H-INJ  [T-3]: delta/2 + 4/beta < inj(T^{2N})
+    class    : CONDITIONAL
+    closed   : delta/2 + 4/beta < inj(T^{2N})  [full]  ;  delta/2 + 1/beta < inj  [reduced, post half-radius-disc repair]
+    computed : under the UNIT-LATTICE reading inj = 1/2 the two forms give delta < 1 - 8/beta and delta < 1 - 2/beta respectively (T-3's parenthetical 'delta <= 2/5 suffices')
+    status   : CONDITIONAL  (missing: inj_M, delta, beta, <declared torus normalization> [G9])
+    note     : [G9] NORMALIZATION FLAG: T-3's inj = 1/2 is the UNIT-LATTICE reading, while the
+    note     : standing bond coordinates carry |e_i| = pi on Delta_phi [PX:7399 physical] and
+    note     : 'SP_k's max bond is pi - a_k < pi' [LP:179]. The two normalizations are not the
+    note     : same and the inj numeral is not transportable between them. This pass declares NO
+    note     : normalization and leaves the row CONDITIONAL. The corpus row is itself marked
+    note     : 'NOT VERIFIED against the lane's standing delta'.
+    [PROV]   : V2:3245 (S7.1 T-3); V2:508, V2:519-520 (C-02's beta-free reading)
+
+[C-22] (GATE-LOWER) consumed NON-STRICT chain: m_k + 2 lambda >= m_k + 2 kappa >= S_k + 4 c_H
+    class    : VERIFIED
+    closed   : m_k + 2 lambda >= m_k + 2 kappa >= S_k + 4 c_H
+    computed : m_k + 2 kappa = 3.9098300563 ; S_k + 4 c_H = 3.9098300563 ; difference = 0.000e+00
+    required : the NON-STRICT chain only
+    status   : PASS
+    note     : Confirms the corpus's own row 'The STRICT middle clause is NOT CONSUMED: it FAILS
+    note     : at the flagship'. The second inequality holds with EXACT EQUALITY because the
+    note     : active c_H branch is (m_k + 2 kappa - S_k)/4, so S_k + 4 c_H = m_k + 2 kappa
+    note     : identically. Strictness is unavailable; the non-strict chain is what is consumed.
+    note     : (This row reads no free scale; it is checked here because Stage 0 is a regression
+    note     : gate, not a condition stage.)
+    [PROV]   : V2:1279, V2:3299
+
+----------------------------------------------------------------------------------------------------
+STAGE 3 BINDING delta CAP (argmin over the caps expressible in Q := L_eps N delta^2/4)
+    C-08   c_plate > 0            Q < 0.4644293800    <=>  delta < 0.4310124731 / sqrt(L_eps)
+    C-03   (H-SEP)                Q < 0.4644293800    <=>  delta < 0.4310124731 / sqrt(L_eps)
+    C-09   (THR)                  Q < 0.9288587599    <=>  delta < 0.6095436850 / sqrt(L_eps)
+    C-11   3 c_H - 2 eta > 0      Q < 0.9756497373    <=>  delta < 0.6247078476 / sqrt(L_eps)
+    ARGMIN  : C-08 (c_plate > 0) at Q < 0.4644293800, TIED by C-03 (H-SEP) at the same number.
+    Per the inventory's tension (b) the BINDING delta cap is c_plate's; this pass
+    confirms that and records the C-03 tie. C-09 and C-11 are strictly looser
+    (by factors 2.000000 and 2.100749 on Q respectively).
+    No leg is dropped (R4): the standing delta must satisfy the MAX of the rows,
+    i.e. the MIN of the caps.
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+STAGE 4 -- DERIVED beta-FREE SCALARS AT (eps, delta) -- R1 ORDER: c_0/eta/err_A -> c_plate -> beta
+====================================================================================================
+
+[S4-c_0] (C0) c_0 := L_eps N delta^2 / 4
+    class    : CONDITIONAL
+    closed   : c_0 = L_eps N delta^2 / 4 = 2.5 L_eps delta^2  (N = 10) = Q
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    [PROV]   : V2:271
+
+[S4-eta] (ETA) eta := L_eps N delta^2 / 8  (frozen at err class, NEVER sent to 0)
+    class    : CONDITIONAL
+    closed   : eta = 1.25 L_eps delta^2 = Q/2 ; eta_den = eta_lev = eta ; eta_den + eta_lev = Q
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    [PROV]   : V2:264-267, V2:2385-2386
+
+[S4-err_A] err_A := c_0 + eps w_k + L_eps N delta^2/4   [G7 reading (ii)]
+    class    : CONDITIONAL
+    closed   : err_A = 0.0954915028 + 5 L_eps delta^2 = 0.0954915028 + 2Q
+    computed : eps w_k part is landed: 0.0954915028
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    note     : [G7] FLAGGED, NOT MERGED: the corpus also uses err_A as 'the TRAP_2 leg's loss' in the
+    note     : two-leg identity err_tot := err_A + err_B [V2:414-416], where NO closed form is given.
+    note     : Reading (i) has no closed form, so this instantiation CANNOT confirm the identification
+    note     : of the two readings. Both are carried; err_B is a Stage-1 unsupplied input.
+    [PROV]   : V2:3248
+
+[S4-c_plate] c_plate := (S_k + c_H - m_k) - err_A
+    class    : CONDITIONAL
+    closed   : c_plate = 0.9288587599 - 2Q  (beta-free)
+    computed : landed part 0.9288587599 ; positive iff Q < 0.4644293800 (C-08)
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    [PROV]   : V2:3248
+
+[S4-A_tube] A_tube (OPERATIVE vintage)  [G4]
+    class    : CONDITIONAL
+    closed   : A_tube = m_k + eps w_k + L_eps N delta^2/4 = 2.0053215591 + Q  (TUBE-LEVEL')
+    computed : landed part m_k + eps w_k = 2.0053215591
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    note     : [G4] The SUPERSEDED PE-DOORREACH vintage A_tube := m_k + eps w_k + (25/128) L_eps delta^2
+    note     : [PX:8365 pre-banner = PX:8369 physical] is NOT used. beta_*^{DR} reads the OPERATIVE
+    note     : vintage only [V2:162, V2:3376]. Verified by read: physical 9789 carries
+    note     : '= m_k + eps w_k + L_eps N delta^2 / 4 =: A_tube. (TUBE-LEVEL')' and physical 8369
+    note     : carries the (25/128) scale choice.
+    [PROV]   : PX:9785 pre-banner = PX:9789 physical (TUBE-LEVEL'); carried at V2:162
+
+[S4-gap_DR] S_k + c_H - A_tube  (read by beta_*^{DR})
+    class    : CONDITIONAL
+    closed   : S_k + c_H - A_tube = 0.9288587599 - Q
+    computed : landed part 0.9288587599 ; note this is c_plate + Q, i.e. LARGER than c_plate for Q > 0
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    [PROV]   : V2:3364, V2:162
+
+[S4-C_H''] C_H'' := C(n, e^{4G})^8, BETA-FREE (chained, LIVE)  [G5]
+    class    : CONDITIONAL
+    closed   : C_H'' = C(n, e^{4G})^8
+    status   : CONDITIONAL  (missing: C_n_harnack, G)
+    [PROV]   : V2:1547, V2:1556, V2:3289
+
+[S4-C_3] C_3 := C_H'' * C_up' / c(N,delta),  C_up' = e G^2 V_M  (companion leg, factor e)  [G2]
+    class    : CONDITIONAL
+    closed   : C_3 = C_H'' * e * G^2 * V_M / c(N,delta)
+    status   : CONDITIONAL  (missing: C_n_harnack, G, V_M, c_N_delta)
+    note     : [G2] carries factor e -- NEVER substitute C_3^main's e^2 here.
+    [PROV]   : V2:1685-1686
+
+[S4-C_3main] C_3^main := C_H'' e^2 G^2 V_M / c(N,delta)  (main leg, factor e^2)  [G2]
+    class    : CONDITIONAL
+    closed   : C_3^main = C_H'' * e^2 * G^2 * V_M / c(N,delta)
+    status   : CONDITIONAL  (missing: C_n_harnack, G, V_M, c_N_delta)
+    note     : [G2] carries factor e^2 -- NEVER substitute C_3's e here.
+    note     : [G5] runs on C_H'' (chained, LIVE), NOT C_H' (single application, SUPERSEDED).
+    [PROV]   : V2:1697, V2:3303
+
+[S4-C_4] C_4 := 2 C_H'' e^{5G} V_M / c(N,delta), beta-free
+    class    : CONDITIONAL
+    closed   : C_4 = 2 C_H'' e^{5G} V_M / c(N,delta)
+    status   : CONDITIONAL  (missing: C_n_harnack, G, V_M, c_N_delta)
+    [PROV]   : V2:2285
+
+[S4-C_5] C_5 -- not displayed in closed form; carries the Sard factor e
+    class    : CONDITIONAL
+    closed   : <no closed form displayed>
+    status   : CONDITIONAL  (missing: C_s)
+    note     : No closed form is displayed in the corpus, so this row is CONDITIONAL on the FORM
+    note     : as well as on the numerals.
+    [PROV]   : V2:3298
+
+[S4-T_row] T_row = (C_5 + C_s C_4) K_abs, beta-free
+    class    : CONDITIONAL
+    closed   : T_row = (C_5 + C_s C_4) K_abs
+    status   : CONDITIONAL  (missing: C_s, K_abs)
+    [PROV]   : V2:3289; LP:226
+
+====================================================================================================
+STAGE 5 -- CLOSED-FORM beta THRESHOLDS (S7.2 ledger). R1: c_plate row already emitted.
+====================================================================================================
+Ledger header, verbatim: 'One list. Every entry is beta-free.'
+Register row T-7, verbatim: 'Nothing is claimed below the collected threshold.'
+R4: NO domination is assumed. Every leg is carried in the max.
+
+PARTIAL REDUCTION available from Stage 0's landed 3 c_H = 0.9756497373:
+    24 / (3 c_H)      = 24.5989919164   ->  beta_*'s (G4) gradient leg is 24.5989919164 * G
+    5  / (3 c_H)      = 5.1247899826 ,  2 / (3 c_H) = 2.0499159930
+    beta_* = max( 16/delta , 24.5989919164 G , 1 + 5.1247899826 G + 2.0499159930 )
+
+[B-01] beta >= beta_plate := 2 / c_plate   (PLATE-SEP)
+    class    : CONDITIONAL
+    closed   : beta_plate = 2 / c_plate = 2 / (0.9288587599 - 2Q)
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    [PROV]   : V2:3313
+
+[B-02] beta >= 8 / delta   (v4c);  2rho <= delta/4 with rho := 1/beta
+    class    : CONDITIONAL
+    closed   : beta >= 8 / delta
+    status   : CONDITIONAL  (missing: delta)
+    [PROV]   : V2:3314
+
+[B-03] beta >= beta_S4 := max( 2/c_plate , 8/delta )
+    class    : CONDITIONAL
+    closed   : beta_S4 = max( 2/c_plate , 8/delta )
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    note     : ARITHMETIC OBSERVATION (leg still carried): beta_S4 >= beta_plate by construction.
+    [PROV]   : V2:3315-3316
+
+[B-04] beta >= beta_env := max( 4G/c_0 , 2/c_0 ),  G := sup_M |grad E_eps| < infinity
+    class    : CONDITIONAL
+    closed   : beta_env = (2/c_0) * max(2G, 1) = (2/Q) * max(2G, 1) = 8 max(2G,1) / (L_eps N delta^2)
+    status   : CONDITIONAL  (missing: G, L_eps, delta)
+    note     : This is a delta^{-2} beta FLOOR. It is consistent ONLY under the mandated order
+    note     : beta -> infinity FIRST at fixed delta, then delta -> 0 [MM:3025-3039]. Structurally
+    note     : the same shape as MM's diffusive floor beta_0(h) = 16/h^2 (L-07).
+    [PROV]   : V2:3317-3319
+
+[B-06] beta >= beta_door := 8G / c_plate   (the (DOOR-CASE1) separation threshold)
+    class    : CONDITIONAL
+    closed   : beta_door = 8G / (0.9288587599 - 2Q)
+    status   : CONDITIONAL  (missing: G, L_eps, delta)
+    note     : 'COLLECTED, NOT INFERRED: no other leg is claimed to dominate it' [XE-8 F1 residual 1].
+    note     : Arithmetic: beta_door >= beta_plate iff G >= 1/4 -- CONDITIONAL on G, so not asserted.
+    [PROV]   : V2:3335-3343
+
+[B-10] beta >= beta_* := max( 16/delta , 24G/(3 c_H) , 1 + (5G+2)/(3 c_H) )   [G3]
+    class    : CONDITIONAL
+    closed   : beta_* = max( 16/delta , 24.5989919164 G , 1 + 5.1247899826 G + 2.0499159930 )
+    computed : the two 3 c_H legs are reduced to landed coefficients above; only G and delta are missing
+    status   : CONDITIONAL  (missing: G, delta)
+    note     : [G3] beta_* and beta_*^{DR} are DISTINCT symbols, split by naming per (BETA-STAR) S0.5.
+    [PROV]   : V2:3363, V2:3365-3375, V2:199
+
+[B-11] beta >= beta_*^{DR} := max( 8/delta , (2+G)/(S_k + c_H - A_tube) )   [G3][G4]
+    class    : CONDITIONAL
+    closed   : beta_*^{DR} = max( 8/delta , (2+G)/(0.9288587599 - Q) )
+    status   : CONDITIONAL  (missing: G, L_eps, delta)
+    note     : [G4] reads the OPERATIVE DOORREACH-MAXFIX A_tube [PX:9814 pre-banner = PX:9818-9819
+    note     : physical]. The form 2/(S_k + c_H - A_tube) [PX:8367 pre-banner] is the SUPERSEDED
+    note     : predecessor and is NOT a ledger line.
+    [PROV]   : V2:3364, V2:3376-3380
+
+[B-13] beta >= 4/delta   ((MARG) sub-condition rho <= delta/4) -- DOMINATED
+    class    : VERIFIED
+    closed   : 4/delta
+    computed : 16/delta >= 4/delta for every delta > 0, so beta_*'s 16/delta leg dominates it
+    required : dominated by B-10's 16/delta leg
+    status   : PASS
+    note     : The ONLY domination the ledger itself asserts, and it is arithmetically confirmed here.
+    note     : 'therefore NOT a separate standing hypothesis'. Recorded, not dropped.
+    [PROV]   : V2:3389-3391
+
+[B-12] beta >= max( beta_S4 , beta_* )   ((MAIN-V2ID) standing threshold)
+    class    : CONDITIONAL
+    closed   : max( beta_S4 , beta_* )
+    status   : CONDITIONAL  (missing: G, L_eps, delta)
+    note     : 'NO DOMINATION beta_S4 >= beta_* is proved' [XE-8 F1 residual 4]. The max is carried.
+    [PROV]   : V2:3381-3388
+
+[B-14] conservative single reading: max( beta_* , beta_*^{DR} )
+    class    : CONDITIONAL
+    closed   : max( beta_* , beta_*^{DR} )
+    status   : CONDITIONAL  (missing: G, L_eps, delta)
+    note     : 'A row wanting one number may read max(beta_*, beta_*^{DR})', 'conservative at every
+    note     : site'. Enlarging a threshold moves no exponent and no prefactor.
+    [PROV]   : V2:249-252, V2:3394
+
+====================================================================================================
+STAGE 6 -- IMPLICIT beta THRESHOLDS BY NUMERICAL ROOT-FINDING (R3: UPPER root)
+====================================================================================================
+Each of beta_1^hist, beta_1^weak, beta_2 is defined as 'the beta-free value at or
+above which <a beta-bearing expression> <= 1/2'. beta appears on BOTH sides of the
+defining relation, so each must be SOLVED, never read off.
+
+[B-05a] beta_1^weak (IMPLICIT)
+    class    : CONDITIONAL
+    closed   : beta_1^weak := any beta-free value at or above which C_3^main e^{6G} beta^{2N+1} exp(-beta(3 c_H - 2 eta)) <= 1/2, with C_3^main := C_H'' e^2 G^2 V_M / c(N,delta), C_H'' = C(n, e^{4G})^8, 2N+1 = 21 at N = 10, and 3 c_H = 0.9756497373 landed
+    computed : solvable the moment C_3^main, G and eta are supplied: the left side is log-concave in beta with interior maximum at beta = 21/(3 c_H - 2 eta), and the UPPER root is bracketed by doubling from there
+    status   : CONDITIONAL  (missing: C_n_harnack, G, V_M, c_N_delta, L_eps, delta)
+    note     : [G2] runs on C_3^main (factor e^2), NOT C_3 (factor e).
+    note     : [G5] runs on C_H'' (chained, LIVE), NOT C_H' (SUPERSEDED).
+    note     : EXISTENCE is landed and beta-free BECAUSE 3 c_H - 2 eta > 0 (C-11).
+    [PROV]   : V2:3325-3333, V2:173-180
+
+[B-05b] beta_1^hist (IMPLICIT) -- CONDITIONAL ON THE FORM, not only on the numerals
+    class    : CONDITIONAL
+    closed   : beta_1^hist := the beta-free threshold at which THE LAST LINE OF THE HISTORICAL (ENTRY) (Section 3.2) falls to 1/2 on dA_z. That line runs on C_H' and a ONE-eta margin [PE-TRAPOCC Section 5 (5c), landed at PX:9074].
+    computed : the defining EXPRESSION is not displayed in the inventory, so no root-finder can run
+    status   : CONDITIONAL  (missing: <the last line of the HISTORICAL (ENTRY), Section 3.2>, C_H', eta)
+    note     : [G5] beta_1^hist runs on C_H' (single application, SUPERSEDED as a Harnack constant but
+    note     : LIVE as this threshold's own input). Do NOT substitute C_H'' here -- that is exactly the
+    note     : enlargement the corpus refuses to assume: 'the live route runs the LARGER C_H'', ... so
+    note     : beta_1^hist is NOT claimed to serve it' [V2:181-183].
+    [PROV]   : V2:170-172, V2:3320-3324
+
+[B-05] beta >= beta_1 := max( beta_1^hist , beta_1^weak )
+    class    : CONDITIONAL
+    closed   : beta_1 = max( beta_1^hist , beta_1^weak )
+    status   : CONDITIONAL  (missing: beta_1^hist, beta_1^weak)
+    note     : 'NO domination between the two is claimed; the max is what every consumer reads'. R4 honored.
+    [PROV]   : V2:3320-3334, V2:167-185
+
+[B-07] beta >= beta_2(N, delta, eps) (IMPLICIT)
+    class    : CONDITIONAL
+    closed   : beta_2 := max( <the threshold at which the (ENTRY-W) last line becomes <= 1/2, Section 4.2(e) -- relation NOT displayed> , <the (C0) hinge leg> , beta_env )
+    computed : the (C0) leg IS solvable in closed form here: (C0) reads m_k + eps w_k + (1/2) L_eps N delta^2 + 1/beta <= S_k + c_H, i.e. 1/beta <= 0.9288587599 - 2Q = c_plate, i.e. beta >= 1 / c_plate = 1 / (0.9288587599 - 2Q)
+    status   : CONDITIONAL  (missing: <the (ENTRY-W) last line, Section 4.2(e)>, L_eps, delta, G)
+    note     : DISCLOSED ORDERING CONSTRAINT: beta_2 is 'REQUIRED to additionally dominate beta_env',
+    note     : so beta_2 cannot be solved in isolation.
+    note     : ARITHMETIC OBSERVATION (computed here, leg still carried per R4): the (C0) leg equals
+    note     : 1/c_plate, which is exactly HALF of beta_plate = 2/c_plate. So beta_plate dominates the
+    note     : (C0) leg of beta_2. This is stated as an observation only; no leg is dropped and the
+    note     : corpus's 'no domination claimed' discipline is preserved.
+    [PROV]   : V2:3344-3348; (C0) at V2:271-273
+
+[B-08] beta >= beta_W := max( beta_2(N,delta,eps), beta_env, beta_plate, 6G/c_0, 2/c_0 )
+    class    : CONDITIONAL
+    closed   : beta_W = max( beta_2 , beta_env , beta_plate , 6G/c_0 , 2/c_0 )
+    status   : CONDITIONAL  (missing: beta_2, G, L_eps, delta)
+    note     : ARITHMETIC OBSERVATION: (2/c_0) max(2G,1) = beta_env, so the 2/c_0 leg is inside
+    note     : beta_env and the 6G/c_0 leg exceeds beta_env's 4G/c_0 leg. beta_W >= beta_env and
+    note     : beta_W >= beta_plate by construction. All legs carried.
+    [PROV]   : V2:3349-3351
+
+[B-09] beta >= beta_W' := max( beta_W , 32/delta )
+    class    : CONDITIONAL
+    closed   : beta_W' = max( beta_W , 32/delta )
+    status   : CONDITIONAL  (missing: beta_W, delta)
+    note     : 'the 32/delta leg is the near-S radius condition at the halved plate S' = B_{delta/8}(g*).
+    note     : It affects only the NONCONSUMED near-S branch, and it carries the (NEARS-ERR) row (T-17).'
+    note     : ARITHMETIC: 32/delta dominates 16/delta and 8/delta, so beta_W' >= beta_*'s first leg.
+    [PROV]   : V2:3352-3362
+
+----------------------------------------------------------------------------------------------------
+SOLVER SELF-TEST -- SYNTHETIC INPUTS, NOT CORPUS VALUES, NOT A VERIFICATION OF ANY ROW.
+Purpose: prove the upper-root machinery of Stage 6 is live, so that supplying Stage-1
+inputs converts B-05a from CONDITIONAL to VERIFIED with no code change.
+    C_3^main=1          G=1    eta=0      3cH-2eta=0.9756497373  interior max at beta=21.5241179269  UPPER ROOT beta_1^weak=107.5488350818  residual log f = 1.06e-11
+    C_3^main=1e+06      G=2    eta=0.1    3cH-2eta=0.7756497373  interior max at beta=27.0740760827  UPPER ROOT beta_1^weak=173.8255682709  residual log f = -3.83e-11
+    C_3^main=1e+12      G=0.5  eta=0.3    3cH-2eta=0.3756497373  interior max at beta=55.9031403920  UPPER ROOT beta_1^weak=421.2176871378  residual log f = 3.71e-11
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+STAGE 7 -- beta-COUPLED GEOMETRIC ROWS at beta = max over Stages 5-6
+====================================================================================================
+beta itself is CONDITIONAL (every leg of the collected threshold reads G and/or
+delta and/or L_eps). Rows that are discharged STRUCTURALLY by a ledger leg are
+still VERIFIED, because the discharge is an arithmetic implication, not a numeral.
+
+[C-14] (RAMP-ADM): 3 beta c_H > 5G + 2
+    class    : VERIFIED
+    closed   : inclusion holds IFF (5G+2)/beta < 3 c_H, i.e. IFF beta > (5G+2)/(3 c_H)
+    computed : beta_* carries the leg 1 + (5G+2)/(3 c_H) [B-10], and 1 + x > x for every x, so beta >= beta_* delivers beta > (5G+2)/(3 c_H) STRICTLY, for every G >= 0
+    required : beta > (5G+2)/(3 c_H) = 5.1247899826 G + 2.0499159930
+    status   : PASS
+    note     : Structural discharge, no numeral required: 'the non-strict standing hypothesis
+    note     : beta >= beta_* delivers the STRICT inequality 3 beta c_H > 5G + 2'. The '+1' in the
+    note     : leg is 'a choice, not a computed constant' [V2:224] and it is exactly what buys the
+    note     : strictness.
+    [PROV]   : V2:215-216, V2:220-223, V2:3292 (T-29)
+
+[C-15] (DOOR-CASE1): dist(z, closure(S)) >= c_plate/(2G) >= 4/beta
+    class    : VERIFIED
+    closed   : c_plate/(2G) >= 4/beta for beta >= beta_door := 8G/c_plate
+    computed : beta >= 8G/c_plate  =>  4/beta <= 4 c_plate/(8G) = c_plate/(2G). Identity, all G > 0.
+    required : beta >= beta_door
+    status   : PASS
+    note     : Structural discharge by B-06. It presupposes c_plate > 0 (C-08), which is CONDITIONAL
+    note     : on L_eps and delta -- so the row is verified AS AN IMPLICATION, not as a numeral.
+    [PROV]   : V2:3251 (T-9 residual 1), V2:3335-3339
+
+[C-10] (C0) Regime-A hinge: m_k + eps w_k + (1/2) L_eps N delta^2 + 1/beta <= S_k + c_H
+    class    : CONDITIONAL
+    closed   : <=>  1/beta <= (S_k + c_H - m_k - eps w_k) - L_eps N delta^2/2 = c_plate  <=>  beta >= 1/c_plate
+    computed : landed part: S_k + c_H - m_k - eps w_k = 0.9288587599 ; so (C0) <=> beta >= 1/(0.9288587599 - 2Q)
+    required : beta >= beta_2, and beta_2 carries this leg
+    status   : CONDITIONAL  (missing: L_eps, delta)
+    note     : The ALGEBRAIC REDUCTION to beta >= 1/c_plate is exact and is performed here; only the
+    note     : NUMERAL awaits L_eps and delta, which is why the row is classed CONDITIONAL.
+    [PROV]   : V2:271-273
+
+[C-19] theta_2 admissibility window: theta_2 Sard-regular in [S_k + c_H - 1/beta, S_k + c_H]
+    class    : VERIFIED
+    closed   : theta_2 in [S_k + c_H - 1/beta, S_k + c_H], Sard-regular
+    computed : window = [2.9341803190 - 1/beta, 2.9341803190] ; length 1/beta > 0, hence NONEMPTY for every finite beta > 0
+    required : only theta_2 >= S_k + c_H - 1/beta is available; window must be nonempty
+    status   : PASS
+    note     : VERDICT IS DEFINITE FOR THE NONEMPTINESS ONLY: the right endpoint S_k + c_H = 2.9341803190 is a
+    note     : landed numeral and the window has positive length at every finite beta, so no input is
+    note     : needed. The SARD-REGULAR SELECTION of theta_2 inside the window is a measure-theoretic
+    note     : a.e. statement and is TYPED-UNVERIFIABLE by a numerical pass; it is NOT claimed here.
+    [PROV]   : V2:3298, V2:605-606, V2:2674
+
+[C-02] H-INJ, the S1.1 (G4') beta-free reading: 8/beta < inj(M),  rho := 1/beta
+    class    : CONDITIONAL
+    closed   : 8 rho < inj(M) with rho := 1/beta, i.e. beta > 8/inj(M)
+    status   : CONDITIONAL  (missing: inj_M, beta, <declared torus normalization> [G9])
+    note     : Same [G9] normalization flag as C-01. Also requires 'a minimizing geodesic of length < inj(M)'.
+    [PROV]   : V2:508, V2:519-520
+
+====================================================================================================
+STAGE 8 -- LP.5(c) / MM SIDE -- h-DISCIPLINE, DIFFUSIVE FLOOR, Gamma(h), err(delta)
+====================================================================================================
+[G1] Throughout this stage h is h_hop, the MM/LP.5(c) HOP-AND-RELOCATE scale.
+It is NOT the equilibrium/entry potential h of (SANDWICHw)'s 'h <= 1/2' and
+'1 - 2h >= 0 q.e.' (C-16). The two are different objects and are never merged.
+
+----------------------------------------------------------------------------------------------------
+FINDING F-2 (REPORTED TO THE LEAD, NOT ADJUDICATED HERE): the h-DISCIPLINE CONFLICT
+  L-08 [MM:3025-3039] : '1. FIX (eps, delta, h = delta/2) ... 2. beta -> infinity FIRST
+                        ... 3. THEN delta -> 0 and h -> 0 (h = delta/2) ...'
+  L-09 [MM:344-345]   : '3. THEN delta -> 0 - err(delta) -> 0 (taken at fixed h, so
+                        delta <= h stays in force);'   then '4. THEN h -> 0'
+  ARITHMETIC: h = delta/2 gives h <= delta, and delta <= h reads delta <= delta/2,
+  which is FALSE for every delta > 0 and true only at delta = 0 -- which rule R2
+  forbids the pass from evaluating at. The two clauses are therefore jointly
+  satisfiable at NO admissible point of the schedule.
+      delta = 0.4000 -> h = delta/2 = 0.200000 : 'h <= delta' TRUE ; 'delta <= h' FALSE
+      delta = 0.2000 -> h = delta/2 = 0.100000 : 'h <= delta' TRUE ; 'delta <= h' FALSE
+      delta = 0.1000 -> h = delta/2 = 0.050000 : 'h <= delta' TRUE ; 'delta <= h' FALSE
+      delta = 0.0500 -> h = delta/2 = 0.025000 : 'h <= delta' TRUE ; 'delta <= h' FALSE
+  CANDIDATE DISPOSITIONS (the choice is the lead's):
+    E1  L-08 governs. MM:3025's 'FIX (eps, delta, h = delta/2)' is the TOP of the
+        mandated order, and L-09's 'delta <= h' is read as an inverted transcription
+        of 'h <= delta'. Under E1 the diffusive floor becomes beta_0 = 16/h^2 = 64/delta^2.
+    E2  The two printings are TWO DIFFERENT SCHEDULES in the same file and each site
+        reads its own: MM:3025 ties h = delta/2 and sends them together; MM:344-345
+        sends delta -> 0 at FIXED h and only afterwards h -> 0. Under E2 the pass must
+        record, per consumer of Gamma(h) / err(delta), WHICH schedule it reads.
+    E3  Both stand and L-09 is a statement about the ORDER rather than a standing
+        constraint: under MM:344-345's schedule delta drops below the fixed h, so
+        'delta <= h' becomes true en route. E3 is the most economical reconciliation
+        and is consistent with both printings read verbatim -- but adopting it is a
+        lead adjudication, and it is NOT performed here.
+  CONSEQUENCE FOR THIS PASS: h is NOT pinned. L-07's floor, Gamma(h) and the order
+  guard below are all reported under BOTH readings where they differ.
+----------------------------------------------------------------------------------------------------
+
+[L-08] order-of-limits discipline: FIX (eps, delta, h = delta/2); beta -> infinity FIRST; THEN delta -> 0 and h -> 0 (h = delta/2); THEN the eps-window
+    class    : FINDING
+    closed   : h = delta/2
+    computed : h/delta = 0.5 ; 'h <= delta' TRUE
+    status   : REPORTED
+    note     : See FINDING F-2. Not adjudicated against L-09 by this pass.
+    [PROV]   : MM:3025-3039; MM:511 ('beta -> infinity before h -> 0 is mandatory')
+
+[L-09] competing h/delta discipline (SECOND wording): 'THEN delta -> 0 ... (taken at fixed h, so delta <= h stays in force)'
+    class    : FINDING
+    closed   : delta <= h
+    computed : under L-08's h = delta/2 this reads delta <= delta/2, FALSE for every delta > 0
+    status   : REPORTED
+    note     : See FINDING F-2. Not adjudicated against L-08 by this pass.
+    [PROV]   : MM:344-345
+
+[L-07] diffusive floor: beta h^2 >= B_Z = 16, i.e. beta_0(h) = 16/h^2 = O(h^{-2})
+    class    : CONDITIONAL
+    closed   : beta >= 16 / h^2
+    computed : under reading E1 (h = delta/2) this becomes beta >= 64 / delta^2, a delta^{-2} floor of the SAME shape as beta_env = 8 max(2G,1)/(L_eps N delta^2) [B-04]; under reading E2/E3 h is an independent fixed scale and no delta reduction is available
+    required : beta h^2 >= 16
+    status   : CONDITIONAL  (missing: h_hop, beta, <h-discipline adjudication: see FINDING F-2>)
+    note     : LOAD-BEARING per the ledger row; 'the order beta -> infinity before h -> 0 is mandatory'.
+    [PROV]   : MM:511, MM:533, MM:446
+
+[S8-Gamma] Gamma(h) := 6 C_1 D_G h = O(h)   [G6: D_G is the PRODUCT torus value]
+    class    : CONDITIONAL
+    closed   : Gamma(h) = 6 C_1 D_G h with D_G = pi sqrt(2N) = 14.0496294621 at N = 10
+    computed : Gamma(h) = 84.2977767725 * C_1 * h ; under reading E1 (h = delta/2), Gamma = 42.1488883862 * C_1 * delta
+    status   : CONDITIONAL  (missing: C_1, h_hop, <h-discipline adjudication>)
+    note     : [G6] The single-loop reading D_G = pi sqrt(N) = 9.9345882658 and the max-norm reading D_G = pi = 3.1415926536
+    note     : are NOT used here; MM:125 says of the latter, verbatim, that it 'is NOT used here'.
+    note     : C_1 is derivable the moment L is supplied (C_1 = 1/2 + L/4 + L^2/24).
+    [PROV]   : MM:312, MM:135, MM:131 (C_1 = 1/2 + L/4 + L^2/24); MM:1370 (D_G product, campaign-#23 seal)
+
+[S8-err] err(delta) := 18 C_Z(tau) delta^2 = O(delta^2)
+    class    : CONDITIONAL
+    closed   : err(delta) = 18 C_Z(tau) delta^2
+    status   : CONDITIONAL  (missing: C_Z_tau, delta, tau)
+    [PROV]   : MM:549-550
+
+ORDER-OF-LIMITS GUARD (R2) -- executed, not merely asserted:
+    assert_positive_scale(delta=1e-3, h=5e-4)  -> OK (fixed positive scales admitted)
+    assert_positive_scale(delta=0.0) -> correctly REFUSED: ORDER-OF-LIMITS GUARD: delta must be > 0 (got 0.0)
+    assert_positive_scale(h_hop=0.0) -> correctly REFUSED: ORDER-OF-LIMITS GUARD: h_hop must be > 0 (got 0.0)
+    Consequence: every delta cap in Stage 3 and every beta threshold in Stages 5-6 is
+    evaluated at a FIXED POSITIVE delta (symbolically, since delta is unsupplied), never
+    at delta = 0. beta -> infinity is taken FIRST. [PROV] MM:3025-3039, MM:511
+
+[L-05] r_0' shrink ledger ([tube]/[cone]/[cube]/[phi]/[theta] entries)
+    class    : CONDITIONAL
+    closed   : r_0' <= r_0/2 ; r_0' <= gamma_c lambda_u/(16 C_N (1 + gamma_c^2)) ; [cube] r_0' small enough to bury every cubic Taylor remainder ; C_Z r_0'^2 <= 4 c_H (so r_0' <= sqrt(4 c_H / C_Z) = sqrt(1.3008663163 / C_Z)) ; r_0' <= (1/2) dist(Z, Delta_theta)
+    computed : landed part of the [phi] entry: 4 c_H = 1.3008663163
+    status   : CONDITIONAL  (missing: r0, lambda_u, C_N, C_Z, r_0_prime, gamma_c, dist(Z, Delta_theta))
+    note     : The M2-PIN strict clause inside [phi] is checkable at the cell level: it needs
+    note     : m_k + 2 lambda > m_k + 2 kappa >= S_k + 4 c_H. Per C-22 the SECOND inequality holds
+    note     : with EQUALITY (3.9098300563 = 3.9098300563) and the FIRST is strict only because lambda > kappa
+    note     : STRICTLY (L-06) -- at the flagship NAME lambda -> 1+ this is the boundary.
+    [PROV]   : LP:170-182
+
+[L-06] M2-PIN (standing cell condition): lambda > kappa
+    class    : VERIFIED
+    closed   : lambda > kappa
+    computed : flagship NAME is (N, lambda) = (10, 1+), kappa = 1, i.e. lambda -> 1 FROM ABOVE
+    required : lambda > kappa STRICTLY
+    status   : PASS
+    note     : BOUNDARY ROW, per the inventory: 'L-06 (M2-PIN lambda > kappa) is STRICT and the
+    note     : flagship name (10, 1+) is the BOUNDARY of the standing regime, not a point of it.'
+    note     : Every lambda > 1 satisfies it; lambda = 1 does not. All lambda-bearing numerals in
+    note     : Stage 0 are evaluated at the LIMIT lambda = 1, which is the corpus's own convention
+    note     : for the flagship printings -- so they are limit values, not interior-point values.
+    [PROV]   : V2:347-348, V2:345-346
+
+[L-10] [23] SS C one-metric discipline: ONE declared metric per consumer
+    class    : TYPED-UNVERIFIABLE
+    closed   : <discipline row; no scalar>
+    status   : REPORTED
+    note     : Interacts with [G6]/[G9]: the D_G reading and the inj normalization are metric choices.
+    [PROV]   : MM:101-102, MM:588, MM:1359
+
+[L-11] tube radius vs injectivity: r0 <= inj(M)/4 ; (H2) r < normal injectivity radius of Z
+    class    : CONDITIONAL
+    closed   : r0 <= inj(M)/4
+    status   : CONDITIONAL  (missing: r0, inj_M)
+    [PROV]   : MM:106, MM:421, MM:530
+
+[L-12] [23] SS D.2 no-common-small-set discipline
+    class    : TYPED-UNVERIFIABLE
+    closed   : <composition discipline; no scalar>
+    status   : REPORTED
+    [PROV]   : MM:1965
+
+[L-13] [23] SS B.3 non-identification fence: w_k and S_k/kappa are NEVER identified; 'g_k := m_k/kappa = W*(G_k)' is DELETED
+    class    : TYPED-UNVERIFIABLE
+    closed   : <fence row; no scalar>
+    status   : REPORTED
+    note     : ENFORCED BY THIS SCRIPT: w_k is computed from N(1 - cos(2 pi k/N)) and S_k from its own
+    note     : closed form; the deleted identity is never used, and no code path divides m_k by kappa
+    note     : to obtain w_k. At the flagship they coincide numerically (kappa = 1) -- which is exactly
+    note     : why the fence exists.
+    [PROV]   : MM:760, MM:766, MM:940
+
+[L-14] transverse nondegeneracy on the tube: J - m_k >= (c_perp/2) dist(.,C_k)^2 ; |grad J| <= L dist(.,C_k)
+    class    : CONDITIONAL
+    closed   : J - m_k >= (c_perp/2) dist(., C_k)^2 ;  |grad J| <= L dist(., C_k)
+    status   : CONDITIONAL  (missing: c_perp, L)
+    [PROV]   : MM:109
+
+----------------------------------------------------------------------------------------------------
+REMAINING NAMED ROWS THAT CARRY NO NUMERICAL CONTENT A PASS CAN EVALUATE
+----------------------------------------------------------------------------------------------------
+
+[C-04] (H-SEP) strength flag, UNRESOLVED: PE-DOORREACH's separation row displays dist(z, Door') > 0 while B_{2rho}(z) subset Omega requires >= 2rho
+    class    : TYPED-UNVERIFIABLE
+    closed   : dist(z, Door') > 0   vs   dist(z, Door') >= 2rho
+    computed : a strength mismatch between two displayed rows; no numeral resolves it
+    status   : REPORTED
+    note     : At the TRAP instantiation it is 'supplied at full strength by (G4)/(G4')'.
+    [PROV]   : V2:3246
+
+[C-16] (SANDWICHw) hypothesis on the SOLID ball: 1 - 2h >= 0 q.e., companion h <= 1/2   [G1]
+    class    : TYPED-UNVERIFIABLE
+    closed   : 1 - 2h >= 0 q.e. on the SOLID A_z ;  h <= 1/2
+    status   : REPORTED
+    note     : [G1] SYMBOL WARNING ENFORCED: this h is the EQUILIBRIUM / ENTRY-POTENTIAL quantity,
+    note     : NOT the MM/LP.5(c) hop-and-relocate scale h of L-07/L-08/Gamma(h). The script never
+    note     : substitutes h_hop here. 'q.e.' is a quasi-everywhere statement -- not numerically
+    note     : checkable by this pass.
+    [PROV]   : V2:3251 (T-9)
+
+[C-17] TRAP nonemptiness / properness [T-12]: dTRAP nonempty provided TRAP is a proper nonempty subset of M
+    class    : TYPED-UNVERIFIABLE
+    closed   : TRAP a proper nonempty subset of M
+    status   : REPORTED
+    note     : 'a standing side condition of the realization' -- set-theoretic, not numerical.
+    [PROV]   : V2:3259 (T-12)
+
+[C-18] positive-capacity rows: cap(A_z, closure(S)) > 0 ; cap(TRAP, closure(S)) > 0
+    class    : TYPED-UNVERIFIABLE
+    closed   : cap(A_z, closure(S)) > 0 ; cap(TRAP, closure(S)) > 0
+    status   : REPORTED
+    note     : Potential-theoretic positivity from a nonempty regular level set; no numeral.
+    [PROV]   : V2:3296
+
+[C-23] (SIGMA0-EXC) tier bounds [T-2] -- TYPED, NOT DISCHARGED
+    class    : TYPED-UNVERIFIABLE
+    closed   : (TIER-A6) <= T_sig exp(beta(Gamma(h) + gamma_2 eps^2 + err(delta))), T_sig beta-free ; (TIER-DISPLAY) <= T_row exp(-beta(c_H/2 - err(delta)))
+    computed : the only landed numeral inside either tier is c_H/2 = 0.1626082895
+    status   : REPORTED  (missing: T_sig, T_row, gamma_2, C_Z_tau, h_hop)
+    note     : Typed and NOT discharged in the corpus. E5's BLOCKING finding on this row (the
+    note     : beta-free-T_sig vs polynomial-P(beta) conflict) is an E5 matter; this pass records
+    note     : the row as typed and evaluates nothing into it.
+    [PROV]   : V2:3244 (T-2), V2:3210
+
+[C-24] GAP-LP-RECUR @ A6 strength [T-1] -- REOPENED, not discharged
+    class    : TYPED-UNVERIFIABLE
+    closed   : beta^{-1} log E_q[sigma_0] bounded by S_k - m_k + eps(S_k/kappa - w_k) + C eps^2 + err ; binds 'LP.5(c) upper limsup ONLY'
+    computed : landed cell part: S_k - m_k = 0.6991336837 ; eps(S_k/kappa - w_k) = 0.0349566842 at eps = 0.05 [L-13 fence: S_k/kappa and w_k are DISTINCT coefficients, never identified]
+    status   : REPORTED  (missing: C_w, gamma_2, err)
+    note     : C := C_w + gamma_2 (MM:1256-1257, MM:3036); both are Stage-1 unsupplied.
+    [PROV]   : V2:3243 (T-1)
+
+====================================================================================================
+STAGE 9 -- REPORT
+====================================================================================================
+A. ARGMIN OVER eps CAPS (caps with landed numerals; L-01/L-03's eps_2 is a MIN that
+   INCLUDES epsilon_0 and therefore cannot loosen the binder)
+     L-02   eps < (2 kappa - m_k)/w_k          0.0472135955   design eps = 0.0500000000 -> FAIL
+     C-07   eps < 1/8                          0.1250000000   design eps = 0.0500000000 -> PASS
+     C-06   eps < kappa/(4 g(10))              0.1309016994   design eps = 0.0500000000 -> PASS
+     ARGMIN  = L-02  at eps < 0.0472135955
+     STATUS  = the design eps = 0.0500000000 VIOLATES it (FINDING F-1).
+
+B. ARGMIN OVER delta CAPS, in Q := L_eps N delta^2 / 4
+     C-08   c_plate > 0            Q < 0.4644293800     delta < 0.4310124731 / sqrt(L_eps)
+     C-03   (H-SEP)                Q < 0.4644293800     delta < 0.4310124731 / sqrt(L_eps)
+     C-09   (THR)                  Q < 0.9288587599     delta < 0.6095436850 / sqrt(L_eps)
+     C-11   3 c_H - 2 eta > 0      Q < 0.9756497373     delta < 0.6247078476 / sqrt(L_eps)
+     ARGMIN  = C-08 (c_plate > 0), TIED by C-03 (H-SEP), both at Q < 0.4644293800
+     Matches the inventory's tension (b): the binding delta cap is c_plate's.
+     Additional landed delta cap not expressible in Q: C-20, delta < pi = 3.1415926536.
+
+C. ARGMAX OVER beta LEGS
+     CONDITIONAL. Every leg of the collected standing threshold reads at least one
+     unsupplied Stage-1 input (G, and/or L_eps, and/or delta), so no argmax can be
+     taken. What IS established:
+       - the collected threshold is the MAX over the ten named thresholds
+         beta_plate, beta_S4, beta_env, beta_1, beta_2, beta_W, beta_W', beta_*,
+         beta_*^{DR}, beta_door, plus the bare condition beta >= 8/delta ((v4c));
+         the bare beta >= 4/delta is DOMINATED (B-13, arithmetically confirmed).
+       - the conservative single reading is max(beta_*, beta_*^{DR}) (B-14).
+       - NO domination is assumed anywhere else (R4). The arithmetic observations
+         recorded above (beta_S4 >= beta_plate; beta_W >= beta_env, beta_plate;
+         beta_W' >= beta_W; beta_2's (C0) leg = 1/c_plate = beta_plate/2) are
+         OBSERVATIONS; no leg was dropped.
+       - partial reduction achieved from landed numerals:
+         beta_* = max( 16/delta , 24.5989919164 G , 1 + 5.1247899826 G + 2.0499159930 )
+         beta_*^{DR} = max( 8/delta , (2+G)/(0.9288587599 - Q) )
+         beta_plate = 2/(0.9288587599 - 2Q) ,  beta_door = 8G/(0.9288587599 - 2Q)
+         beta_env = 8 max(2G, 1) / (L_eps N delta^2) = 2 max(2G,1) / Q
+
+D. STAGE-1 INPUTS THAT HAD TO BE SUPPLIED AND WERE NOT (51)
+     G             L             L_eps         inj_M         V_M           omega_nm1     
+     c_N_delta     C_n_harnack   c_perp        r0            C_1           C_Z_tau       
+     gamma_2       C_w           C_B           C_ch          err_B         err_S         
+     T_sig         T_row         T_1           T_b           T_init        T_relax       
+     T_sub         C_s           K_abs         c_Z           C_Z           C_Z_prime     
+     lambda_u      Lambda_s      Lambda_min    C_N           c_1           C_fr          
+     L_fr          W_sup         c_shell       L_E           r_0_prime     eps_prime_0   
+     epsilon_0     epsilon_1     eps_2         s             s_prime       delta         
+     h_hop         theta_2       tau           
+     Supplied: <none>
+     G and L (hence L_eps) gate the most rows; neither has a landed numeral.
+
+====================================================================================================
+E. THREE-CLASS TABLE
+====================================================================================================
+
+--- VERIFIED  -- closed form + landed numerals; evaluated to a definite verdict   (10 rows) ---
+  [PASS]    C-07   (SML') operative eps anchor B: eps < 1/8
+            [PROV] V2:433 ('the simpler eps < 1/8 condition below both')
+  [PASS]    C-06   (SML') operative eps anchor A: eps < kappa/(4 g(10))
+            [PROV] V2:429-431 ('1/(4 g(10)) = 0.130901699... at kappa = 1; the inherited 0.130906 is a stale transcription and is not carried')
+  [FAIL]    L-02   M2P third entry (epsilon_0 cap): eps < epsilon_0 <= (2 kappa - m_k)/w_k
+            [PROV] LP:431-433
+  [PASS]    C-12   (MARGIN-GEN): c_0 - eta = L_eps N delta^2/8 > 0
+            [PROV] V2:277, V2:1716
+  [PASS]    C-22   (GATE-LOWER) consumed NON-STRICT chain: m_k + 2 lambda >= m_k + 2 kappa >= S_k
+            [PROV] V2:1279, V2:3299
+  [PASS]    B-13   beta >= 4/delta   ((MARG) sub-condition rho <= delta/4) -- DOMINATED
+            [PROV] V2:3389-3391
+  [PASS]    C-14   (RAMP-ADM): 3 beta c_H > 5G + 2
+            [PROV] V2:215-216, V2:220-223, V2:3292 (T-29)
+  [PASS]    C-15   (DOOR-CASE1): dist(z, closure(S)) >= c_plate/(2G) >= 4/beta
+            [PROV] V2:3251 (T-9 residual 1), V2:3335-3339
+  [PASS]    C-19   theta_2 admissibility window: theta_2 Sard-regular in [S_k + c_H - 1/beta, S_k
+            [PROV] V2:3298, V2:605-606, V2:2674
+  [PASS]    L-06   M2-PIN (standing cell condition): lambda > kappa
+            [PROV] V2:347-348, V2:345-346
+
+--- CONDITIONAL -- closed form printed, awaiting supplied Stage-1 inputs   (47 rows) ---
+  [CONDITIONAL] L-01   eps < eps_2, q in D_k(eps)  (the ONE smallness threshold cited by LP.3/LP.4/LP
+            closed form: eps < eps_2
+            missing    : eps_2
+            [PROV] LP:218-219, LP:211-212
+  [CONDITIONAL] L-03   eps_2 ledger, entry list (a MIN over the named entries, epsilon_0 among them)
+            closed form: eps_2 := min( epsilon_1(eps'_0), sqrt(eps'_0/C_inv), c_shell/(4 sqrt(2N)), c_cone r_0'^2/(2 W_sup), (S_k - 2 kappa - eps'_0)/(2 W_sup), [phi-desc] lea
+            missing    : epsilon_1, eps_prime_0, C_Z, c_shell, lambda_u, r_0_prime, W_sup, C_B, C_ch, c_Z, epsilon_0, C_inv, c_cone, K_M, C*, A_x
+            [PROV] LP:185-212
+  [CONDITIONAL] L-04   eps'_0 ledger: eps'_0 < S_k - 2 kappa ; eps'_0 <= 2 C_Z r_0'^2 ; eps'_0 <= c_c
+            closed form: eps'_0 < S_k - 2 kappa ; eps'_0 <= 2 C_Z r_0'^2 ; eps'_0 <= c_cone r_0'^2 / 4
+            missing    : C_Z, r_0_prime, lambda_u
+            [PROV] LP:183-184
+  [CONDITIONAL] C-08   c_plate > 0  [T-6]
+            closed form: c_plate := (S_k + c_H - m_k) - err_A,  err_A := c_0 + eps w_k + L_eps N delta^2/4 ; c_plate = 0.9288587599 - L_eps N delta^2/2 = 0.9288587599 - 2Q
+            missing    : L_eps
+            [PROV] V2:3248 (S7.1 T-6); warrant V2:2600-2602
+  [CONDITIONAL] C-03   (H-SEP), N-corrected form  [T-4]
+            closed form: delta^2 < 2(S_k + c_H - m_k - eps w_k)/(N L_eps)
+            missing    : L_eps
+            [PROV] V2:3246 (S7.1 T-4)
+  [CONDITIONAL] C-09   (THR), AM-R5-15's home
+            closed form: L_eps N delta^2/4  <  S_k + c_H - m_k - eps w_k
+            missing    : L_eps
+            [PROV] PX:7411 physical (= PX:7407 pre-banner); AM-R5-15 at PX:9239 physical
+  [CONDITIONAL] C-11   3 c_H - 2 eta > 0  [T-27; beta_1^weak's existence]
+            closed form: L_eps N delta^2/4 < 3 c_H
+            missing    : L_eps
+            [PROV] V2:3290 (T-27), V2:1832, V2:2395
+  [CONDITIONAL] C-13   (NEARS-ERR) [T-17], CASE-2 ONLY: (ENTRY-MARGIN) reads c_0 - eta - err_S > 0
+            closed form: c_0 - eta - err_S > 0, i.e. L_eps N delta^2/8 > err_S, i.e. Q/2 > err_S
+            missing    : err_S, L_eps, delta
+            [PROV] V2:3264 (T-17)
+  [CONDITIONAL] C-20   delta < pi (label well-definedness on S^+)
+            closed form: delta < pi
+            missing    : delta
+            [PROV] PX:7399 physical
+  [CONDITIONAL] C-21   delta/2 <= r0  (UP-QUAD applicability on the GROUND tube U = T_{r0}(G_k))
+            closed form: delta/2 <= r0
+            missing    : r0, delta
+            [PROV] PX:7405-7406 physical
+  [CONDITIONAL] C-05   (SML')  [T-5]: eps w_k + O(N L_eps delta^2) + s + s' < RHS
+            closed form: eps w_k + O(N L_eps delta^2) + s + s' < RHS
+            missing    : <the O(N L_eps delta^2) constant>, L_eps, delta, s, s'
+            [PROV] V2:425 (display), V2:426-427 (flagship reading), V2:3247 (T-5)
+  [CONDITIONAL] C-01   (T4) H-INJ  [T-3]: delta/2 + 4/beta < inj(T^{2N})
+            closed form: delta/2 + 4/beta < inj(T^{2N})  [full]  ;  delta/2 + 1/beta < inj  [reduced, post half-radius-disc repair]
+            missing    : inj_M, delta, beta, <declared torus normalization> [G9]
+            [PROV] V2:3245 (S7.1 T-3); V2:508, V2:519-520 (C-02's beta-free reading)
+  [CONDITIONAL] S4-c_0 (C0) c_0 := L_eps N delta^2 / 4
+            closed form: c_0 = L_eps N delta^2 / 4 = 2.5 L_eps delta^2  (N = 10) = Q
+            missing    : L_eps, delta
+            [PROV] V2:271
+  [CONDITIONAL] S4-eta (ETA) eta := L_eps N delta^2 / 8  (frozen at err class, NEVER sent to 0)
+            closed form: eta = 1.25 L_eps delta^2 = Q/2 ; eta_den = eta_lev = eta ; eta_den + eta_lev = Q
+            missing    : L_eps, delta
+            [PROV] V2:264-267, V2:2385-2386
+  [CONDITIONAL] S4-err_A err_A := c_0 + eps w_k + L_eps N delta^2/4   [G7 reading (ii)]
+            closed form: err_A = 0.0954915028 + 5 L_eps delta^2 = 0.0954915028 + 2Q
+            missing    : L_eps, delta
+            [PROV] V2:3248
+  [CONDITIONAL] S4-c_plate c_plate := (S_k + c_H - m_k) - err_A
+            closed form: c_plate = 0.9288587599 - 2Q  (beta-free)
+            missing    : L_eps, delta
+            [PROV] V2:3248
+  [CONDITIONAL] S4-A_tube A_tube (OPERATIVE vintage)  [G4]
+            closed form: A_tube = m_k + eps w_k + L_eps N delta^2/4 = 2.0053215591 + Q  (TUBE-LEVEL')
+            missing    : L_eps, delta
+            [PROV] PX:9785 pre-banner = PX:9789 physical (TUBE-LEVEL'); carried at V2:162
+  [CONDITIONAL] S4-gap_DR S_k + c_H - A_tube  (read by beta_*^{DR})
+            closed form: S_k + c_H - A_tube = 0.9288587599 - Q
+            missing    : L_eps, delta
+            [PROV] V2:3364, V2:162
+  [CONDITIONAL] S4-C_H'' C_H'' := C(n, e^{4G})^8, BETA-FREE (chained, LIVE)  [G5]
+            closed form: C_H'' = C(n, e^{4G})^8
+            missing    : C_n_harnack, G
+            [PROV] V2:1547, V2:1556, V2:3289
+  [CONDITIONAL] S4-C_3 C_3 := C_H'' * C_up' / c(N,delta),  C_up' = e G^2 V_M  (companion leg, factor 
+            closed form: C_3 = C_H'' * e * G^2 * V_M / c(N,delta)
+            missing    : C_n_harnack, G, V_M, c_N_delta
+            [PROV] V2:1685-1686
+  [CONDITIONAL] S4-C_3main C_3^main := C_H'' e^2 G^2 V_M / c(N,delta)  (main leg, factor e^2)  [G2]
+            closed form: C_3^main = C_H'' * e^2 * G^2 * V_M / c(N,delta)
+            missing    : C_n_harnack, G, V_M, c_N_delta
+            [PROV] V2:1697, V2:3303
+  [CONDITIONAL] S4-C_4 C_4 := 2 C_H'' e^{5G} V_M / c(N,delta), beta-free
+            closed form: C_4 = 2 C_H'' e^{5G} V_M / c(N,delta)
+            missing    : C_n_harnack, G, V_M, c_N_delta
+            [PROV] V2:2285
+  [CONDITIONAL] S4-C_5 C_5 -- not displayed in closed form; carries the Sard factor e
+            closed form: <no closed form displayed>
+            missing    : C_s
+            [PROV] V2:3298
+  [CONDITIONAL] S4-T_row T_row = (C_5 + C_s C_4) K_abs, beta-free
+            closed form: T_row = (C_5 + C_s C_4) K_abs
+            missing    : C_s, K_abs
+            [PROV] V2:3289; LP:226
+  [CONDITIONAL] B-01   beta >= beta_plate := 2 / c_plate   (PLATE-SEP)
+            closed form: beta_plate = 2 / c_plate = 2 / (0.9288587599 - 2Q)
+            missing    : L_eps, delta
+            [PROV] V2:3313
+  [CONDITIONAL] B-02   beta >= 8 / delta   (v4c);  2rho <= delta/4 with rho := 1/beta
+            closed form: beta >= 8 / delta
+            missing    : delta
+            [PROV] V2:3314
+  [CONDITIONAL] B-03   beta >= beta_S4 := max( 2/c_plate , 8/delta )
+            closed form: beta_S4 = max( 2/c_plate , 8/delta )
+            missing    : L_eps, delta
+            [PROV] V2:3315-3316
+  [CONDITIONAL] B-04   beta >= beta_env := max( 4G/c_0 , 2/c_0 ),  G := sup_M |grad E_eps| < infinity
+            closed form: beta_env = (2/c_0) * max(2G, 1) = (2/Q) * max(2G, 1) = 8 max(2G,1) / (L_eps N delta^2)
+            missing    : G, L_eps, delta
+            [PROV] V2:3317-3319
+  [CONDITIONAL] B-06   beta >= beta_door := 8G / c_plate   (the (DOOR-CASE1) separation threshold)
+            closed form: beta_door = 8G / (0.9288587599 - 2Q)
+            missing    : G, L_eps, delta
+            [PROV] V2:3335-3343
+  [CONDITIONAL] B-10   beta >= beta_* := max( 16/delta , 24G/(3 c_H) , 1 + (5G+2)/(3 c_H) )   [G3]
+            closed form: beta_* = max( 16/delta , 24.5989919164 G , 1 + 5.1247899826 G + 2.0499159930 )
+            missing    : G, delta
+            [PROV] V2:3363, V2:3365-3375, V2:199
+  [CONDITIONAL] B-11   beta >= beta_*^{DR} := max( 8/delta , (2+G)/(S_k + c_H - A_tube) )   [G3][G4]
+            closed form: beta_*^{DR} = max( 8/delta , (2+G)/(0.9288587599 - Q) )
+            missing    : G, L_eps, delta
+            [PROV] V2:3364, V2:3376-3380
+  [CONDITIONAL] B-12   beta >= max( beta_S4 , beta_* )   ((MAIN-V2ID) standing threshold)
+            closed form: max( beta_S4 , beta_* )
+            missing    : G, L_eps, delta
+            [PROV] V2:3381-3388
+  [CONDITIONAL] B-14   conservative single reading: max( beta_* , beta_*^{DR} )
+            closed form: max( beta_* , beta_*^{DR} )
+            missing    : G, L_eps, delta
+            [PROV] V2:249-252, V2:3394
+  [CONDITIONAL] B-05a  beta_1^weak (IMPLICIT)
+            closed form: beta_1^weak := any beta-free value at or above which C_3^main e^{6G} beta^{2N+1} exp(-beta(3 c_H - 2 eta)) <= 1/2, with C_3^main := C_H'' e^2 G^2 V_M 
+            missing    : C_n_harnack, G, V_M, c_N_delta, L_eps, delta
+            [PROV] V2:3325-3333, V2:173-180
+  [CONDITIONAL] B-05b  beta_1^hist (IMPLICIT) -- CONDITIONAL ON THE FORM, not only on the numerals
+            closed form: beta_1^hist := the beta-free threshold at which THE LAST LINE OF THE HISTORICAL (ENTRY) (Section 3.2) falls to 1/2 on dA_z. That line runs on C_H' and
+            missing    : <the last line of the HISTORICAL (ENTRY), Section 3.2>, C_H', eta
+            [PROV] V2:170-172, V2:3320-3324
+  [CONDITIONAL] B-05   beta >= beta_1 := max( beta_1^hist , beta_1^weak )
+            closed form: beta_1 = max( beta_1^hist , beta_1^weak )
+            missing    : beta_1^hist, beta_1^weak
+            [PROV] V2:3320-3334, V2:167-185
+  [CONDITIONAL] B-07   beta >= beta_2(N, delta, eps) (IMPLICIT)
+            closed form: beta_2 := max( <the threshold at which the (ENTRY-W) last line becomes <= 1/2, Section 4.2(e) -- relation NOT displayed> , <the (C0) hinge leg> , beta
+            missing    : <the (ENTRY-W) last line, Section 4.2(e)>, L_eps, delta, G
+            [PROV] V2:3344-3348; (C0) at V2:271-273
+  [CONDITIONAL] B-08   beta >= beta_W := max( beta_2(N,delta,eps), beta_env, beta_plate, 6G/c_0, 2/c_
+            closed form: beta_W = max( beta_2 , beta_env , beta_plate , 6G/c_0 , 2/c_0 )
+            missing    : beta_2, G, L_eps, delta
+            [PROV] V2:3349-3351
+  [CONDITIONAL] B-09   beta >= beta_W' := max( beta_W , 32/delta )
+            closed form: beta_W' = max( beta_W , 32/delta )
+            missing    : beta_W, delta
+            [PROV] V2:3352-3362
+  [CONDITIONAL] C-10   (C0) Regime-A hinge: m_k + eps w_k + (1/2) L_eps N delta^2 + 1/beta <= S_k + c
+            closed form: <=>  1/beta <= (S_k + c_H - m_k - eps w_k) - L_eps N delta^2/2 = c_plate  <=>  beta >= 1/c_plate
+            missing    : L_eps, delta
+            [PROV] V2:271-273
+  [CONDITIONAL] C-02   H-INJ, the S1.1 (G4') beta-free reading: 8/beta < inj(M),  rho := 1/beta
+            closed form: 8 rho < inj(M) with rho := 1/beta, i.e. beta > 8/inj(M)
+            missing    : inj_M, beta, <declared torus normalization> [G9]
+            [PROV] V2:508, V2:519-520
+  [CONDITIONAL] L-07   diffusive floor: beta h^2 >= B_Z = 16, i.e. beta_0(h) = 16/h^2 = O(h^{-2})
+            closed form: beta >= 16 / h^2
+            missing    : h_hop, beta, <h-discipline adjudication: see FINDING F-2>
+            [PROV] MM:511, MM:533, MM:446
+  [CONDITIONAL] S8-Gamma Gamma(h) := 6 C_1 D_G h = O(h)   [G6: D_G is the PRODUCT torus value]
+            closed form: Gamma(h) = 6 C_1 D_G h with D_G = pi sqrt(2N) = 14.0496294621 at N = 10
+            missing    : C_1, h_hop, <h-discipline adjudication>
+            [PROV] MM:312, MM:135, MM:131 (C_1 = 1/2 + L/4 + L^2/24); MM:1370 (D_G product, campaign-#23 seal)
+  [CONDITIONAL] S8-err err(delta) := 18 C_Z(tau) delta^2 = O(delta^2)
+            closed form: err(delta) = 18 C_Z(tau) delta^2
+            missing    : C_Z_tau, delta, tau
+            [PROV] MM:549-550
+  [CONDITIONAL] L-05   r_0' shrink ledger ([tube]/[cone]/[cube]/[phi]/[theta] entries)
+            closed form: r_0' <= r_0/2 ; r_0' <= gamma_c lambda_u/(16 C_N (1 + gamma_c^2)) ; [cube] r_0' small enough to bury every cubic Taylor remainder ; C_Z r_0'^2 <= 4 c_
+            missing    : r0, lambda_u, C_N, C_Z, r_0_prime, gamma_c, dist(Z, Delta_theta)
+            [PROV] LP:170-182
+  [CONDITIONAL] L-11   tube radius vs injectivity: r0 <= inj(M)/4 ; (H2) r < normal injectivity radiu
+            closed form: r0 <= inj(M)/4
+            missing    : r0, inj_M
+            [PROV] MM:106, MM:421, MM:530
+  [CONDITIONAL] L-14   transverse nondegeneracy on the tube: J - m_k >= (c_perp/2) dist(.,C_k)^2 ; |g
+            closed form: J - m_k >= (c_perp/2) dist(., C_k)^2 ;  |grad J| <= L dist(., C_k)
+            missing    : c_perp, L
+            [PROV] MM:109
+
+--- TYPED-UNVERIFIABLE -- no numerical content a pass can evaluate   (9 rows) ---
+  [REPORTED] L-10   [23] SS C one-metric discipline: ONE declared metric per consumer
+            [PROV] MM:101-102, MM:588, MM:1359
+  [REPORTED] L-12   [23] SS D.2 no-common-small-set discipline
+            [PROV] MM:1965
+  [REPORTED] L-13   [23] SS B.3 non-identification fence: w_k and S_k/kappa are NEVER identified; 
+            [PROV] MM:760, MM:766, MM:940
+  [REPORTED] C-04   (H-SEP) strength flag, UNRESOLVED: PE-DOORREACH's separation row displays dist
+            [PROV] V2:3246
+  [REPORTED] C-16   (SANDWICHw) hypothesis on the SOLID ball: 1 - 2h >= 0 q.e., companion h <= 1/2
+            [PROV] V2:3251 (T-9)
+  [REPORTED] C-17   TRAP nonemptiness / properness [T-12]: dTRAP nonempty provided TRAP is a prope
+            [PROV] V2:3259 (T-12)
+  [REPORTED] C-18   positive-capacity rows: cap(A_z, closure(S)) > 0 ; cap(TRAP, closure(S)) > 0
+            [PROV] V2:3296
+  [REPORTED] C-23   (SIGMA0-EXC) tier bounds [T-2] -- TYPED, NOT DISCHARGED
+            [PROV] V2:3244 (T-2), V2:3210
+  [REPORTED] C-24   GAP-LP-RECUR @ A6 strength [T-1] -- REOPENED, not discharged
+            [PROV] V2:3243 (T-1)
+
+--- REPORTED FINDING -- surfaced for the lead; NOT adjudicated by this pass   (2 rows) ---
+  [REPORTED] L-08   order-of-limits discipline: FIX (eps, delta, h = delta/2); beta -> infinity FI
+            [PROV] MM:3025-3039; MM:511 ('beta -> infinity before h -> 0 is mandatory')
+  [REPORTED] L-09   competing h/delta discipline (SECOND wording): 'THEN delta -> 0 ... (taken at 
+            [PROV] MM:344-345
+
+====================================================================================================
+F. COUNTS: VERIFIED 10 | CONDITIONAL 47 | TYPED-UNVERIFIABLE 9 | REPORTED FINDING 2 | total rows emitted 68
+   Plus Stage 0's 21 asserted cell-scalar rows, all PASS (the regression gate).
+   Authority is this enumeration by name. No exhaustiveness over the corpus is claimed.
+====================================================================================================
+
+G. THE TWO NAMED TENSIONS
+   F-1  L-02 eps cap VIOLATED at the design eps.
+        eps = 0.0500000000  vs  cap (2 kappa - m_k)/w_k = 0.0472135955  ->  FAIL by 0.0027864045.
+        Substance: M2P's supporting inequality 2 kappa > m_k + eps w_k reads
+        2.0000000000 > 2.0053215591, which is FALSE by 0.0053215591.
+        Four dispositions listed in Stage 2; the choice is the lead's.
+   F-2  h-discipline conflict L-08 (h = delta/2) vs L-09 (delta <= h).
+        Jointly satisfiable only at delta = 0, which rule R2 forbids evaluating at.
+        Three dispositions listed in Stage 8; the choice is the lead's.
+
+H. SUBORDINATE OBSERVATIONS (computed by this pass; NOT among the two named tensions)
+   O-1  C-03 (H-SEP) and C-08 (c_plate > 0) reduce to the SAME cap Q < 0.4644293800.
+        They TIE for binding. The inventory's tension (b) compares C-08/C-09/C-11 only.
+   O-2  (SML')'s printed constant 0.0894771449 is the (ADJ-2) value at the WORST SAMPLED
+        cell (200, 1.0001), not the flagship RHS. The flagship reading is against
+        (MRG) = 0.8617419732 [V2:426-427] and PASSES with slack 0.7662504704 before the err terms.
+   O-3  C-22's second inequality holds with EXACT equality (S_k + 4 c_H = m_k + 2 kappa
+        identically, since the active c_H branch is (m_k + 2 kappa - S_k)/4). This is
+        why the corpus records the STRICT middle clause as NOT CONSUMED.
+   O-4  beta_2's (C0) leg reduces exactly to beta >= 1/c_plate = beta_plate/2.
+
+I. SCOPE FENCE
+   This pass evaluated the rows NAMED C-01..C-24, B-01..B-14, L-01..L-14 and the
+   derived-scalar rows S4-*, S8-* listed above, at the flagship cell
+   (N, kappa, lambda) = (10, 1, 1+) with the design eps = 0.05 and delta left as a
+   free positive scale. Its authority is that enumeration. It asserts nothing about
+   rows not named here, and it makes no quantified claim of exhaustiveness over
+   V2 / MM / LP / PX. Rows T-19..T-22, T-23..T-25 and T-26..T-29 are outside the
+   inventory's scope by the inventory's own fence and were not evaluated.
+
+====================================================================================================
+END OF PASS. Stage 0 regression gate: PASS. Two tensions reported (F-1, F-2).
+====================================================================================================

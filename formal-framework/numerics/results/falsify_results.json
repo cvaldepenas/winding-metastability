@@ -1,0 +1,338 @@
+{
+ "prod_shell": {
+  "display": "lane-lt PROD-SHELL: S_k - m_k < 2k",
+  "verdict": "STANDS",
+  "k1_gap_at_N_10_12_20": {
+   "10": 0.6991,
+   "12": 0.8817,
+   "20": 1.2946
+  },
+  "k1_sup_gap_to_Nmax": 1.9926,
+  "k2plus_admissible_checked": 16003,
+  "violations": [],
+  "note": "k=1 reference values artifact records 0.70/0.882/1.295; k>=2 row is TYPED (open) - this sweep is its first map"
+ },
+ "cH_ledger": {
+  "display": "lane-lp constants ledger c_H + lane-ls S_1<=2.7<4",
+  "verdict": "STANDS",
+  "rows": {
+   "10": {
+    "m_1": 1.9098,
+    "S_1": 2.609,
+    "c_H": 0.3252,
+    "entry_shell": 1.3009,
+    "entry_4k": 1.391
+   },
+   "12": {
+    "m_1": 1.6077,
+    "S_1": 2.4894,
+    "c_H": 0.2796,
+    "entry_shell": 1.1183,
+    "entry_4k": 1.5106
+   },
+   "20": {
+    "m_1": 0.9789,
+    "S_1": 2.2735,
+    "c_H": 0.1764,
+    "entry_shell": 0.7054,
+    "entry_4k": 1.7265
+   },
+   "50": {
+    "m_1": 0.3943,
+    "S_1": 2.1028,
+    "c_H": 0.0729,
+    "entry_shell": 0.2915,
+    "entry_4k": 1.8972
+   },
+   "100": {
+    "m_1": 0.1973,
+    "S_1": 2.0504,
+    "c_H": 0.0367,
+    "entry_shell": 0.147,
+    "entry_4k": 1.9496
+   }
+  },
+  "sup_S1_over_N_10_2000": 2.608964,
+  "violations": []
+ },
+ "hessian_calibration": {
+  "display": "lane-lp constants ledger (recorded numerics)",
+  "verdict": "FINDING",
+  "rows": {
+   "10": {
+    "lambda_u": 1.2317,
+    "Lambda_s_full": 4.0,
+    "Lambda_s_theta_only": 3.5953,
+    "Lambda_min": 0.3529,
+    "theta_inertia_pos_neg": [
+     8,
+     1
+    ],
+    "c_1": 1.3336,
+    "C_fr_norm": 0.4708,
+    "C_fr_per_eigvec": 0.3035,
+    "gamma_c_from_full": 0.2775,
+    "slice_alignment": 0.9427
+   },
+   "12": {
+    "lambda_u": 1.2681,
+    "Lambda_s_full": 4.0,
+    "Lambda_s_theta_only": 3.7337,
+    "Lambda_min": 0.2548,
+    "theta_inertia_pos_neg": [
+     10,
+     1
+    ],
+    "c_1": 1.3334,
+    "C_fr_norm": 0.4713,
+    "C_fr_per_eigvec": 0.2844,
+    "gamma_c_from_full": 0.2815,
+    "slice_alignment": 0.9342
+   },
+   "20": {
+    "lambda_u": 1.3131,
+    "Lambda_s_full": 4.0,
+    "Lambda_s_theta_only": 3.9137,
+    "Lambda_min": 0.0964,
+    "theta_inertia_pos_neg": [
+     18,
+     1
+    ],
+    "c_1": 1.3333,
+    "C_fr_norm": 0.4714,
+    "C_fr_per_eigvec": 0.2141,
+    "gamma_c_from_full": 0.2865,
+    "slice_alignment": 0.9177
+   }
+  },
+  "reference": {
+   "lambda_u": "1.23-1.31",
+   "Lambda_s": "3.6-3.9",
+   "Lambda_min": "0.35/0.25/0.10",
+   "c_1": "~1.333",
+   "C_fr": "<=0.30/0.28/0.21",
+   "alignment": "0.943/0.934/0.918",
+   "gamma_c": "~0.29"
+  },
+  "violations": [
+   [
+    "reference-value drift",
+    10
+   ],
+   [
+    "reference-value drift",
+    12
+   ],
+   [
+    "reference-value drift",
+    20
+   ]
+  ],
+  "finding_note": "structure findings (inertia/c_1) break proofs; reference-value drift findings mean the artifact's RECORDED SUPPORTING numbers need correction (Lambda_s full-transversal tops at 4.0 lam via the phi-block N/2 mode at even N - the 3.6-3.9 range looks theta-only; C_fr as the NORM the display consumes is ~0.47, the recorded 0.30 looks per-eigenvector). The ledger is SYMBOLIC and minima-composed; no proof consumes the recorded numbers - correction is to the reference lines only. gamma_c from full conventions ~0.277 vs recorded ~0.29."
+ },
+ "lp1_band_floor": {
+  "display": "lane-lp LP.1 band/floor/upper (Morse-Bott feedstock)",
+  "verdict": "STANDS",
+  "N": 10,
+  "k": 1,
+  "rows": [
+   {
+    "r": 0.05,
+    "C_Z_est_max": 19.17,
+    "c_Z_est_min": 3.378,
+    "Cp_Z_est_max": 11.802
+   },
+   {
+    "r": 0.1,
+    "C_Z_est_max": 15.088,
+    "c_Z_est_min": 2.894,
+    "Cp_Z_est_max": 9.905
+   },
+   {
+    "r": 0.2,
+    "C_Z_est_max": 14.23,
+    "c_Z_est_min": 3.176,
+    "Cp_Z_est_max": 9.637
+   },
+   {
+    "r": 0.3,
+    "C_Z_est_max": 14.181,
+    "c_Z_est_min": 3.62,
+    "Cp_Z_est_max": 9.335
+   }
+  ],
+  "note": "c_Z floor must stay bounded away from 0 as r shrinks; C_Z finite = the band's r^2 scaling"
+ },
+ "wstar": {
+  "display": "lane-lp W* bounds + W*-cost slice identity",
+  "verdict": "STANDS",
+  "sup_W_found": 19.2405,
+  "bound_2N": 20,
+  "sup_gradW_found": 8.0025,
+  "bound_2sqrt2N": 8.9443,
+  "slice_identity_max_err": 0.0
+ },
+ "Gkj_levels": {
+  "display": "lane-lp G_{k,j} level separations (trap census)",
+  "verdict": "STANDS",
+  "N": 10,
+  "k": 1,
+  "S_k": 2.609,
+  "band_top": 2.9342,
+  "rows": [
+   {
+    "j": 1,
+    "lam": 1.0,
+    "level": 3.8197,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 2,
+    "lam": 1.0,
+    "level": 8.8197,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 3,
+    "lam": 1.0,
+    "level": 15.0,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 4,
+    "lam": 1.0,
+    "level": 20.0,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 5,
+    "lam": 1.0,
+    "level": 21.9098,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 1,
+    "lam": 1.5,
+    "level": 4.7746,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 2,
+    "lam": 1.5,
+    "level": 12.2746,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 3,
+    "lam": 1.5,
+    "level": 21.5451,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 4,
+    "lam": 1.5,
+    "level": 29.0451,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 5,
+    "lam": 1.5,
+    "level": 31.9098,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 1,
+    "lam": 2.0,
+    "level": 5.7295,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 2,
+    "lam": 2.0,
+    "level": 15.7295,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 3,
+    "lam": 2.0,
+    "level": 28.0902,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 4,
+    "lam": 2.0,
+    "level": 38.0902,
+    "in_band": false,
+    "above_band": true
+   },
+   {
+    "j": 5,
+    "lam": 2.0,
+    "level": 41.9098,
+    "in_band": false,
+    "above_band": true
+   }
+  ],
+  "note": "census only - the tori are REAL criticals (the reason the probability-floor row is false); the SDE probe measures whether the expected-time form survives them"
+ },
+ "ladder_Lk": {
+  "display": "lane-ls LS.1 middle rungs 2k < L_k < S_k (prose)",
+  "verdict": "STANDS",
+  "violations": [],
+  "slice_interior_stationary_points_N10": 1
+ },
+ "range_row": {
+  "display": "lane-ls ROW RANGE(N,k) (prose)",
+  "verdict": "STANDS",
+  "violations": []
+ },
+ "ridge_r_vacuity": {
+  "display": "lane-ls C1-SUB => r<=3/4 vacuity (prose)",
+  "verdict": "STANDS",
+  "max_residual_mean_bound": 0.628319,
+  "threshold": 0.75
+ },
+ "valley_criticals": {
+  "display": "lane-ls LS.2c valley has no criticals (prose)",
+  "verdict": "STANDS",
+  "n_starts": 300,
+  "descents_ending_in_valley": 0,
+  "critical_hits_in_valley": [],
+  "note": "bounded multistart |grad|^2 minimization; descents ending in V with grad ~ 0 would be counterexamples"
+ },
+ "shell_floor": {
+  "display": "lane-lp LP.1' c_shell > 0 (prose)",
+  "verdict": "STANDS",
+  "n_starts": 200,
+  "min_grad_found_in_shell": null,
+  "critical_hits_in_shell": [],
+  "note": "tests the REPAIRED K_all (saddle tube = UNION over the N cyclic relabeling copies of Z). AS LITERALLY STATED (one T^2 orbit excised) c_shell = 0: the probe found SP_k(hot bond 2) x C_0 at grad ~ 3e-6, level S_k, inside the shell - a STATEMENT finding with a by-symmetry repair (all constants unchanged)"
+ },
+ "wall_seconds": 27.2,
+ "verdict_summary": {
+  "prod_shell": "STANDS",
+  "cH_ledger": "STANDS",
+  "hessian_calibration": "FINDING",
+  "lp1_band_floor": "STANDS",
+  "wstar": "STANDS",
+  "Gkj_levels": "STANDS",
+  "ladder_Lk": "STANDS",
+  "range_row": "STANDS",
+  "ridge_r_vacuity": "STANDS",
+  "valley_criticals": "STANDS",
+  "shell_floor": "STANDS"
+ }
+}

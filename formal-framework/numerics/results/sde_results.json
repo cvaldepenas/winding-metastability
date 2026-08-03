@@ -1,0 +1,89 @@
+{
+ "beta_slope": {
+  "experiment": "beta_slope_exit",
+  "N": 10,
+  "k": 1,
+  "dt": 0.005,
+  "n_rep": 24,
+  "seed": 20260710,
+  "rows": [
+   {
+    "beta": 6.0,
+    "n": 24,
+    "censored": 0,
+    "mean_tau": 65.96666666666668,
+    "log_mean_tau": 4.18914956394041
+   },
+   {
+    "beta": 7.0,
+    "n": 24,
+    "censored": 0,
+    "mean_tau": 120.05416666666667,
+    "log_mean_tau": 4.787943029825617
+   },
+   {
+    "beta": 8.0,
+    "n": 24,
+    "censored": 0,
+    "mean_tau": 255.76666666666665,
+    "log_mean_tau": 5.54426557051551
+   },
+   {
+    "beta": 9.0,
+    "n": 24,
+    "censored": 0,
+    "mean_tau": 430.6416666666667,
+    "log_mean_tau": 6.065276344453895
+   },
+   {
+    "beta": 10.0,
+    "n": 24,
+    "censored": 0,
+    "mean_tau": 849.5916666666667,
+    "log_mean_tau": 6.7447558419022196
+   }
+  ],
+  "arrhenius_slope": 0.6388545870551897,
+  "ladder_gap_S_minus_m": 0.6991336836591806,
+  "honesty": "moderate-beta supporting evidence; slope at these betas need not equal the beta->inf rate; censored runs bias the mean downward"
+ },
+ "pinning": {
+  "experiment": "pinning_occupancy",
+  "N": 10,
+  "k": 1,
+  "beta": 8.0,
+  "dt": 0.005,
+  "n_steps": 2000000,
+  "seed": 20260710,
+  "samples_in_sector": 1963,
+  "exited": true,
+  "occupancy_below_quarter_gap": 0.034640855832908816,
+  "occupancy_mid_band": 0.49821701477330615,
+  "occupancy_above_three_quarter": 0.467142129393785,
+  "mean_J_in_sector": 2.4424661534382794,
+  "m_k": 1.9098300562505255,
+  "S_k": 2.608963739909706,
+  "honesty": "single moderate-beta trajectory; occupancy shape is evidence about pinning, not a rate certificate"
+ },
+ "excursions": {
+  "experiment": "excursion_shape",
+  "N": 10,
+  "k": 1,
+  "beta": 8.0,
+  "dt": 0.005,
+  "n_steps": 4000000,
+  "seed": 20260710,
+  "level": 2.259396898080116,
+  "level_frac": 0.5,
+  "samples_in_sector": 3926,
+  "n_excursions_completed": 213,
+  "n_excursions_open_at_cut": 1,
+  "duration_mean": 0.32617370892018777,
+  "duration_p95": 1.4699999999999989,
+  "peak_mean": 2.477446985455714,
+  "peak_max": 3.377787245225795,
+  "fraction_time_above": 0.7498726439123791,
+  "honesty": "empirical excursion census at one moderate beta; probes the PROD-EXCURSION raw material (renewal + budget), certifies nothing"
+ },
+ "wall_seconds": 338.1
+}

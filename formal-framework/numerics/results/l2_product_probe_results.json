@@ -1,0 +1,413 @@
+{
+ "seed": 20260721,
+ "N": 10,
+ "kappa": 1.0,
+ "lambda": 1.3,
+ "dt": 0.005,
+ "t_end": 1.0,
+ "npaths": 40000,
+ "betas": [
+  10.0,
+  20.0,
+  40.0
+ ],
+ "epses": [
+  0.0,
+  0.1
+ ],
+ "s_values": [
+  0.4,
+  0.6,
+  0.8,
+  1.0
+ ],
+ "r_tube": 0.8,
+ "design": "[23] S C-D: the L2 orbit chain on the product ground T^2",
+ "cells": {
+  "beta=10.0,eps=0.0": {
+   "tube_stay": 0.0008,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.00025,
+     "rate": 0.8294049640102028
+    },
+    "phi_dir": {
+     "emp": 0.0002,
+     "rate": 0.8517193191416238
+    },
+    "radial_2d": {
+     "emp": 0.00045,
+     "rate": 0.7706262975199909
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.00015,
+     "rate": 0.8804875263868018
+    },
+    "phi_dir": {
+     "emp": 7.5e-05,
+     "rate": 0.9498022444427964
+    },
+    "radial_2d": {
+     "emp": 0.000275,
+     "rate": 0.8198739460297702
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 7.5e-05,
+     "rate": 0.9498022444427964
+    },
+    "phi_dir": {
+     "emp": 5e-05,
+     "rate": 0.9903487552536128
+    },
+    "radial_2d": {
+     "emp": 0.00015,
+     "rate": 0.8804875263868018
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "phi_dir": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "radial_2d": {
+     "emp": 2.5e-05,
+     "rate": 1.0596634733096073
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  },
+  "beta=10.0,eps=0.1": {
+   "tube_stay": 0.001475,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.00045,
+     "rate": 0.7706262975199909
+    },
+    "phi_dir": {
+     "emp": 0.0005,
+     "rate": 0.7600902459542083
+    },
+    "radial_2d": {
+     "emp": 0.00095,
+     "rate": 0.6959048573369688
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.000225,
+     "rate": 0.8399410155759854
+    },
+    "phi_dir": {
+     "emp": 0.000225,
+     "rate": 0.8399410155759854
+    },
+    "radial_2d": {
+     "emp": 0.0006,
+     "rate": 0.7418580902748129
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 2.5e-05,
+     "rate": 1.0596634733096073
+    },
+    "phi_dir": {
+     "emp": 5e-05,
+     "rate": 0.9903487552536128
+    },
+    "radial_2d": {
+     "emp": 0.0002,
+     "rate": 0.8517193191416238
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 2.5e-05,
+     "rate": 1.0596634733096073
+    },
+    "phi_dir": {
+     "emp": 2.5e-05,
+     "rate": 1.0596634733096073
+    },
+    "radial_2d": {
+     "emp": 5e-05,
+     "rate": 0.9903487552536128
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  },
+  "beta=20.0,eps=0.0": {
+   "tube_stay": 0.35485,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.07295,
+     "rate": 0.1308990502006671
+    },
+    "phi_dir": {
+     "emp": 0.071125,
+     "rate": 0.13216581932678212
+    },
+    "radial_2d": {
+     "emp": 0.159,
+     "rate": 0.09194255383809527
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.019925,
+     "rate": 0.19578900271529293
+    },
+    "phi_dir": {
+     "emp": 0.019275,
+     "rate": 0.1974473179766372
+    },
+    "radial_2d": {
+     "emp": 0.0581,
+     "rate": 0.14227948075621358
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 0.0039,
+     "rate": 0.2773389362923268
+    },
+    "phi_dir": {
+     "emp": 0.0036,
+     "rate": 0.28134107167600364
+    },
+    "radial_2d": {
+     "emp": 0.01415,
+     "rate": 0.21290203274464453
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 0.0006,
+     "rate": 0.37092904513740643
+    },
+    "phi_dir": {
+     "emp": 0.0004,
+     "rate": 0.3912023005428146
+    },
+    "radial_2d": {
+     "emp": 0.001875,
+     "rate": 0.31395733097798817
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  },
+  "beta=20.0,eps=0.1": {
+   "tube_stay": 0.40785,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.08445,
+     "rate": 0.1235797817864164
+    },
+    "phi_dir": {
+     "emp": 0.083025,
+     "rate": 0.12443067558596635
+    },
+    "radial_2d": {
+     "emp": 0.183125,
+     "rate": 0.08487931496054027
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.023825,
+     "rate": 0.18685099147209355
+    },
+    "phi_dir": {
+     "emp": 0.023325,
+     "rate": 0.18791147661243648
+    },
+    "radial_2d": {
+     "emp": 0.06745,
+     "rate": 0.13481843481641861
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 0.0041,
+     "rate": 0.27483841526359376
+    },
+    "phi_dir": {
+     "emp": 0.0045,
+     "rate": 0.27018389411029314
+    },
+    "radial_2d": {
+     "emp": 0.016525,
+     "rate": 0.20514404466221933
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 0.00065,
+     "rate": 0.36692690975372955
+    },
+    "phi_dir": {
+     "emp": 0.000675,
+     "rate": 0.3650398933545872
+    },
+    "radial_2d": {
+     "emp": 0.00275,
+     "rate": 0.2948077183651828
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  },
+  "beta=40.0,eps=0.0": {
+   "tube_stay": 0.973875,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.071775,
+     "rate": 0.06585547632437523
+    },
+    "phi_dir": {
+     "emp": 0.073525,
+     "rate": 0.06525324486355197
+    },
+    "radial_2d": {
+     "emp": 0.1982,
+     "rate": 0.040461966427156236
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.007575,
+     "rate": 0.12207254818966759
+    },
+    "phi_dir": {
+     "emp": 0.007425,
+     "rate": 0.12257256485733434
+    },
+    "radial_2d": {
+     "emp": 0.027775,
+     "rate": 0.08959047358641108
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 0.0003,
+     "rate": 0.20279320208270182
+    },
+    "phi_dir": {
+     "emp": 0.00035,
+     "rate": 0.19893943508702036
+    },
+    "radial_2d": {
+     "emp": 0.001975,
+     "rate": 0.1556796720157263
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "phi_dir": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "radial_2d": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  },
+  "beta=40.0,eps=0.1": {
+   "tube_stay": 0.981075,
+   "0.4": {
+    "theta_dir": {
+     "emp": 0.072225,
+     "rate": 0.06569922581574596
+    },
+    "phi_dir": {
+     "emp": 0.07085,
+     "rate": 0.06617975782113619
+    },
+    "radial_2d": {
+     "emp": 0.1986,
+     "rate": 0.04041156318427662
+    },
+    "rate_pred_flatBM": 0.04000000000000001
+   },
+   "0.6": {
+    "theta_dir": {
+     "emp": 0.007,
+     "rate": 0.12404612824817059
+    },
+    "phi_dir": {
+     "emp": 0.0074,
+     "rate": 0.12265688196930032
+    },
+    "radial_2d": {
+     "emp": 0.026575,
+     "rate": 0.09069460886885314
+    },
+    "rate_pred_flatBM": 0.09
+   },
+   "0.8": {
+    "theta_dir": {
+     "emp": 0.000275,
+     "rate": 0.20496848650744254
+    },
+    "phi_dir": {
+     "emp": 0.00045,
+     "rate": 0.19265657437999772
+    },
+    "radial_2d": {
+     "emp": 0.001725,
+     "rate": 0.15906320571247035
+    },
+    "rate_pred_flatBM": 0.16000000000000003
+   },
+   "1.0": {
+    "theta_dir": {
+     "emp": 0.0,
+     "rate": null
+    },
+    "phi_dir": {
+     "emp": 2.5e-05,
+     "rate": 0.2649158683274018
+    },
+    "radial_2d": {
+     "emp": 5e-05,
+     "rate": 0.2475871888134032
+    },
+    "rate_pred_flatBM": 0.25
+   }
+  }
+ },
+ "wall_seconds": 56.3,
+ "analysis": {
+  "Q1_flat_at_every_eps": "PASS - per-direction rates identical across eps (beta=40: theta 0.1221 vs 0.1240, phi 0.1226 vs 0.1227) AND identical between directions AND equal to the single-loop K6 probe value (~0.122 at s=0.6, beta=40): the coupling taxes the orbit modes NOT AT ALL, as the bond-difference invariance predicts.",
+  "Q2_radial_2d": "PASS - radial rate 0.0896/0.0907 at beta=40 vs the flat-BM prediction s^2/4 = 0.09: on the nose. No cross-direction tax; the 2-D hop geometry the L2 chain needs is exactly flat.",
+  "Q3_tube_stay": "PASS - 0.001 -> 0.36/0.41 -> 0.97/0.98 rising with beta (2N-2 stable transverse dims, no unstable mode; the beta=10 collapse is the Gibbs width vs r_tube=0.8, not an exponential cost).",
+  "verdict": "The L2-on-product-ground ingredient of LP-MIN-MIG SURVIVES its falsification probe. Together with lz_kick_probe (L1-Z at the saddle orbit) the two riskiest local ingredients of the [23] migration route are probe-validated. Scope: N=10, k=1, W*, eps<=0.1, moderate-deviation window - probes, not proofs."
+ }
+}

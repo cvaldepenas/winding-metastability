@@ -1,0 +1,73 @@
+{
+ "experiment": "prod_excursion_rounds",
+ "N": 18,
+ "k": 1,
+ "kappa": 1.0,
+ "lam": 1.05,
+ "eps": 0.05,
+ "dt": 0.005,
+ "n_steps": 2000000,
+ "seed": 20260721,
+ "ledger": {
+  "m_k": 1.0855,
+  "S_k": 2.3074,
+  "c_H": 0.1945,
+  "band_top": 2.502,
+  "Delta_phi_gate": 3.1855,
+  "ground_level_eps": 1.1398,
+  "row_predicted_slope_leq": -0.0973
+ },
+ "rows": [
+  {
+   "beta": 10.0,
+   "rounds": 78,
+   "n_excursions": 13150,
+   "outside_time_total": 8181.8,
+   "outside_time_per_round": 104.89487179487176,
+   "log_out_per_round": 4.652958627599748,
+   "excursion_mean": 0.6221901140684408,
+   "doorway_level_mean": 2.670805981327945,
+   "wphi_crossings": 0,
+   "wphi_cross_level_min": null,
+   "min_dist_to_Gk1_phi_signature": null,
+   "theta_label_changes": 0
+  },
+  {
+   "beta": 14.0,
+   "rounds": 1195,
+   "n_excursions": 16874,
+   "outside_time_total": 3164.15,
+   "outside_time_per_round": 2.647824267782427,
+   "log_out_per_round": 0.973738271742062,
+   "excursion_mean": 0.18751629726205998,
+   "doorway_level_mean": 2.613352599462037,
+   "wphi_crossings": 0,
+   "wphi_cross_level_min": null,
+   "min_dist_to_Gk1_phi_signature": null,
+   "theta_label_changes": 0
+  },
+  {
+   "beta": 18.0,
+   "rounds": 1612,
+   "n_excursions": 4926,
+   "outside_time_total": 554.25,
+   "outside_time_per_round": 0.3438275434243176,
+   "log_out_per_round": -1.067615074570153,
+   "excursion_mean": 0.11251522533495736,
+   "doorway_level_mean": 2.584964442043567,
+   "wphi_crossings": 0,
+   "wphi_cross_level_min": null,
+   "min_dist_to_Gk1_phi_signature": null,
+   "theta_label_changes": 0
+  }
+ ],
+ "outside_time_slope": -0.7150717127712375,
+ "row_scaling_consistent": true,
+ "honesty": "moderate-beta evidence; the row is an expected-TIME bound - slope <= -c_H/2 at beta->inf; finite-beta slope carries prefactor drift; renewal restarts on theta-change are a simplification of LP.5(c)'s ground-ball-return rounds",
+ "purpose": "A-prime edge probe (prodexc design, refined red flag): N=18, lam=1.05 FAILS the row-true condition floor >= S_k + c_H/2; prediction: outside-time slope flattens toward -(floor - S_k) instead of -c_H. Baseline: in-window N=10 run in sde_product_results.json (slope -0.348).",
+ "analysis": {
+  "observed": "slope -0.715 (beta 10->18), zero Delta_phi crossings in ~2900 rounds total",
+  "ledger_arithmetic": "gate - S_k = 0.878; trap floor - S_k = -0.08 (the row-true margin is negative at this cell). Visit probability per round ~ exp(-0.878 beta): at beta=18 that is ~e^-15.8 - invisible to MC.",
+  "verdict": "The edge probe is CONSISTENT with the row at moderate beta and STRUCTURALLY BLIND to the asymptotic trap term: the arithmetic red flag (net trap occupation ~ exp(-beta(floor - S_k)) with negative argument = growth) lives at beta scales the gate prefactor hides from any feasible MC. The adjudication of the row beyond the N-window is therefore THEOREM work, not probe work. A probe, honestly scoped; moderate-beta window."
+ }
+}

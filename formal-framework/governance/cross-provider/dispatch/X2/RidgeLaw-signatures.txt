@@ -1,0 +1,45 @@
+import Mathlib
+
+open Real Finset
+
+namespace RidgeLaw
+
+noncomputable def E {N : ℕ} (κ : ℝ) (d : Fin N → ℝ) : ℝ :=
+  κ * ∑ i, (1 - Real.cos (d i))
+
+noncomputable def ridgeEnv (N : ℕ) (κ : ℝ) (k : ℕ) (m : ℝ) : ℝ :=
+  κ * ((1 - Real.cos m) + ((N : ℝ) - 1) * (1 - Real.cos ((2 * π * k - m) / ((N : ℝ) - 1))))
+
+theorem mu_sin_ge_one_sub_cos {μ : ℝ} (h0 : 0 ≤ μ) (h1 : μ ≤ 3 / 4) :
+    1 - Real.cos μ ≤ μ * Real.sin μ := <proof elided>
+
+theorem endpoint_pi (h0 : (0:ℝ) ≤ 0) : ∀ μ : ℝ, 0 ≤ μ → μ ≤ 3 / 4 →
+    Real.sin μ * (π - μ) ≤ 1 + Real.cos μ := <proof elided>
+
+theorem tangent_line_bound {μ x : ℝ} (hμ0 : 0 ≤ μ) (hμ1 : μ ≤ 3 / 4)
+    (hx : x ∈ Set.Icc (-π) π) :
+    (1 - Real.cos μ) + Real.sin μ * (x - μ) ≤ 1 - Real.cos x := <proof elided>
+
+theorem sum_tangent {M : ℕ} {t : ℝ} (ht0 : 0 ≤ t) (ht1 : t ≤ 3 / 4)
+    (c : Fin M → ℝ) (hrange : ∀ i, c i ∈ Set.Icc (-π) π) :
+    (M : ℝ) * (1 - Real.cos t) + Real.sin t * ((∑ i, c i) - M * t)
+      ≤ ∑ i, (1 - Real.cos (c i)) := <proof elided>
+
+theorem sum_le_card_mul_max {N : ℕ} (d : Fin N → ℝ) (istar : Fin N)
+    (hmax : ∀ j, |d j| ≤ |d istar|) :
+    (∑ i, d i) ≤ (N : ℝ) * |d istar| := <proof elided>
+
+theorem ridge_law {N : ℕ} {κ : ℝ} {k : ℕ} (hκ : 0 < κ) (hN : 3 ≤ N)
+    (d : Fin N → ℝ) (hrange : ∀ i, d i ∈ Set.Ioo (-π) π)
+    (hsum : ∑ i, d i = 2 * π * k) (istar : Fin N)
+    (hmax : ∀ j, |d j| ≤ |d istar|)
+    (hr : (2 * π * k - |d istar|) / ((N : ℝ) - 1) ∈ Set.Icc 0 (3 / 4)) :
+    ridgeEnv N κ k (|d istar|) ≤ E κ d := <proof elided>
+
+theorem ridge_law_flagship {N : ℕ} {κ : ℝ} (hκ : 0 < κ) (hN : 10 ≤ N)
+    (d : Fin N → ℝ) (hrange : ∀ i, d i ∈ Set.Ioo (-π) π)
+    (hsum : ∑ i, d i = 2 * π) (istar : Fin N)
+    (hmax : ∀ j, |d j| ≤ |d istar|) :
+    ridgeEnv N κ 1 (|d istar|) ≤ E κ d := <proof elided>
+
+end RidgeLaw

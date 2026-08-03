@@ -1,0 +1,200 @@
+# C-7 L-A2f Brief: The Reflection-Parity Artifact (gate-v12 surface)
+
+Role: SELF-CONTAINED blind-audit brief for a different-model auditor
+with NO repository access beyond this file.  Task: audit the CLAIMED
+section (Section 2 - quoted VERBATIM from the artifact, proofs
+included) against the QUOTED certificates (Section 1), quantifier by
+quantifier; plus one adjudication (Section 3).  You never author new
+mathematics; you verify.  Severity: FATAL = a claim states something
+its quoted certificate does not deliver / a proof step is invalid;
+MAJOR = unstated bridge; MINOR = loose phrasing.  Exact locations and
+replacement text.  Output ONLY the structured verdict.  Firewall: no
+physics/agency vocabulary in your report.
+
+## 1. GIVEN - certified statements, QUOTED (ground truth)
+
+Single loop `T^N` (N >= 3): configurations theta; bonds `d_i =
+theta_{i+1} - theta_i` read in the principal branch; `J_mu(theta) =
+mu sum_i (1 - cos(d_i))`, mu > 0.
+
+```text
+[LOOP]  off the antipodal set Delta (closed, Lebesgue-NULL; the set
+        where some bond equals pi) every bond lies in the OPEN
+        interval (-pi, pi) and the winding `w = (1/2pi) sum_i d_i` is
+        an INTEGER; the sectors Sigma_k = {w = k} are OPEN; the
+        equidistributed point e_k (all bonds 2 pi k/N) lies in
+        Sigma_k whenever |k| < N/2 - in particular e_1 in Sigma_1 for
+        every N >= 3.
+[MEAS]  the named invariant probabilities and their densities:
+        rho = Z^-1 exp(-beta J) on T^N (smooth strictly positive -
+        J smooth, T^N compact); for every maintenance member g in
+        G(b, eta), h = id + g: rho_c = Z^-1 exp(-beta h(J)) on T^N
+        (same properties); the coupled rho_E = Z^-1 exp(-beta E_eps)
+        on T^N x T^N (explicit density form in the M2a declaration);
+        the composed rho_c = Z^-1 exp(-beta E_c) on T^N x T^N (smooth
+        strictly positive; the recorded composed-R2 density bridge).
+[ENER]  E_eps = J_kappa(theta) + J_lambda(phi) + eps W(theta, phi)
+        with W = sum_i (1 - cos(d_i - e_i)) (d_i = theta-bonds, e_i =
+        phi-bonds), eps >= 0; E_c = h(J_kappa(theta)) + J_lambda(phi)
+        + eps W, h = id + g, g in G(b, eta).
+[SKEW]  the corpus skew classes (Lane-S skew pairs; M1
+        state-dependent families) are drift modifications built so
+        that THE SAME rho_beta = Z^-1 exp(-beta J) remains THE
+        invariant probability (the silent-class construction,
+        Div_col(rho_beta A) = 0); they change the DRIFT, not the
+        invariant density.
+[R6]    the M4 R6 row (amended wording): "the class C(b) is
+        parameterized through a declared scalar readout Y (its
+        control potential, its ADDED energy contribution - the class
+        increment over the FIXED, class-independent passive part -
+        and its gain are sigma(Y)-measurable), and ell is NOT
+        sigma(Y)-measurable (no measurable phi with phi(Y) = ell
+        rho-a.e.)".  Prior certified R6 discharges used a window
+        method requiring N >= 10.
+```
+
+## 2. CLAIMED - the artifact's content, VERBATIM (audit this)
+
+Declared objects:
+
+```text
+R : T^N -> T^N,  R(theta) = -theta  (coordinatewise negation);
+    a smooth involutive diffeomorphism preserving Lebesgue measure
+    (|det DR| = 1).
+R_2 : T^N x T^N -> T^N x T^N,  R_2(theta, phi) = (-theta, -phi)
+    (the DOUBLE reflection; same properties).
+```
+
+LEMMA P.1 (bond and winding parity).  "Delta is R-invariant: a bond
+of `R(theta)` equals `-d_i mod 2 pi`, and `d_i = pi <=> -d_i = pi
+(mod 2 pi)`; so `R(Delta) = Delta` and R maps the off-Delta set to
+itself.  Off Delta each bond `d_i` lies in the OPEN symmetric
+interval `(-pi, pi)`, so `-d_i in (-pi, pi)` IS the principal-branch
+bond of `R(theta)` (no wrap-around is possible off Delta), giving
+`w(R theta) = (1/2pi) sum_i (-d_i) = -w(theta)` off Delta, and
+`J_mu(R theta) = mu sum_i (1 - cos(-d_i)) = J_mu(theta)` everywhere
+(cos even).  On the pair, under R_2: both factors' bonds negate, so
+`w_theta -> -w_theta`, `w_phi -> -w_phi`, `J_kappa` and `J_lambda`
+are invariant, and the coupling `W = sum_i (1 - cos(d_i - e_i))` is
+invariant since `(-d_i) - (-e_i) = -(d_i - e_i)` and cos is even.
+Hence `E_eps o R_2 = E_eps` and, for every g in G(b, eta),
+`E_c o R_2 = E_c` (h reshapes a reflection-invariant scalar).  QED."
+
+LEMMA P.2 (measure parity).  "Any probability on T^N whose density is
+a measurable function of J alone - in particular rho ~ exp(-beta J)
+and EVERY class member's rho_c ~ exp(-beta h(J)) - is R-invariant:
+change of variables with `|det DR| = 1` and `J o R = J`.  Likewise
+any probability on `T^N x T^N` whose density is a measurable function
+of a R_2-invariant energy - the coupled rho_E and the composed rho_c
+of every (eps, g) - is R_2-invariant (Lemma P.1).  QED."
+
+THEOREM P.3 (R6 information honesty, single factor, EVERY N >= 3).
+"Let `N >= 3` and let rho* be ANY R-invariant probability on T^N with
+a strictly positive density (in particular: rho, and every member's
+rho_c).  Then there is NO measurable `phi` with `phi(J(theta)) =
+w(theta)` for rho*-a.e. theta.
+Proof.  Suppose such phi exists; let `A = {theta off Delta :
+w(theta) = phi(J(theta))}`, so `rho*(A) = 1` (Delta is null).  Since
+rho* is R-invariant and R is an involution, `rho*(R(A)) = 1`; the set
+`B = A intersect R(A)` (off Delta, which is R-invariant and null) has
+`rho*(B) = 1`.  For theta in B: theta in A gives `w(theta) =
+phi(J(theta))`; also `R theta in A` (theta in R(A)), which gives
+`w(R theta) = phi(J(R theta)) = phi(J(theta))` (Lemma P.1, J even).
+By the winding parity (Lemma P.1), `w(R theta) = -w(theta)`.  Hence
+`w(theta) = -w(theta)`, so `2 w(theta) = 0` and `w = 0` on B, i.e.
+`w = 0` rho*-a.e. (integer-valuedness is consumed only below, where
+`w = 1` on Sigma_1).  But `Sigma_1` is open and nonempty (`e_1 in
+Sigma_1`; its bonds `2 pi/N` lie in `(-pi, pi)` for every N >= 3) and
+rho* has a strictly positive density, so `rho*(Sigma_1) > 0` while
+`w = 1` there.  Contradiction.  QED.
+Remark (stronger form, recorded not exploited): the argument used
+only `Y o R = Y` for the readout `Y = J`; it excludes
+sigma(Y)-measurability of w for EVERY readout Y invariant under R,
+with respect to EVERY R-invariant rho* of positive density."
+
+THEOREM P.4 (coupled and composed pairs, EVERY N >= 3, every eps,
+every g).  "On `T^N x T^N`, for the label `ell = w_theta` and the
+readout `Y = J_kappa(theta)`: no measurable phi satisfies
+`phi(J_kappa) = w_theta` a.e. with respect to the coupled rho_E (any
+eps >= 0) or the composed rho_c (any eps >= 0, any g in G(b, eta)).
+Proof.  Identical parity argument with R_2 in place of R:
+`J_kappa o R_2 = J_kappa` and `w_theta o R_2 = -w_theta` (Lemma P.1);
+rho_E and rho_c are R_2-invariant (Lemma P.2); the sector cylinder
+`Sigma_1 x T^N` is open nonempty and carries positive mass (strictly
+positive density: for rho_E, the M2a declaration's explicit density
+form `rho_E = Z^-1 exp(-beta E_eps)`; for the composed rho_c, the
+composed-R2 density bridge of MC.6, already recorded).  The
+contradiction forces `w_theta = 0` a.e. with respect to rho_E (every
+eps) and to the composed rho_c (every eps, g), against the positive
+mass of `Sigma_1 x T^N` under each.  QED."
+
+COROLLARIES (integration targets).  "C-A: M4.1's R6 row HOLDS FOR
+EVERY N >= 3 (Y = J; the class's control potential g(J), added
+contribution g(J), gain g'(J) are sigma(J)-measurable by construction
+- the amended wording - and w is not sigma(J)-measurable by Theorem
+P.3); the typed-open row 'R6 for 3 <= N <= 9' RESOLVES: not
+measurable.  C-B: MC.6's R6 leg extends to every N >= 3 (Theorem
+P.4); the N >= 10 product-transfer bridge STANDS as the window-method
+proof - supersession-IN-RANGE only.  C-C: the window method (N >= 10)
+STANDS: it localizes the failure of measurability to the sub-barrier
+window (m_k, 2 kappa) - information the parity argument does not
+give."
+
+HONEST BOUNDARY (claimed as recorded).  "The parity argument is a
+SYMMETRY argument AT THE MEASURE LEVEL: it consumes the
+reflection-invariance of the INVARIANT DENSITY and dies under
+modifications whose invariant density is not reflection-invariant
+(tilted potentials, asymmetric couplings).  The corpus skew classes
+(Lane-S, M1) keep the SAME rho_beta ~ exp(-beta J), which IS
+parity-invariant - the argument SURVIVES every corpus skew class; the
+fragile hypothesis is the measure's parity, not the drift's."
+
+## 3. ADJUDICATION: the fragility-scope claim
+
+Adjudicate the Honest Boundary's survival claim against [SKEW]: is it
+correct that the parity theorems apply VERBATIM to the corpus skew
+classes because the invariant measure is unchanged (the theorems
+consume only the measure, w, and J - never the drift)?  Is there any
+way a drift could matter to a statement quantified only over
+(rho*, w, J)?  Answer YES-SURVIVES / NO-with-counterexample, with
+reasoning.
+
+## 4. NOT claimed
+
+```text
+robustness beyond the typed hypotheses (nothing for
+non-reflection-invariant densities); no new persistence, pinning,
+rate, or threshold content; the window-method proofs untouched (kept,
+complementary); the stronger sigma(Y) remark recorded, not exploited;
+no change to admissibility/C1-SUB or domain families; no physics; no
+agency.
+```
+
+## 5. Attack checklist (complete task list)
+
+```text
+A1. P.1 branch bookkeeping: is negation really closed on (-pi, pi)
+    off Delta (no wrap-around)?  Is Delta exactly R-invariant?  Is
+    w(R theta) = -w(theta) the correct principal-branch computation?
+A2. P.1 pair claims: recompute W o R_2 = W; E_eps and E_c invariance
+    for EVERY g (does h introduce any parity dependence?).
+A3. P.2: change of variables for MERELY MEASURABLE densities (no
+    continuity) - any measurability gap?  |det DR| = 1 on the torus?
+A4. P.3 a.e. logic: rho*(R(A)) = 1 from R-invariance + involution;
+    B = A intersect R(A) full measure; the pointwise chain on B; the
+    2w = 0 step; where integer-valuedness is genuinely consumed.
+A5. P.3 positive mass: Sigma_1 nonempty for EVERY N >= 3 (check the
+    extreme N = 3: bonds 2 pi/3 < pi); strictly positive density =>
+    rho*(Sigma_1) > 0.
+A6. P.3 escape routes: can phi(J) = w a.e. survive via null-set
+    modifications of w, phi undefined on null J-values, or zero-mass
+    sectors?  Close each or report a gap.
+A7. P.4: every step re-checked on the product (R_2 involution;
+    exceptional set Delta_theta x T^N null and R_2-invariant;
+    cylinder positive mass under BOTH rho_E and composed rho_c;
+    parameter-pointwise in (eps, g)).
+A8. The Remark: is the sigma(Y) generalization actually proved by
+    the displayed argument (which steps use Y = J specifically)?
+A9. Section 3 adjudication.
+A10. Vocabulary scan of Section 2 + NOT-claimed leakage.
+```

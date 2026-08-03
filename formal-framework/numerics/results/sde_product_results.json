@@ -1,0 +1,109 @@
+{
+ "prod_excursion": {
+  "experiment": "prod_excursion_rounds",
+  "N": 10,
+  "k": 1,
+  "kappa": 1.0,
+  "lam": 1.0,
+  "eps": 0.05,
+  "dt": 0.005,
+  "n_steps": 3000000,
+  "seed": 20260710,
+  "ledger": {
+   "m_k": 1.9098,
+   "S_k": 2.609,
+   "c_H": 0.3252,
+   "band_top": 2.9342,
+   "Delta_phi_gate": 3.9098,
+   "ground_level_eps": 2.0053,
+   "row_predicted_slope_leq": -0.1626
+  },
+  "rows": [
+   {
+    "beta": 10.0,
+    "rounds": 3730,
+    "n_excursions": 27425,
+    "outside_time_total": 6915.2,
+    "outside_time_per_round": 1.853941018766756,
+    "log_out_per_round": 0.6173136536747056,
+    "excursion_mean": 0.2521494986326345,
+    "doorway_level_mean": 3.048226775467654,
+    "wphi_crossings": 0,
+    "wphi_cross_level_min": null,
+    "min_dist_to_Gk1_phi_signature": null,
+    "theta_label_changes": 11
+   },
+   {
+    "beta": 12.0,
+    "rounds": 5046,
+    "n_excursions": 21438,
+    "outside_time_total": 3738.1,
+    "outside_time_per_round": 0.7408045977011495,
+    "log_out_per_round": -0.30001838926938723,
+    "excursion_mean": 0.17436794477096745,
+    "doorway_level_mean": 3.0294033012205746,
+    "wphi_crossings": 0,
+    "wphi_cross_level_min": null,
+    "min_dist_to_Gk1_phi_signature": null,
+    "theta_label_changes": 2
+   },
+   {
+    "beta": 14.0,
+    "rounds": 4588,
+    "n_excursions": 13213,
+    "outside_time_total": 1812.3,
+    "outside_time_per_round": 0.3950087183958152,
+    "log_out_per_round": -0.928847442436456,
+    "excursion_mean": 0.137160372360554,
+    "doorway_level_mean": 3.015408788274869,
+    "wphi_crossings": 0,
+    "wphi_cross_level_min": null,
+    "min_dist_to_Gk1_phi_signature": null,
+    "theta_label_changes": 0
+   },
+   {
+    "beta": 16.0,
+    "rounds": 3083,
+    "n_excursions": 6236,
+    "outside_time_total": 708.05,
+    "outside_time_per_round": 0.2296626662341875,
+    "log_out_per_round": -1.4711437152170825,
+    "excursion_mean": 0.11354233483001926,
+    "doorway_level_mean": 3.0044198779372806,
+    "wphi_crossings": 0,
+    "wphi_cross_level_min": null,
+    "min_dist_to_Gk1_phi_signature": null,
+    "theta_label_changes": 0
+   }
+  ],
+  "outside_time_slope": -0.34471005799212184,
+  "row_scaling_consistent": "True",
+  "honesty": "moderate-beta evidence; the row is an expected-TIME bound - slope <= -c_H/2 at beta->inf; finite-beta slope carries prefactor drift; renewal restarts on theta-change are a simplification of LP.5(c)'s ground-ball-return rounds"
+ },
+ "forgetting": {
+  "experiment": "flat_mode_forgetting",
+  "N": 10,
+  "eps": 0.05,
+  "rows": [
+   {
+    "beta": 3.0,
+    "fitted_rate": 2.9676208670607496,
+    "predicted_N_over_beta": 3.3333333333333335
+   },
+   {
+    "beta": 5.0,
+    "fitted_rate": 1.8304906516398058,
+    "predicted_N_over_beta": 2.0
+   },
+   {
+    "beta": 8.0,
+    "fitted_rate": 0.9772602255445363,
+    "predicted_N_over_beta": 1.25
+   }
+  ],
+  "max_relative_error": 0.218,
+  "verdict": "STANDS",
+  "honesty": "MC estimate of E[e^{i Phi}] with n_rep samples; statistical error scales as 1/sqrt(n_rep); the prediction is EXACT (two-sided target)"
+ },
+ "wall_seconds": 1105.0
+}

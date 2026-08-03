@@ -1,0 +1,38 @@
+import Mathlib
+
+open Real
+
+namespace QcbCfg
+
+theorem qcb_scalar_sandwich {kx ky d : ℝ} (hkx : 0 < kx) (hky : 0 < ky)
+    (hpd : d ^ 2 < kx * ky) (x y : ℝ) :
+    ((kx + ky - Real.sqrt ((kx - ky) ^ 2 + 4 * d ^ 2)) / 2) * (x ^ 2 + y ^ 2)
+      ≤ kx * x ^ 2 + ky * y ^ 2 - 2 * d * x * y
+    ∧ kx * x ^ 2 + ky * y ^ 2 - 2 * d * x * y
+      ≤ ((kx + ky + Real.sqrt ((kx - ky) ^ 2 + 4 * d ^ 2)) / 2) * (x ^ 2 + y ^ 2) := <proof elided>
+
+theorem qcb_k0_pos {kx ky d : ℝ} (hkx : 0 < kx) (hky : 0 < ky)
+    (hpd : d ^ 2 < kx * ky) :
+    0 < (kx + ky - Real.sqrt ((kx - ky) ^ 2 + 4 * d ^ 2)) / 2 := <proof elided>
+
+theorem skew_self_pairing {α : Type*} [AddCommGroup α]
+    (B : α → α → ℝ) (hskew : ∀ v w, B v w = -B w v) (v : α) :
+    B v v = 0 := <proof elided>
+
+theorem cfg_drift_domination {gm gp dd DA k0 k1 β : ℝ}
+    (hgm : 0 < gm) (hgp : 0 < gp) (hdd : 0 < dd) (hDA : 0 ≤ DA)
+    (hk0 : 0 < k0) (hk1 : 0 < k1) (hβ : 0 < β)
+    (LW W r : ℝ) (hr : 0 ≤ r)
+    (hLW : LW ≤ (gp * dd * k1) / β - gm * k0 ^ 2 * r ^ 2 + (DA * k1 / β) * r)
+    (hW1 : 1 ≤ W) (hW : W ≤ 1 + (k1 / 2) * r ^ 2) :
+    let a := gm * k0 ^ 2 / k1
+    let R := max (4 * DA * k1 / (β * gm * k0 ^ 2))
+      (Real.sqrt ((4 / (gm * k0 ^ 2)) * ((gp * dd * k1) / β + a)))
+    let bC := (gp * dd * k1) / β + (DA * k1 / β) * R + a * (1 + (k1 / 2) * R ^ 2)
+    (R < r → LW ≤ -a * W) ∧ (r ≤ R → LW + a * W ≤ bC) := <proof elided>
+
+theorem weight_sandwich {k0 k1 J r : ℝ}
+    (hJ0 : (k0 / 2) * r ^ 2 ≤ J) (hJ1 : J ≤ (k1 / 2) * r ^ 2) :
+    1 + (k0 / 2) * r ^ 2 ≤ 1 + J ∧ 1 + J ≤ 1 + (k1 / 2) * r ^ 2 := <proof elided>
+
+end QcbCfg

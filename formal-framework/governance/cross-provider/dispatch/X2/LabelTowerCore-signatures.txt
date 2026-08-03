@@ -1,0 +1,497 @@
+import Mathlib
+
+open Real Finset
+
+namespace LabelTowerCore
+
+noncomputable def E {N : ℕ} (κ : ℝ) (d : Fin N → ℝ) : ℝ :=
+  κ * ∑ i, (1 - Real.cos (d i))
+
+noncomputable def groundLevel (N : ℕ) (κ : ℝ) (k : ℕ) : ℝ :=
+  N * κ * (1 - Real.cos (2 * π * k / N))
+
+noncomputable def saddleParam (N : ℕ) (k : ℕ) : ℝ :=
+  (2 * π * k - π) / ((N : ℝ) - 2)
+
+noncomputable def saddleLevel (N : ℕ) (κ : ℝ) (k : ℕ) : ℝ :=
+  κ * (2 + ((N : ℝ) - 2) * (1 - Real.cos (saddleParam N k)))
+
+noncomputable def ridgeEnv (N : ℕ) (κ : ℝ) (k : ℕ) (m : ℝ) : ℝ :=
+  κ * ((1 - Real.cos m) + ((N : ℝ) - 1) * (1 - Real.cos ((2 * π * k - m) / ((N : ℝ) - 1))))
+
+theorem no_minus_branch_below_barrier {N : ℕ} {κ c : ℝ} (hN : 2 ≤ N) (hκ : 0 < κ)
+    (hc0 : 0 ≤ c) (hc1 : c ≤ 1) (d : Fin N → ℝ)
+    (hcos : ∀ i, Real.cos (d i) = c ∨ Real.cos (d i) = -c)
+    (hE : E κ d < 2 * κ) (i : Fin N) : Real.cos (d i) = c := <proof elided>
+
+theorem eq_of_sin_eq_of_cos_eq {x y : ℝ} (hx : x ∈ Set.Ioo (-π) π) (hy : y ∈ Set.Ioo (-π) π)
+    (hs : Real.sin x = Real.sin y) (hc : Real.cos x = Real.cos y) : x = y := <proof elided>
+
+theorem classification_below_barrier {N : ℕ} {κ : ℝ} {k : ℕ} (hN : 3 ≤ N) (hκ : 0 < κ)
+    (d : Fin N → ℝ) (hrange : ∀ i, d i ∈ Set.Ioo (-π) π)
+    (hsum : ∑ i, d i = 2 * π * k)
+    (hcrit : ∀ i j, Real.sin (d i) = Real.sin (d j))
+    (hE : E κ d < 2 * κ) :
+    ∀ i, d i = 2 * π * k / N := <proof elided>
+
+theorem ridgeEnv_at_saddle {N : ℕ} {κ : ℝ} {k : ℕ} (hN : 3 ≤ N) :
+    ridgeEnv N κ k (π - saddleParam N k) = saddleLevel N κ k := <proof elided>
+
+theorem saddleLevel_gt_two_kappa {N : ℕ} {κ : ℝ} {k : ℕ} (hκ : 0 < κ) (hk : 1 ≤ k)
+    (h2k : 2 * (k : ℝ) + 1 < N) :
+    2 * κ < saddleLevel N κ k := <proof elided>
+
+theorem jensen_one_sub_cos {M : ℕ} (hM : 0 < M) (d : Fin M → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Icc (-(π / 2)) (π / 2)) :
+    M * (1 - Real.cos ((∑ i, d i) / M)) ≤ ∑ i, (1 - Real.cos (d i)) := <proof elided>
+
+theorem groundLevel_ten_lt_two : groundLevel 10 1 1 < 2 := <proof elided>
+
+theorem groundLevel_nine_gt_two : 2 < groundLevel 9 1 1 := <proof elided>
+
+theorem ladder {N : ℕ} {κ : ℝ} {k : ℕ} (hκ : 0 < κ) (hk : 1 ≤ k)
+    (h2k : 2 * (k : ℝ) + 1 < N) (hsub : groundLevel N κ k < 2 * κ) :
+    groundLevel N κ k < 2 * κ ∧ 2 * κ < saddleLevel N κ k := <proof elided>
+
+noncomputable def dE {N : ℕ} (κ : ℝ) (d : Fin N → ℝ) : (Fin N → ℝ) →L[ℝ] ℝ :=
+  ∑ i, (κ * Real.sin (d i)) • (ContinuousLinearMap.proj i)
+
+private lemma hasFDerivAt_one_sub_cos_eval {N : ℕ} (d : Fin N → ℝ) (i : Fin N) :
+    HasFDerivAt (fun d : Fin N → ℝ => 1 - Real.cos (d i))
+      (Real.sin (d i) • (ContinuousLinearMap.proj i : (Fin N → ℝ) →L[ℝ] ℝ)) d := by
+  have hproj : HasFDerivAt (fun d : Fin N → ℝ => d i)
+      (ContinuousLinearMap.proj i : (Fin N → ℝ) →L[ℝ] ℝ) d :=
+    (ContinuousLinearMap.proj i : (Fin N → ℝ) →L[ℝ] ℝ).hasFDerivAt
+  have hcos := (Real.hasDerivAt_cos (d i)).comp_hasFDerivAt d hproj
+  simpa [Function.comp, neg_smul] using hcos.const_sub 1
+
+theorem hasFDerivAt_E {N : ℕ} (κ : ℝ) (d : Fin N → ℝ) :
+    HasFDerivAt (E κ) (dE κ d) d := <proof elided>
+
+theorem zero_sum_iff_bond_image {N : ℕ} [NeZero N] (v : Fin N → ℝ) :
+    (∑ i, v i) = 0 ↔ ∃ w : Fin N → ℝ, ∀ i, v i = w (i + 1) - w i := <proof elided>
+
+theorem critical_slice_iff {N : ℕ} (hN : 2 ≤ N) (d : Fin N → ℝ) :
+    (∀ v : Fin N → ℝ, (∑ i, v i) = 0 → ∑ i, Real.sin (d i) * v i = 0) ↔
+      (∀ i j, Real.sin (d i) = Real.sin (d j)) := <proof elided>
+
+theorem critical_angle_iff {N : ℕ} [NeZero N] (hN : 2 ≤ N) (d : Fin N → ℝ) :
+    (∀ w : Fin N → ℝ, ∑ i, Real.sin (d i) * (w (i + 1) - w i) = 0) ↔
+      (∀ i j, Real.sin (d i) = Real.sin (d j)) := <proof elided>
+
+theorem classification_below_barrier_critical {N : ℕ} {κ : ℝ} {k : ℕ}
+    (hN : 3 ≤ N) (hκ : 0 < κ) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 2 * π * k)
+    (hcrit : ∀ v : Fin N → ℝ, (∑ i, v i) = 0 → ∑ i, Real.sin (d i) * v i = 0)
+    (hE : E κ d < 2 * κ) :
+    ∀ i, d i = 2 * π * k / N := <proof elided>
+
+noncomputable def Wstar {N : ℕ} (d e : Fin N → ℝ) : ℝ :=
+  ∑ i, (1 - Real.cos (d i - e i))
+
+theorem Wstar_nonneg {N : ℕ} (d e : Fin N → ℝ) : 0 ≤ Wstar d e := <proof elided>
+
+theorem tube_self_exclusion {α : Type*} (E0 Eeps : α → ℝ) (S C εp r : ℝ)
+    (T : Set α) (hband : ∀ x ∈ T, |E0 x - S| ≤ C * r ^ 2)
+    (hge : ∀ x, E0 x ≤ Eeps x) (hC : 0 < C) (hεp : 0 < εp)
+    (hr : r ^ 2 = εp / (2 * C)) :
+    ∀ x ∈ T, S - εp < Eeps x := <proof elided>
+
+theorem groundLevel_forty_lt_two : groundLevel 40 1 2 < 2 := <proof elided>
+
+theorem groundLevel_thirtynine_gt_two : 2 < groundLevel 39 1 2 := <proof elided>
+
+theorem groundLevel_eightyninenine_lt_two : groundLevel 89 1 3 < 2 := <proof elided>
+
+theorem groundLevel_eightyeight_gt_two : 2 < groundLevel 88 1 3 := <proof elided>
+
+noncomputable def spBond (N k : ℕ) [NeZero N] : Fin N → ℝ := fun i =>
+  if i = 0 then π - saddleParam N k else saddleParam N k
+
+noncomputable def hessForm {N : ℕ} (κ : ℝ) (d v : Fin N → ℝ) : ℝ :=
+  κ * ∑ i, Real.cos (d i) * v i ^ 2
+
+noncomputable def hessBilin {N : ℕ} (κ : ℝ) (d v w : Fin N → ℝ) : ℝ :=
+  κ * ∑ i, Real.cos (d i) * v i * w i
+
+theorem cos_saddleParam_pos {N : ℕ} (hN : 5 ≤ N) :
+    0 < Real.cos (saddleParam N 1) := <proof elided>
+
+theorem hessForm_spBond {N : ℕ} [NeZero N] (κ : ℝ) (k : ℕ) (v : Fin N → ℝ) :
+    hessForm κ (spBond N k) v
+      = κ * Real.cos (saddleParam N k)
+        * ((∑ i ∈ Finset.univ.erase 0, v i ^ 2) - v 0 ^ 2) := <proof elided>
+
+theorem hess_negative_witness {N : ℕ} [NeZero N] {κ : ℝ} (hN : 3 ≤ N)
+    (hκ : 0 < κ) (k : ℕ) (hc : 0 < Real.cos (saddleParam N k)) :
+    (∑ i, (fun i => if i = (0 : Fin N) then ((N : ℝ) - 1) else -1) i) = 0 ∧
+    hessForm κ (spBond N k)
+      (fun i => if i = (0 : Fin N) then ((N : ℝ) - 1) else -1) < 0 := <proof elided>
+
+theorem hess_pos_on_perp {N : ℕ} [NeZero N] {κ : ℝ} (hκ : 0 < κ) (k : ℕ)
+    (hc : 0 < Real.cos (saddleParam N k)) (v : Fin N → ℝ)
+    (hv0 : v 0 = 0) (hvne : v ≠ 0) :
+    0 < hessForm κ (spBond N k) v := <proof elided>
+
+theorem hess_nondegenerate {N : ℕ} [NeZero N] {κ : ℝ} (hN : 3 ≤ N)
+    (hκ : 0 < κ) (k : ℕ) (hc : 0 < Real.cos (saddleParam N k))
+    (v : Fin N → ℝ) (hvsum : (∑ i, v i) = 0)
+    (hkill : ∀ w : Fin N → ℝ, (∑ i, w i) = 0 → hessBilin κ (spBond N k) v w = 0) :
+    v = 0 := <proof elided>
+
+theorem mem_arcsin_branches {x : ℝ} (hx : x ∈ Set.Ioo (-π) π) :
+    x = Real.arcsin (Real.sin x) ∨ x = π - Real.arcsin (Real.sin x) ∨
+      x = -π - Real.arcsin (Real.sin x) := <proof elided>
+
+theorem no_winding_with_nonpos_sine {N : ℕ} (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 2 * π)
+    (hs : ∀ i, Real.sin (d i) ≤ 0) : False := <proof elided>
+
+theorem bonds_two_valued {N : ℕ} {s : ℝ} (hs : 0 < s) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsin : ∀ i, Real.sin (d i) = s) :
+    ∀ i, d i = Real.arcsin s ∨ d i = π - Real.arcsin s := <proof elided>
+
+theorem count_equation {N : ℕ} {α : ℝ} (d : Fin N → ℝ)
+    (hval : ∀ i, d i = α ∨ d i = π - α) (hsum : ∑ i, d i = 2 * π) :
+    ((Finset.univ.filter (fun i => d i ≠ α)).card : ℝ) * π
+      + ((N : ℝ) - 2 * ((Finset.univ.filter (fun i => d i ≠ α)).card : ℝ)) * α
+      = 2 * π := <proof elided>
+
+theorem count_dichotomy {N p : ℕ} {α : ℝ} (hN : 5 ≤ N) (hp : p ≤ N)
+    (hα : 0 < α) (hα2 : α ≤ π / 2)
+    (heq : (p : ℝ) * π + ((N : ℝ) - 2 * p) * α = 2 * π) :
+    (p = 0 ∧ α = 2 * π / N) ∨ (p = 1 ∧ α = π / ((N : ℝ) - 2)) := <proof elided>
+
+theorem winding_one_classification {N : ℕ} (hN : 5 ≤ N) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 2 * π)
+    (hcrit : ∀ i j, Real.sin (d i) = Real.sin (d j)) :
+    (∀ i, d i = 2 * π / N) ∨
+    (∃ i0 : Fin N, d i0 = π - saddleParam N 1
+      ∧ ∀ i, i ≠ i0 → d i = saddleParam N 1) := <proof elided>
+
+theorem winding_one_classification_critical {N : ℕ} (hN : 5 ≤ N)
+    {κ : ℝ} (hκ : κ ≠ 0) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 2 * π)
+    (hcrit : ∀ v : Fin N → ℝ, (∑ i, v i) = 0 → dE κ d v = 0) :
+    (∀ i, d i = 2 * π / N) ∨
+    (∃ i0 : Fin N, d i0 = π - saddleParam N 1
+      ∧ ∀ i, i ≠ i0 → d i = saddleParam N 1) := <proof elided>
+
+theorem ridgeEnv_strictMonoOn {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (hN : 3 ≤ N) (hk : 1 ≤ k)
+    (hsub : 2 * π * k / N ≤ π / 2)
+    (ha : saddleParam N k ≤ π / 2)
+    (hrange : 2 * π * k / N < π - saddleParam N k) :
+    StrictMonoOn (fun m => ridgeEnv N κ k m)
+      (Set.Icc (2 * π * k / N) (π - saddleParam N k)) := <proof elided>
+
+theorem ridgeEnv_strictAntiOn {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (hN : 3 ≤ N) (hk : 1 ≤ k) (hkN : 2 * k < N)
+    (hsub : 2 * π * k / N ≤ π / 2)
+    (ha : saddleParam N k ≤ π / 2) :
+    StrictAntiOn (fun m => ridgeEnv N κ k m)
+      (Set.Icc (π - saddleParam N k) π) := <proof elided>
+
+theorem ridgeEnv_le_saddleLevel {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (hN : 3 ≤ N) (hk : 1 ≤ k) (hkN : 2 * k < N)
+    (hsub : 2 * π * k / N ≤ π / 2)
+    (ha : saddleParam N k ≤ π / 2)
+    (hrange : 2 * π * k / N < π - saddleParam N k)
+    {m : ℝ} (hm : m ∈ Set.Icc (2 * π * k / N) π) :
+    ridgeEnv N κ k m ≤ saddleLevel N κ k := <proof elided>
+
+theorem ladder_middle {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (hN : 3 ≤ N) (hk : 1 ≤ k) (hkN : 2 * k < N)
+    (hsub : 2 * π * k / N ≤ π / 2)
+    (ha : saddleParam N k ≤ π / 2) :
+    2 * κ < ridgeEnv N κ k π ∧ ridgeEnv N κ k π < saddleLevel N κ k := <proof elided>
+
+theorem one_sub_cos_taylor_bound (x μ : ℝ) :
+    |(1 - Real.cos x) - (1 - Real.cos μ) - Real.sin μ * (x - μ)|
+      ≤ (x - μ) ^ 2 / 2 := <proof elided>
+
+theorem E_spBond (N k : ℕ) [NeZero N] (κ : ℝ) (hN : 3 ≤ N) :
+    E κ (spBond N k) = saddleLevel N κ k := <proof elided>
+
+theorem saddle_band {N k : ℕ} [NeZero N] {κ : ℝ} (hκ : 0 ≤ κ) (hN : 3 ≤ N)
+    (d : Fin N → ℝ) (hsum : ∑ i, d i = ∑ i, spBond N k i) :
+    |E κ d - saddleLevel N κ k| ≤ κ / 2 * ∑ i, (d i - spBond N k i) ^ 2 := <proof elided>
+
+theorem ground_band {N : ℕ} {κ : ℝ} (hκ : 0 ≤ κ) (e : Fin N → ℝ) :
+    0 ≤ E κ e ∧ E κ e ≤ κ / 2 * ∑ i, (e i) ^ 2 := <proof elided>
+
+theorem product_band {N k : ℕ} [NeZero N] {κ lam : ℝ} (hκ : 0 ≤ κ) (hlam : 0 ≤ lam)
+    (hN : 3 ≤ N) (d e : Fin N → ℝ)
+    (hsum : ∑ i, d i = ∑ i, spBond N k i) :
+    |E κ d + E lam e - saddleLevel N κ k|
+      ≤ κ / 2 * ∑ i, (d i - spBond N k i) ^ 2 + lam / 2 * ∑ i, (e i) ^ 2 := <proof elided>
+
+theorem tube_exclusion_unconditional {N k : ℕ} [NeZero N] {κ lam ε ε' : ℝ}
+    (hκ : 0 ≤ κ) (hlam : 0 ≤ lam) (hε : 0 ≤ ε) (hε' : 0 < ε')
+    (hN : 3 ≤ N) (d e : Fin N → ℝ)
+    (hsum : ∑ i, d i = ∑ i, spBond N k i)
+    (htube : κ / 2 * ∑ i, (d i - spBond N k i) ^ 2
+      + lam / 2 * ∑ i, (e i) ^ 2 ≤ ε' / 2) :
+    saddleLevel N κ k - ε' < E κ d + E lam e + ε * Wstar d e := <proof elided>
+
+theorem s_sin_gt_one_sub_cos {s : ℝ} (h0 : 0 < s) (h2 : s ≤ 2) :
+    1 - Real.cos s < s * Real.sin s := <proof elided>
+
+theorem prod_shell_k1 {N : ℕ} {κ : ℝ} (hκ : 0 < κ) (hN : 5 ≤ N) :
+    saddleLevel N κ 1 - groundLevel N κ 1 < 2 * κ := <proof elided>
+
+theorem coupled_ground_level (N k : ℕ) (κ lam ε : ℝ) :
+    E κ (fun _ : Fin N => 2 * π * k / N) + E lam (fun _ : Fin N => (0 : ℝ))
+      + ε * Wstar (fun _ : Fin N => 2 * π * k / N) (fun _ : Fin N => (0 : ℝ))
+      = groundLevel N κ k + ε * (N * (1 - Real.cos (2 * π * k / N))) := <proof elided>
+
+theorem coupled_ground_below_cap_iff {m w κ ε : ℝ} (hw : 0 < w) :
+    m + ε * w < 2 * κ ↔ ε < (2 * κ - m) / w := <proof elided>
+
+theorem slice_floor_arith {c H ε : ℝ} (hc : 0 < c) (hH : 0 < H) :
+    ε ≤ c / (4 * H) → (3 / 4) * c - H * ε ≥ c / 2 := <proof elided>
+
+theorem Wv_aligned (N j : ℕ) (v : ℝ → ℝ) :
+    ∑ _i : Fin N, v (2 * π * j / N) = N * v (2 * π * j / N) := <proof elided>
+
+theorem w2_member_psd {N : ℕ} {γ : ℝ} (hN : 7 ≤ N) (hγ : 1 - 2 / (N : ℝ) ≤ γ) :
+    0 < 4 * (2 * γ ^ 2 - 1) := <proof elided>
+
+theorem deep_case_gain {m S b : ℝ} (g : ℝ → ℝ)
+    (hm : g m = -b) (hS : g S = b) :
+    (S + g S) - (m + g m) = S - m + 2 * b := <proof elided>
+
+theorem mc_no_harm {κ b J : ℝ} (g : ℝ → ℝ) (hgb : g J ≤ b)
+    (Ec Ee : ℝ) (hEc : Ec = Ee + g J) :
+    ((2 * κ + b) - Ec) - (2 * κ - Ee) = b - g J ∧ 0 ≤ b - g J := <proof elided>
+
+theorem sin_taylor_bound (x μ : ℝ) :
+    |Real.sin x - Real.sin μ - Real.cos μ * (x - μ)| ≤ (x - μ) ^ 2 / 2 := <proof elided>
+
+theorem slice_grad_sq_identity {N k : ℕ} [NeZero N] (hN : 3 ≤ N)
+    (v : Fin N → ℝ) (hv : ∑ i, v i = 0) :
+    ∑ i, (Real.cos (spBond N k i) * v i
+        - (1 / N) * ∑ j, Real.cos (spBond N k j) * v j) ^ 2
+      = Real.cos (saddleParam N k) ^ 2
+        * ((∑ i, v i ^ 2) - (4 / N) * v ⟨0, Nat.pos_of_ne_zero (NeZero.ne N)⟩ ^ 2) := <proof elided>
+
+theorem slice_coord_bound {N : ℕ} (hN : 2 ≤ N)
+    (v : Fin N → ℝ) (hv : ∑ i, v i = 0) (i0 : Fin N) :
+    v i0 ^ 2 ≤ (1 - 1 / N) * ∑ i, v i ^ 2 := <proof elided>
+
+theorem slice_grad_floor {N k : ℕ} [NeZero N] (hN : 3 ≤ N)
+    (v : Fin N → ℝ) (hv : ∑ i, v i = 0) :
+    (Real.cos (saddleParam N k) * (((N : ℝ) - 2) / N)) ^ 2 * ∑ i, v i ^ 2
+      ≤ ∑ i, (Real.cos (spBond N k i) * v i
+        - (1 / N) * ∑ j, Real.cos (spBond N k j) * v j) ^ 2 := <proof elided>
+
+theorem bond_sq_le_maxnorm {N : ℕ} [NeZero N] (θ θ' : Fin N → ℝ) (M : ℝ)
+    (hM : ∀ i, |θ i - θ' i| ≤ M) :
+    ∑ i, ((θ (i + 1) - θ i) - (θ' (i + 1) - θ' i)) ^ 2
+      ≤ 4 * N * M ^ 2 := <proof elided>
+
+theorem metric_tube_exclusion_bond {N k : ℕ} [NeZero N] {κ lam ε ε' ρ : ℝ}
+    (hκ : 0 ≤ κ) (hlam : 0 ≤ lam) (hε : 0 ≤ ε) (hε' : 0 < ε')
+    (hN : 3 ≤ N) (d e : Fin N → ℝ)
+    (hsum : ∑ i, d i = ∑ i, spBond N k i)
+    (hdρ : ∀ i, |d i - spBond N k i| ≤ ρ) (heρ : ∀ i, |e i| ≤ ρ)
+    (htube : N * (κ + lam) * ρ ^ 2 ≤ ε') :
+    saddleLevel N κ k - ε' < E κ d + E lam e + ε * Wstar d e := <proof elided>
+
+theorem composed_hasFDerivAt {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] (f : E → ℝ) (x : E) (f' : E →L[ℝ] ℝ)
+    (hf : HasFDerivAt f f' x) (h : ℝ → ℝ) (h' : ℝ)
+    (hh : HasDerivAt h h' (f x)) :
+    HasFDerivAt (fun z => h (f z)) (h' • f') x := <proof elided>
+
+theorem composed_critical_iff {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] (f' : E →L[ℝ] ℝ) (c : ℝ) (hc : c ≠ 0) :
+    c • f' = 0 ↔ f' = 0 := <proof elided>
+
+theorem composed_floor_ge {a b μ h' : ℝ} (ha : 0 ≤ a) (hμ : 0 ≤ μ)
+    (hh' : 1 ≤ h') :
+    min a b * μ ≤ min (h' * a) b * μ := <proof elided>
+
+theorem composed_ground_below_cap_iff {hm hcap w ε : ℝ} (hw : 0 < w) :
+    hm + ε * w < hcap ↔ ε < (hcap - hm) / w := <proof elided>
+
+theorem composed_delta_phi_barrier {hm hS S m κ lam b : ℝ}
+    (hgain : hS - hm ≤ (S - m) + 2 * b)
+    (hshell : S - m < 2 * κ) (hpin : 2 * κ + 2 * b < 2 * lam) :
+    hS < hm + 2 * lam := <proof elided>
+
+theorem composed_h_ladder {h : ℝ → ℝ} (hmono : StrictMono h)
+    {m c L S : ℝ} (h1 : m < c) (h2 : c < L) (h3 : L < S) :
+    h m < h c ∧ h c < h L ∧ h L < h S := <proof elided>
+
+theorem composed_ground_level (N k : ℕ) (κ lam ε : ℝ) (h : ℝ → ℝ) :
+    h (E κ (fun _ : Fin N => 2 * π * k / N)) + E lam (fun _ : Fin N => (0 : ℝ))
+      + ε * Wstar (fun _ : Fin N => 2 * π * k / N) (fun _ : Fin N => (0 : ℝ))
+      = h (groundLevel N κ k) + ε * (N * (1 - Real.cos (2 * π * k / N))) := <proof elided>
+
+theorem composed_energy_critical_iff {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] (f : E → ℝ) (x : E) (f' : E →L[ℝ] ℝ)
+    (hf : HasFDerivAt f f' x) (h : ℝ → ℝ) (h' : ℝ)
+    (hh : HasDerivAt h h' (f x)) (hh0 : h' ≠ 0) :
+    fderiv ℝ (fun z => h (f z)) x = 0 ↔ f' = 0 := <proof elided>
+
+theorem composed_delta_phi_barrier_flagship {N : ℕ} {κ lam b hm hS : ℝ}
+    (hκ : 0 < κ) (hN : 5 ≤ N)
+    (hgain : hS - hm ≤ (saddleLevel N κ 1 - groundLevel N κ 1) + 2 * b)
+    (hpin : 2 * κ + 2 * b < 2 * lam) :
+    hS < hm + 2 * lam := <proof elided>
+
+theorem hclass_strictMono (g : ℝ → ℝ) (hg : Monotone g) :
+    StrictMono (fun x => x + g x) := <proof elided>
+
+theorem composed_E_critical_iff {N : ℕ} (κ : ℝ) (d : Fin N → ℝ) (h : ℝ → ℝ)
+    (h' : ℝ) (hh : HasDerivAt h h' (E κ d)) (hh0 : h' ≠ 0) :
+    fderiv ℝ (fun x => h (E κ x)) d = 0 ↔ dE κ d = 0 := <proof elided>
+
+theorem composed_slice_critical_iff {N : ℕ} (hN : 2 ≤ N) (d : Fin N → ℝ)
+    {c : ℝ} (hc : c ≠ 0) :
+    (∀ v : Fin N → ℝ, (∑ i, v i) = 0 → c * ∑ i, Real.sin (d i) * v i = 0)
+      ↔ (∀ i j, Real.sin (d i) = Real.sin (d j)) := <proof elided>
+
+theorem one_sub_cos_taylor_lower {x μ m : ℝ} (hm : 0 ≤ m)
+    (hcos : ∀ t ∈ Set.uIcc μ x, m ≤ Real.cos t) :
+    (1 - Real.cos μ) + Real.sin μ * (x - μ) + m / 2 * (x - μ) ^ 2
+      ≤ (1 - Real.cos x) := <proof elided>
+
+theorem ground_coercive_band {N k : ℕ} [NeZero N] {κ m : ℝ} (hκ : 0 ≤ κ)
+    (hm : 0 ≤ m) (hN : 3 ≤ N) (d : Fin N → ℝ)
+    (hsum : ∑ i, d i = 2 * π * k)
+    (hcos : ∀ i, ∀ t ∈ Set.uIcc (2 * π * k / N) (d i), m ≤ Real.cos t) :
+    groundLevel N κ k + κ * m / 2 * ∑ i, (d i - 2 * π * k / N) ^ 2
+      ≤ E κ d := <proof elided>
+
+theorem ground_coercive_band_flagship {N k : ℕ} [NeZero N] {κ ρ : ℝ}
+    (hκ : 0 ≤ κ) (hN : 3 ≤ N) (hρ : 0 ≤ ρ)
+    (hlo : 0 ≤ 2 * π * k / N - ρ) (hhi : 2 * π * k / N + ρ ≤ π / 2)
+    (d : Fin N → ℝ) (hsum : ∑ i, d i = 2 * π * k)
+    (hball : ∀ i, |d i - 2 * π * k / N| ≤ ρ) :
+    groundLevel N κ k
+        + κ * Real.cos (2 * π * k / N + ρ) / 2 * ∑ i, (d i - 2 * π * k / N) ^ 2
+      ≤ E κ d := <proof elided>
+
+theorem Gkj_level (N k j : ℕ) (κ lam ε : ℝ) :
+    E κ (fun _ : Fin N => 2 * π * k / N) + E lam (fun _ : Fin N => 2 * π * j / N)
+      + ε * Wstar (fun _ : Fin N => 2 * π * k / N) (fun _ : Fin N => 2 * π * j / N)
+      = groundLevel N κ k + groundLevel N lam j
+        + ε * (N * (1 - Real.cos (2 * π * k / N - 2 * π * j / N))) := <proof elided>
+
+theorem Gkj_above_saddle {N j : ℕ} {κ lam : ℝ} (hκ : 0 < κ) (hN : 5 ≤ N)
+    (hpin : 2 * κ ≤ groundLevel N lam j) :
+    saddleLevel N κ 1 < groundLevel N κ 1 + groundLevel N lam j := <proof elided>
+
+theorem equidistributed_slice_critical {N : ℕ} (a : ℝ) (v : Fin N → ℝ)
+    (hv : ∑ i, v i = 0) :
+    ∑ i, Real.sin a * v i = 0 := <proof elided>
+
+theorem Gkj_above_saddle_coupled {N j : ℕ} {κ lam ε : ℝ} (hκ : 0 < κ)
+    (hN : 5 ≤ N) (hε : 0 ≤ ε) (hpin : 2 * κ ≤ groundLevel N lam j) :
+    saddleLevel N κ 1
+      < E κ (fun _ : Fin N => 2 * π * 1 / N)
+        + E lam (fun _ : Fin N => 2 * π * j / N)
+        + ε * Wstar (fun _ : Fin N => 2 * π * 1 / N)
+            (fun _ : Fin N => 2 * π * j / N) := <proof elided>
+
+theorem Gkj_coupled_slice_critical {N : ℕ} (a b κ lam ε : ℝ)
+    (v w : Fin N → ℝ) (hv : ∑ i, v i = 0) (hw : ∑ i, w i = 0) :
+    κ * ∑ i, Real.sin a * v i + lam * ∑ i, Real.sin b * w i
+      + ε * ∑ i, Real.sin (a - b) * (v i - w i) = 0 := <proof elided>
+
+theorem E_ge_two_kappa_of_pi_bond {N : ℕ} {κ : ℝ} (hκ : 0 ≤ κ)
+    (d : Fin N → ℝ) (i0 : Fin N) (hpi : d i0 = π) :
+    2 * κ ≤ E κ d := <proof elided>
+
+theorem single_pi_bond_excluded {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (d : Fin N → ℝ) (i0 : Fin N) (hpi : d i0 = π)
+    (hrange : ∀ i, i ≠ i0 → d i ∈ Set.Ioo (-π) π)
+    (hE : E κ d = 2 * κ) (hsum : ∑ i, d i = 2 * π * k) : False := <proof elided>
+
+theorem Gkj_trap_second_order_flat {N : ℕ} {κ lam ε : ℝ}
+    (hκ : 0 ≤ κ) (hlam : 0 ≤ lam) (hε : 0 ≤ ε)
+    (a b t : ℝ) (v w : Fin N → ℝ) (hv : ∑ i, v i = 0) (hw : ∑ i, w i = 0) :
+    |E κ (fun i => a + t * v i) + E lam (fun i => b + t * w i)
+        + ε * Wstar (fun i => a + t * v i) (fun i => b + t * w i)
+      - (E κ (fun _ : Fin N => a) + E lam (fun _ : Fin N => b)
+        + ε * Wstar (fun _ : Fin N => a) (fun _ : Fin N => b))|
+      ≤ (κ * ∑ i, v i ^ 2 + lam * ∑ i, w i ^ 2 + ε * ∑ i, (v i - w i) ^ 2)
+        * t ^ 2 / 2 := <proof elided>
+
+theorem saddle_lt_four_kappa {N : ℕ} {κ : ℝ} (hκ : 0 < κ) (hN : 5 ≤ N) :
+    saddleLevel N κ 1 < 4 * κ := <proof elided>
+
+noncomputable def cH (N : ℕ) (κ : ℝ) : ℝ :=
+  (1 / 4) * min (groundLevel N κ 1 + 2 * κ - saddleLevel N κ 1)
+    (4 * κ - saddleLevel N κ 1)
+
+theorem cH_pos {N : ℕ} {κ : ℝ} (hκ : 0 < κ) (hN : 5 ≤ N) :
+    0 < cH N κ := <proof elided>
+
+theorem Gkj_above_band_top {N j : ℕ} {κ lam ε : ℝ} (hκ : 0 < κ)
+    (hN : 5 ≤ N) (hε : 0 ≤ ε) (hpin : 2 * κ ≤ groundLevel N lam j) :
+    saddleLevel N κ 1 + cH N κ
+      < E κ (fun _ : Fin N => 2 * π * 1 / N)
+        + E lam (fun _ : Fin N => 2 * π * j / N)
+        + ε * Wstar (fun _ : Fin N => 2 * π * 1 / N)
+            (fun _ : Fin N => 2 * π * j / N) := <proof elided>
+
+theorem Gkj_above_band_top_sharp {N j : ℕ} {κ lam ε : ℝ} (hκ : 0 < κ)
+    (hN : 5 ≤ N) (hε : 0 ≤ ε) (hpin : 2 * κ ≤ groundLevel N lam j) :
+    saddleLevel N κ 1 + 4 * cH N κ
+      ≤ E κ (fun _ : Fin N => 2 * π * 1 / N)
+        + E lam (fun _ : Fin N => 2 * π * j / N)
+        + ε * Wstar (fun _ : Fin N => 2 * π * 1 / N)
+            (fun _ : Fin N => 2 * π * j / N) := <proof elided>
+
+theorem two_pi_bonds_sum {N : ℕ} [NeZero N] (hN : 3 ≤ N) :
+    ∑ i : Fin N, (if i = (0 : Fin N) then π else if i = (1 : Fin N) then π else 0)
+      = 2 * π := <proof elided>
+
+theorem two_pi_bonds_energy {N : ℕ} [NeZero N] (hN : 3 ≤ N) (κ : ℝ) :
+    E κ (fun i : Fin N =>
+        if i = (0 : Fin N) then π else if i = (1 : Fin N) then π else 0)
+      = 4 * κ := <proof elided>
+
+theorem delta_family_sum {N : ℕ} [NeZero N] (hN : 3 ≤ N) :
+    ∑ i : Fin N, (if i = (0 : Fin N) then π else π / ((N : ℝ) - 1)) = 2 * π := <proof elided>
+
+theorem delta_family_level {N : ℕ} [NeZero N] (hN : 3 ≤ N) (κ : ℝ) :
+    E κ (fun i : Fin N => if i = (0 : Fin N) then π else π / ((N : ℝ) - 1))
+      = κ * (2 + ((N : ℝ) - 1) * (1 - Real.cos (π / ((N : ℝ) - 1)))) := <proof elided>
+
+theorem delta_family_le {N : ℕ} {κ : ℝ} [NeZero N] (hκ : 0 < κ) (hN : 3 ≤ N) :
+    E κ (fun i : Fin N => if i = (0 : Fin N) then π else π / ((N : ℝ) - 1))
+      ≤ 2 * κ + κ * π ^ 2 / (2 * ((N : ℝ) - 1)) := <proof elided>
+
+theorem delta_family_below_saddle {N : ℕ} {κ : ℝ} [NeZero N] (hκ : 0 < κ)
+    (hN : 4 ≤ N) :
+    E κ (fun i : Fin N => if i = (0 : Fin N) then π else π / ((N : ℝ) - 1))
+      < saddleLevel N κ 1 := <proof elided>
+
+theorem pi_bond_winding_strict {N k : ℕ} {κ : ℝ} (hκ : 0 < κ)
+    (d : Fin N → ℝ) (i0 : Fin N) (hpi : d i0 = π)
+    (hsum : ∑ i, d i = 2 * π * k) :
+    2 * κ < E κ d := <proof elided>
+
+theorem winding_zero_classification {N : ℕ} (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π)
+    (hsin : ∀ i j, Real.sin (d i) = Real.sin (d j))
+    (hsum : ∑ i, d i = 0) :
+    ∀ i, d i = 0 := <proof elided>
+
+theorem winding_zero_classification_critical {N : ℕ} (hN : 2 ≤ N)
+    {κ : ℝ} (hκ : κ ≠ 0) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 0)
+    (hcrit : ∀ v : Fin N → ℝ, (∑ i, v i) = 0 → dE κ d v = 0) :
+    ∀ i, d i = 0 := <proof elided>
+
+theorem winding_zero_critical_level {N : ℕ} (hN : 2 ≤ N)
+    {κ : ℝ} (hκ : κ ≠ 0) (d : Fin N → ℝ)
+    (hrange : ∀ i, d i ∈ Set.Ioo (-π) π) (hsum : ∑ i, d i = 0)
+    (hcrit : ∀ v : Fin N → ℝ, (∑ i, v i) = 0 → dE κ d v = 0) :
+    E κ d = 0 := <proof elided>
+
+end LabelTowerCore
