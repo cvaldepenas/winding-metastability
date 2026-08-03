@@ -4,6 +4,7 @@ title: "Winding Metastability: a verified research program on metastability of r
 authors:
   - family-names: "Valdepenas"
     given-names: "Cristobal"
+    orcid: "https://orcid.org/0009-0001-4714-666X"
 version: math-v2.0
 date-released: "2026-08-02"
 repository-code: "https://github.com/cvaldepenas/winding-metastability"
