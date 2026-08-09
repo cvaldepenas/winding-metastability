@@ -33,7 +33,7 @@ def fail(msg):
     sys.exit("CENSUS FAIL-CLOSED: " + msg)
 
 # item-token grammar for LEDGER status rows
-TOKEN = re.compile(r"^X[0-9]$|^X[0-9][BC]$|^X[FHM]$|^X[HM]-R\d*$|^XE-\d+$|^XM-R\d+$")
+TOKEN = re.compile(r"^X[0-9]$|^X[0-9][BC]$|^X[FHM]$|^X[HM]-R\d*$|^XE-\d+$|^XE-\d+-R\d*$|^XM-R\d+$")
 PATH = re.compile(r"verdicts/[A-Za-z0-9.\-]+\.md")
 
 # (regex over the item token, primary campaign, note)
@@ -50,6 +50,8 @@ RULES = [
     (r"^XE-1[2-4]$", "E5 (GAP-LP-RECUR)", "the initial-delay campaign arc XE-12..XE-14"),
     (r"^XE-1[5-8]$", "E4 (READER)",
      "the reader-panel comprehension gates (not soundness signatures)"),
+    (r"^XE-19(-R\d*)?$", "GOVERNANCE (SEAL-RECON)",
+     "the post-seal documentary reconciliation gates (not soundness signatures)"),
 ]
 
 # files that are physical artifacts but NOT the authoritative path for their
@@ -172,6 +174,9 @@ def main():
     print("NOTE: XE-15..XE-18 are comprehension/fidelity panels, not")
     print("soundness signatures, and are not summed into any campaign's")
     print("soundness count.")
+    print("NOTE: XE-19-class rows (GOVERNANCE, the post-seal documentary")
+    print("reconciliation gates) are likewise authoritative signatures but")
+    print("not soundness signatures.")
 
 if __name__ == "__main__":
     main()

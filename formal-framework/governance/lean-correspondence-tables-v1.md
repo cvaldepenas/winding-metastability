@@ -27,8 +27,13 @@ why blind matters = the compiler is an independent axis for PROOFS, but
 LaneCT1.lean       seals T1.1(i)-(iii) + T1.2(a)-(c); T1.1(iv) and the
                    min-clause / a.s. wrapper of T1.2(c) DEFERRED.
 LabelTowerCore     P0.2 GIVEN P0.1; off-Delta ASSUMED (not derived);
-                   k >= 0 only (negative windings by reflection, not
-                   mechanized); ladder = the UPPER rung only (L_k rung
+                   k >= 0 tower, PLUS the named w = -1 classification
+                   mechanized in-file (winding_neg_one_classification
+                   + its _critical form) - general negative k beyond
+                   w = -1 by reflection, not separately mechanized
+                   (RECON 2026-08-09; the pre-recon sentence here
+                   said "not mechanized" for all negative windings);
+                   ladder = the UPPER rung only (L_k rung
                    absent); Jensen = convex-range engine only.
 RidgeLaw           the pointwise law under the EXPLICIT hypothesis
                    r in [0, 3/4] (auto-discharged at the flagship AND,

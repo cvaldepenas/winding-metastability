@@ -25,6 +25,9 @@ LEDGER.md status rows (exact-path bijection; gates survive python -O)
 | XE-16 | XE-16-2026-08-02.md | E4 (READER) |
 | XE-17 | XE-17-2026-08-02.md | E4 (READER) |
 | XE-18 | XE-18-2026-08-02.md | E4 (READER) |
+| XE-19 | XE-19-2026-08-09.md | GOVERNANCE (SEAL-RECON) |
+| XE-19-R | XE-19-R-2026-08-09.md | GOVERNANCE (SEAL-RECON) |
+| XE-19-R2 | XE-19-R2-2026-08-09.md | GOVERNANCE (SEAL-RECON) |
 | XE-2 | XE-2-2026-07-27.md | E2 (PROD-EXCURSION) |
 | XE-3 | XE-3-2026-07-27.md | E2 (PROD-EXCURSION) |
 | XE-4 | XE-4-2026-07-27.md | E2 (PROD-EXCURSION) |
@@ -65,10 +68,11 @@ CAMPAIGN TOTALS (strict primary-campaign taxonomy, AUTHORITATIVE rows only):
   E4 (READER)            4
   E5 (GAP-LP-RECUR)      3
   FOUNDATION (X-arc)     13
+  GOVERNANCE (SEAL-RECON) 3
   H-ARC                  4
 
 HEADLINE (strict): E2 = 11 (XE-1..XE-11); E5 = 3 (XE-12..XE-14); E2+E5 = 14.
-PHYSICAL artifacts on disk: 53. AUTHORITATIVE verdicts: 52. Superseded: 1.
+PHYSICAL artifacts on disk: 56. AUTHORITATIVE verdicts: 55. Superseded: 1.
 THE RETIRED CONFLATION, named: the legacy figure 'sixteen for E2' was
 eleven XE items plus the five E1/MIN-MIG-primary reviews XM-R12..XM-R16,
 whose signing window (2026-07-25/26) overlapped the E2 run. They are
@@ -76,3 +80,6 @@ counted at their primary campaign above and nowhere else.
 NOTE: XE-15..XE-18 are comprehension/fidelity panels, not
 soundness signatures, and are not summed into any campaign's
 soundness count.
+NOTE: XE-19-class rows (GOVERNANCE, the post-seal documentary
+reconciliation gates) are likewise authoritative signatures but
+not soundness signatures.

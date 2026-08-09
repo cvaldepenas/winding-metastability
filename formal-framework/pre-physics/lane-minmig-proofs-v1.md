@@ -53,6 +53,13 @@ XM OUTCOME (2026-07-20): NOT DISCHARGE-SOUND (2B+3M+2m); rounds
   ONE commit. LS-MIN-MIG and LP-MIN-MIG are DISCHARGED at every
   operative surface; the label tower is TWO-SIDED top-to-bottom;
   the coupled upper keeps exactly the excursion pair.
+  [RECON 2026-08-09, MATH-SEAL-RECON-01: the register above is the
+  state at flip time (2026-07-26). The external excursion pair was
+  subsequently DISCHARGED (E2 campaign, XE-11-authorized 2026-08-02)
+  and GAP-LP-RECUR at the MIN OBJECT at rate strength (E5, XE-14).
+  The A6 fence clause above remains IN FORCE VERBATIM over exactly
+  the full-expectation reading of the package/full LP.5(c) upper.
+  See governance/math-v2.0-tag-annotation.md.]
 [SUPERSEDED PARAGRAPH (XM-R3 F4): the block below this line down to
 the provenance row predates rounds 5-8 and named the old XM/XH-R3
 gates; the LIVE gate is the wiring-plan line (round-6-8 cures +
@@ -72,7 +79,9 @@ provenance = fleet runs wf_564f55dd (round 1: 4 drafts + 4 checks) +
 typed gaps carried (register at the end): GAP-M1-NORM, L1-Z-TUBE
   (non-flagship residue), GAP-M5-* (per piece), GAP-M2-HIGH-NONFLAG,
   and the TWO external excursion rows: PROD-EXCURSION (parent) +
-  PROD-EXCURSION-COND (conditional-uniform companion, R5b).
+  PROD-EXCURSION-COND (conditional-uniform companion, R5b)
+  [RECON 2026-08-09: both rows DISCHARGED - E2 campaign, XE-11
+  2026-08-02; retained here as the register at sealing].
 anti-quantization firewall = BINDING / NO PHYSICS CLAIMS
 ```
 

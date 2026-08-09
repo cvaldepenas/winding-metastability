@@ -76,6 +76,15 @@ def main():
     record("F2 removed-row hard-fails", a.returncode != 0 and b.returncode != 0,
            "exits %d/%d" % (a.returncode, b.returncode))
 
+    # F9 end-to-end XE-19-R class (XE-19-R residual 3): removing the
+    # governance-cure row while its verdict file remains must hard-fail in
+    # both modes (the -R token grammar is exercised end to end).
+    led_bad = "\n".join(l for l in led.split("\n") if not re.match(r"^XE-19-R\s", l))
+    root, script = build_fixture(led_bad); tmp_roots.append(root)
+    a, b = run(script), run(script, "-O")
+    record("F9 removed XE-19-R row hard-fails", a.returncode != 0 and b.returncode != 0,
+           "exits %d/%d" % (a.returncode, b.returncode))
+
     # F3 duplicate campaign rule under -O -> hard fail
     dup_src = open(CENSUS, encoding="utf-8").read().replace(
         "RULES = [", 'RULES = [\n    (r"^XE-1$", "DUPLICATE-TEST", "dup"),', 1)

@@ -12,7 +12,7 @@ E5 charter, the E6 instantiation table + runlogs), the governance record
 (reader packet, master theorem, verdict census, tag annotation, change
 ledger, flip manifests, roadmap v6, lean correspondence tables, numerics
 results board), the cross-provider verification record (protocol,
-ledger, coordination log, queue, template, all 53 verdict artifacts,
+ledger, coordination log, queue, template, all 56 verdict artifacts,
 dispatch workbenches), the Lean formalization (formal-framework/lean/),
 the numerics (formal-framework/numerics/), and the verification scripts.
 

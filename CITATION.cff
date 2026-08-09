@@ -6,7 +6,7 @@ authors:
     given-names: "Cristobal"
     orcid: "https://orcid.org/0009-0001-4714-666X"
 doi: 10.5281/zenodo.21776818
-version: math-v2.0
+version: math-v2.0.1
 date-released: "2026-08-02"
 repository-code: "https://github.com/cvaldepenas/winding-metastability"
 license: CC-BY-4.0

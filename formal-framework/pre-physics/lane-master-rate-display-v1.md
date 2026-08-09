@@ -107,6 +107,12 @@ rate  <=  S_k - m_k + eps (S_k/kappa - w_k) + C eps^2
     renewal re-based on the local route: lane-minmig-proofs,
     externally reviewed). The O(eps) window is two-sided modulo
     the excursion rows.]
+    [RECON 2026-08-09: the excursion rows were DISCHARGED by the E2
+    campaign (XE-11-authorized 2026-08-02) and the initial delay at
+    the MIN OBJECT at rate strength (E5, XE-14); the surviving gate
+    on the package/full upper is the FULL-EXPECTATION reading under
+    its verbatim A6 fence. The bracket above is retained as the
+    state at this display's sealing.]
 ```
 
 ## What this page does NOT claim (the honest boundary)
@@ -133,7 +139,12 @@ rate  <=  S_k - m_k + eps (S_k/kappa - w_k) + C eps^2
 - Display 3's upper side: gated on the EXCURSION rows
   (PROD-EXCURSION and its conditional-uniform companion
   PROD-EXCURSION-COND - both expectation-shaped, unproved, the
-  off-stratum traps unclassified; LP-MIN-MIG discharged);
+  off-stratum traps unclassified; LP-MIN-MIG discharged)
+  [RECON 2026-08-09: subsequently PROVED at the excursion shape -
+  DISCHARGED, E2 campaign, XE-11-authorized 2026-08-02, and the
+  initial delay at the MIN OBJECT at rate strength (E5, XE-14);
+  what remains gated is the FULL-EXPECTATION reading under the A6
+  fence, and the off-stratum traps stay unclassified AS STRATA];
 - large coupling, k >= 2 coupled laws, composed/symmetric
   PROD-TRANSFER reruns: excluded;
 - NO simultaneous uniformity in N, the coupling, or auxiliary

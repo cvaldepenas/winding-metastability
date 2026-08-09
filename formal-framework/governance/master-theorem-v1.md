@@ -6,17 +6,25 @@ status = G0 DRAFTED 2026-07-19 (operator direction: "design a better
   parts, every part pinned to sealed items, every conditional named
   INSIDE the statement. The hunt list below is DERIVED from it - a
   residual is work if and only if it advances a part.
+  RECONCILED 2026-08-09 (MATH-SEAL-RECON-01): post-seal status sweep
+  only - no theorem change; the pre-seal enumeration is preserved in
+  git history.
 naming = in-corpus this is THE MASTER THEOREM (label package). Any
   discourse-vocabulary reading of it belongs to the interpretation
   layer under its charter - not here (firewall unchanged).
 done-criterion = the statement below holds with the REMAINING
-  CONDITIONS ENUMERATED IN FULL: C-2 (the library pin, Part III
-  backbone) + the excursion rows PROD-EXCURSION and
-  PROD-EXCURSION-COND (coupled upper) - LS-MIN-MIG and LP-MIN-MIG
-  DISCHARGED (lane-minmig-proofs; XM-R16-authorized); C-1
-  RESOLVED 2026-07-20. A first human reader
-  receives THIS PAGE + the repro kit (tag math-v1.0 lineage), not
-  a corpus tour.
+  CONDITIONS ENUMERATED IN FULL (reconciled 2026-08-09): C-2 (the
+  library pin, Part III backbone) + the A6 fence over the
+  FULL-EXPECTATION reading E_q[D(0)] of the package/full LP.5(c)
+  upper ONLY + the E6 parameter class (47 CONDITIONAL + 7 typed
+  rows; instantiation point eps = 0.045 per the F-1 adjudication).
+  The excursion rows PROD-EXCURSION + PROD-EXCURSION-COND are
+  DISCHARGED (E2 campaign, XE-11-authorized 2026-08-02); the initial
+  delay GAP-LP-RECUR @ A6 is DISCHARGED AT THE MIN OBJECT AT RATE
+  STRENGTH (E5, XE-14, 2026-08-02); LS-MIN-MIG and LP-MIN-MIG
+  DISCHARGED (XM-R16); C-1 RESOLVED 2026-07-20. A first human reader
+  receives THIS PAGE + the repro kit (tag math-v2.0, public, DOI
+  10.5281/zenodo.21776818), not a corpus tour.
 ```
 
 ## THE STATEMENT (model vocabulary)
@@ -44,9 +52,12 @@ PART III (QUANTIFIED PERSISTENCE). Label changes are barrier-gated:
   (X4); the DOMAIN-EXIT upper/sharp law holds via the verified
   local route (C-1 RESOLVED 2026-07-20: repair + in-lane migration
   + delta-check); the LABEL uppers are two-sided (LS-MIN-MIG
-  discharged) and the COUPLED upper holds MODULO the excursion
-  rows PROD-EXCURSION + PROD-EXCURSION-COND (LP-MIN-MIG
-  discharged).
+  discharged) and the COUPLED upper HOLDS - the excursion rows
+  PROD-EXCURSION + PROD-EXCURSION-COND are DISCHARGED (E2 campaign,
+  XE-11-authorized 2026-08-02) and the initial delay is DISCHARGED
+  AT THE MIN OBJECT AT RATE STRENGTH (E5, XE-14); only the
+  package/full upper's FULL-EXPECTATION reading E_q[D(0)] remains
+  under its verbatim A6 fence.
   The discrete-kernel backbone is sealed 4/5 [C-2].
 PART IV  (COUPLING + MAINTENANCE STABILITY). The label structure
   survives coupling and maintenance: the product shell is strict, the
@@ -69,6 +80,17 @@ C-1 = RESOLVED 2026-07-20: SH.2'-LOCAL v2 fully verified (fleet +
 C-2 = harris_geometric (S4) open at the library pin (invariant-
   measure existence not constructible there; obstruction recorded;
   variant route available). Part III's abstract backbone is 4/5.
+
+POST-SEAL RECONCILIATION (2026-08-09, MATH-SEAL-RECON-01): the
+  excursion rows this page carried pre-seal as live conditions were
+  DISCHARGED by the E2 campaign (XE-11, 2026-08-02), and
+  GAP-LP-RECUR @ A6 was DISCHARGED AT THE MIN OBJECT AT RATE
+  STRENGTH (E5, XE-14, 2026-08-02). The LIVE conditionals are
+  exactly: C-2; the A6 fence over the full-expectation reading
+  E_q[D(0)] of the package/full upper; and the E6 parameter class
+  (47 CONDITIONAL + 7 typed rows, eps = 0.045). See
+  governance/math-v2.0-tag-annotation.md. Hunt-list entries below
+  are HISTORY at their recorded dates, not live status.
 ```
 
 ## Part-to-pillar pin map (Lean names; prose rows where noted)

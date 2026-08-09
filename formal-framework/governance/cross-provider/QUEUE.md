@@ -1309,3 +1309,128 @@ XE-18 - THE STATUS-SEMANTICS MICRO DELTA (the last census item + the
    Q-renumbering stays deferred with its reason in the e4a ledger.
    DELIVERABLE: signed verdict (XE-18-<date>.md); LEDGER +
    COORDINATION as always. BLINDNESS: OPEN. EFFORT: very low.
+
+XE-19 (OPEN) - MATH-SEAL-RECON-01 DELTA GATE: post-seal documentary
+   reconciliation review. INTAKE: COORDINATION [117] (external math
+   auditor intake, 2026-08-09) confirmed a documentary contradiction
+   - E2's excursion rows DISCHARGED in the tag annotation / lanes /
+   reader packet vs still carried as LIVE CONDITIONS in
+   master-theorem-v1, OPEN-QUESTIONS, CANON-BOUNDARY and
+   CANON-THEOREMS - plus publication-state drift (MATH-BOOT,
+   WORKBOARD, NEXT) and two stale sentences (reader packet
+   "nothing is published" under a PUBLIC RELEASE header;
+   correspondence table's negative-winding line). The lead two-way
+   confirmed every citation and landed MATH-SEAL-RECON-01
+   (COORDINATION [118]). ITEMS: (1) each reconciled surface now
+   states the seal state EXACTLY - E2 discharge (XE-11, 2026-08-02),
+   E5 min-object discharge (XE-14), residue = the A6 full-expectation
+   fence + C-2 + the E6 parameter class (eps = 0.045), publication
+   fact with DOI 10.5281/zenodo.21776818; (2) NO mathematical
+   content, theorem statement, Lean file, fence byte, tag or release
+   moved - tag object a45542d1... -> commit 59c5c1a1... unchanged;
+   (3) history-preservation discipline holds (superseded text
+   explicitly marked in place, [117] landed verbatim, git history
+   intact); (4) scripts/coherence_guard.py v1.18 PASSES, and its new
+   seal-state invariants FAIL CLOSED when a reconciled surface is
+   reverted (spot-check at least one reversion, then restore); (5)
+   name any surface this sweep MISSED that still carries pre-seal
+   state (the class is cross-surface status coherence). DELIVERABLE:
+   signed verdict (XE-19-<date>.md); LEDGER + COORDINATION as
+   always. BLINDNESS: OPEN. EFFORT: low.
+   [SIGNED 2026-08-09: NOT SEAL-STATE-CLEAN - F1/F2/F3 blocking,
+   F4/F5 major; cure landed same day; successor item XE-19-R below.]
+
+XE-19-R (OPEN) - MATH-SEAL-RECON-01 CURE DELTA: verify the XE-19
+   cures ONLY; do not re-litigate what XE-19 passed. INTAKE:
+   verdicts/XE-19-2026-08-09.md + COORDINATION [119] (the lead's cure
+   record with per-finding two-way confirmation). CURES LANDED:
+   (F1) RECON/historical brackets at the three byte-public lane
+   sites - lane-lp-product-saddle QED summary; lane-master-rate-
+   display window bracket + honest-boundary item; lane-minmig-proofs
+   post-register bracket + typed-gaps register bracket - with the A6
+   fence clause byte-verbatim and zero formula/strength changes;
+   (F3) publication FACT/ACTIVITY typing on every named live
+   surface: CANON-BOUNDARY I.3 supersession paragraph;
+   CANON-THEOREMS x4; CANON-OBJECT; CANON-LADDER x2 (incl. the lane
+   -model line); MATH-BOOT guardrail; RESEARCH-BOOT x2;
+   DO-NOT-REOPEN x2 (reopen stays gated); META-MATH-LANE;
+   AGENT-CONTEXT-INDEX; (F5) version DOI added to the reader-packet
+   STATUS; E6/eps = 0.045 added to OPEN-QUESTIONS' RECON bracket;
+   ownership contract DECLARED: master theorem + reader packet +
+   MATH-BOOT + WORKBOARD carry the full tuple; canon books carry
+   discharge + residue + publication typing; NEXT carries pointers;
+   (F2) coherence_guard v1.19: full-tuple anchor on the master-
+   theorem status block including the exact "E5, XE-13" reversion
+   trap, an IN-MEMORY SELF-FIXTURE that fails the whole run if the
+   predicate would accept the XE-14 -> XE-13 mutation, stale-pattern
+   scans extended to the three public lanes, reader-packet DOI
+   anchor, untyped publication-token detector, CANON-BOUNDARY
+   supersession anchor; (F4) acknowledged - future charters read "no
+   source theorem, display, hypothesis or proved force moved; the G0
+   status/statement prose synchronized by design" (recorded [119]).
+   ITEMS: (1) verify each cure at its cited site (byte-level, both
+   directions); (2) re-run the guard's fail-closed probes - at
+   minimum the XE-14 -> XE-13 mutation AND one deletion of a new
+   lane RECON bracket, restore after; (3) confirm source trees /
+   fences / tag object unchanged again; (4) adjudicate
+   SEAL-STATE-CLEAN or name residuals. DELIVERABLE: signed verdict
+   (XE-19-R-<date>.md); LEDGER + COORDINATION as always. BLINDNESS:
+   OPEN. EFFORT: very low.
+   ADDENDUM (landed before dispatch pickup): XE-19's own SIGNED row
+   made the census fail closed (item matched 0 campaign rules - the
+   classifier working as designed). The lead added the rule
+   ^XE-19(-R\d*)? -> GOVERNANCE (SEAL-RECON), a NOTE line (governance
+   gates are authoritative but not soundness signatures), regenerated
+   the canonical governance/verdict-census-v1.md (53 AUTHORITATIVE /
+   54 PHYSICAL / 1 SUPERSEDED; strict E2=11/E5=3/14 UNCHANGED), and
+   the selftest passes 8/8 normal and -O. VERIFY additionally: (5)
+   the new rule binds XE-19 (and this very verdict, once signed) to
+   GOVERNANCE and nothing else; the strict headline is unchanged;
+   selftest 8/8.
+   [SIGNED 2026-08-09: NOT SEAL-STATE-CLEAN - 3 exact residuals
+   (guard window collision; MATH-BOOT/WORKBOARD ownership contract;
+   census TOKEN grammar). Cure landed same day; successor XE-19-R2.]
+
+XE-19-R2 (OPEN) - MATH-SEAL-RECON-01 SECOND CURE DELTA: verify the
+   three XE-19-R residual cures ONLY; everything XE-19-R adjudicated
+   PASS is inherited. INTAKE: verdicts/XE-19-R-2026-08-09.md +
+   COORDINATION [120a] (lead cure record; [120b] is the auditor's
+   concurrent record - see index note [121]). CURES LANDED: (R1, guard window collision)
+   the lane invariant is now SITE-ANCHORED - the RECON marker must
+   FOLLOW the stale phrase within 300 collapsed chars (backward
+   tokens no longer count), and a new IN-MEMORY SELF-FIXTURE deletes
+   the exact lane-lp QED RECON bracket and requires detection even
+   while the unrelated line-935 XE-11 remains; coherence_guard is
+   v1.20. (R2, ownership contract) MATH-BOOT.md:14 and the WORKBOARD
+   MATH-SEAL-RECON-01 row now carry the FULL seal tuple (XE-11;
+   XE-14 min-object; A6 E_q[D(0)]; C-2; eps = 0.045; DOI) and point
+   per-round gate state at cross-provider NEXT.md instead of naming
+   a specific gate (the stale-gate class is now also a guard
+   invariant). (R3, census grammar) TOKEN admits ^XE-\d+-R\d*$; the
+   signed XE-19-R row binds end-to-end (census exit 0; 55 PHYSICAL /
+   54 AUTHORITATIVE / 1 SUPERSEDED; GOVERNANCE = 2; strict
+   E2=11/E5=3/14 UNCHANGED); selftest fixture F9 (removed XE-19-R
+   row hard-fails both modes) added - suite now 9/9. ITEMS: (1)
+   verify each cure at its cited site; (2) re-run the two hostile
+   mutations (XE-14->XE-13; lane-lp QED bracket deletion) against
+   v1.20 - both must now fail closed - and restore; (3) rerun census
+   + selftest 9/9 normal and -O; (4) confirm source trees / fences /
+   tag objects unchanged; (5) adjudicate SEAL-STATE-CLEAN or name
+   residuals. DELIVERABLE: signed verdict (XE-19-R2-<date>.md);
+   LEDGER + COORDINATION as always. BLINDNESS: OPEN. EFFORT: very
+   low.
+   ADDENDUM 2 (pre-pickup self-pass; operator-directed
+   anti-ping-pong): before pickup the lead ran its OWN pass at gate
+   strength and cured one further residual of the R2 class it found
+   itself: the LIVE gtpa-bridge charter and the physics evaluator
+   review hardcoded the per-round gate name ("XE-19-R SIGNED") -
+   both now reference the LIVE item via cross-provider NEXT.md, and
+   coherence_guard v1.21 adds an invariant forbidding hardcoded
+   per-round gate names in live charters/reviews (historical
+   closeouts exempt by design). The lead also re-ran BOTH on-disk
+   hostile mutations against v1.21 (XE-14 -> XE-13; lane-lp QED
+   bracket deletion): each fails closed with exit 1 and the named
+   SEAL-STATE message; files restored byte-identical (guard exit 0
+   after restore); census selftest 9/9 and prose invariants PASS.
+   VERIFY additionally: (6) the two live files reference NEXT.md and
+   v1.21 fails closed if a hardcoded gate name is reintroduced.

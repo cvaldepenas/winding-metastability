@@ -833,6 +833,12 @@ Lemma KD, R7a/R8a) and the retry scaffold R5b/R6b/R7b/R8b (the
 A3/Nummelin route is VOIDED - superseded record). LP.5's upper is conditional on
 PROD-EXCURSION + PROD-EXCURSION-COND (the Wald tower consumes the
 conditional-uniform companion - R5b). This block is the record.
+[RECON 2026-08-09, MATH-SEAL-RECON-01: record at this block's
+sealing. Both rows were subsequently DISCHARGED - E2 campaign,
+XE-11-authorized 2026-08-02 - and the initial delay at the MIN
+OBJECT at rate strength (E5, XE-14); the surviving condition on the
+package/full LP.5(c) upper is the FULL-EXPECTATION reading under its
+verbatim A6 fence. The proof below is untouched.]
 
 Proof.  THE ATTEMPT (from B_{delta/2}(G_k)):
 (a) THE NEAR-TARGET SANDWICH.  Let `z_sl := x(pi - a_k) x {phi_0}`
@@ -938,6 +944,12 @@ symmetric   b_phi cancelling                  (rerun prescription
 The gate-v17 window for the COUPLED family: LOWER side
 UNCONDITIONAL; UPPER side conditional on PROD-EXCURSION + PROD-EXCURSION-COND
 (LP-MIN-MIG discharged).
+[RECON 2026-08-09, MATH-SEAL-RECON-01: the sentence above is the state
+at this lane's sealing. Those rows were subsequently DISCHARGED - the
+E2 campaign, XE-11-authorized 2026-08-02, with the initial delay at
+the MIN OBJECT at rate strength (E5, XE-14); the surviving condition
+on the package/full upper is the FULL-EXPECTATION reading under its
+verbatim A6 fence. No formula or strength on this page changes.]
 Two of the three v17 rows are DISCHARGED for the coupled family;
 the third is replaced by a strictly smaller one;
 composed/symmetric await the recorded PROD-TRANSFER rerun.  QED.

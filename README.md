@@ -10,8 +10,9 @@ Independent research directed and operated by **C. Valdepenas**,
 executed by AI systems under an adversarial, multi-architecture
 verification protocol. **Full disclosure, stated up front: all
 verification to date is by AI systems - machine-checked Lean proofs,
-plus 52 authoritative external signatures from an independent AI
-architecture. No human has yet checked any proof in this corpus.** That
+plus 55 authoritative external signatures from an independent AI
+architecture (52 at the math-v2.0 seal + 3 post-seal documentary
+governance gates - the XE-19 arc). No human has yet checked any proof in this corpus.** That
 is exactly why everything here is offered for verification rather than
 asserted on authority: the repository is designed so that you - human
 or machine - can check it yourself.
@@ -50,7 +51,7 @@ awaiting two unlanded analytic constants. See
    proofs, with per-display provenance tags.
 4. The verification record
    (`formal-framework/governance/cross-provider/`) - the protocol, the
-   ledger, the coordination log, and all 53 signed verdict artifacts.
+   ledger, the coordination log, and all 56 signed verdict artifacts.
 
 ## Verify it yourself
 
@@ -94,5 +95,13 @@ Documents: CC BY 4.0 (`LICENSE`). Code (`scripts/`,
 `formal-framework/lean/`, `formal-framework/numerics/`): MIT
 (`LICENSE-CODE`). Cite via `CITATION.cff`. Zenodo: concept DOI
 [10.5281/zenodo.21776817](https://doi.org/10.5281/zenodo.21776817)
-(all versions); this release (math-v2.0):
+(all versions); the sealed release (math-v2.0):
 [10.5281/zenodo.21776818](https://doi.org/10.5281/zenodo.21776818).
+
+Release math-v2.0.1 (2026-08-09) is a DOCUMENTARY REPAIR release:
+zero mathematical change. It reconciles documentary surfaces that
+still asserted pre-seal state (with every superseded sentence marked
+in place, never silently rewritten), and was verified by three
+external delta gates ending SEAL-STATE-CLEAN. Full record:
+`formal-framework/governance/math-v2.0.1-tag-annotation.md` and the
+XE-19 / XE-19-R / XE-19-R2 verdicts.

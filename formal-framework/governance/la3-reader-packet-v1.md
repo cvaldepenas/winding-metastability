@@ -1,7 +1,8 @@
 # L-A3 Reader Packet v1 — PUBLIC RELEASE (math-v2.0)
 
 ```text
-STATUS = PUBLIC RELEASE, 2026-08-03.  This supersedes the working
+STATUS = PUBLIC RELEASE, 2026-08-03 (release math-v2.0; version DOI
+  10.5281/zenodo.21776818).  This supersedes the working
   version's INTERNAL-ONLY status: the four-profile external panel
   (XE-15..XE-18) adjudicated this packet FIT FOR RELEASE AS THE
   PROGRAM'S READER DOCUMENT, and the operator took the distribution
@@ -110,11 +111,10 @@ LS/LT/LP  the LABEL TOWER: the true rate of TOPOLOGICAL persistence
        and DISCHARGED for the coupled product as well (the excursion
        rows PROD-EXCURSION + PROD-EXCURSION-COND, XE-11 2026-08-02;
        LP-MIN-MIG discharged).  Exactly ONE named condition survives
-BENEATH THAT UPPER, and it bites only its PACKAGE/FULL form (the
-program's full done-criterion has three items - Section 3 and
-Addendum 2.1);
-       and it bites only the PACKAGE/FULL form of the coupled upper:
-       see Section 3 and Addendum 2.1
+       BENEATH THAT UPPER - the A6 fence on the FULL-EXPECTATION
+       reading E_q[D(0)] - and it bites only the PACKAGE/FULL form
+       of the coupled upper: see Section 3 and Addendum 2.1 (the
+       program's full done-criterion has three items).
 ```
 
 ## 3. The certified package, in one page
@@ -686,13 +686,16 @@ Assurance records (all waves) ....... governance/ wave records +
   campaign closeouts, gates v5-v18 + phases C-1..C-7
 ```
 
-END OF PACKET.  Nothing in this document is published, submitted, or
-public; it exists so that one human reader, chosen deliberately, can
-try to break what the machines could not.
+END OF PACKET.  [The original charter sentence here - "Nothing in
+this document is published, submitted, or public" - was true when
+written and is SUPERSEDED by the PUBLIC RELEASE header (math-v2.0,
+2026-08-03; RECON 2026-08-09). The purpose stands:] this document
+exists so that a human reader can try to break what the machines
+could not.
 
 ## Addendum 2026-07-21 — the certified-core state
 
-This addendum refreshes the packet past the state it was last written to (2026-07-05, the label-tower completion). Three things changed: a single organizing statement was drafted (the Master Theorem, G0, 2026-07-19); the Lean track reached 170/170; and a second AI architecture had by then reviewed the corpus across ~20 items. The Section-8 disclosure is UNCHANGED and still governs: all verification to date is by AI systems, and no human has yet checked any proof. Nothing here is published. [Section 2.1 below extends this addendum through 2026-08-02, when the two campaigns it describes closed.]
+This addendum refreshes the packet past the state it was last written to (2026-07-05, the label-tower completion). Three things changed: a single organizing statement was drafted (the Master Theorem, G0, 2026-07-19); the Lean track reached 170/170; and a second AI architecture had by then reviewed the corpus across ~20 items. The Section-8 disclosure is UNCHANGED and still governs: all verification to date is by AI systems, and no human has yet checked any proof. [SUPERSEDED 2026-08-09: "Nothing here is published" stood here and was true at this addendum's writing; the packet and the program repository are PUBLIC since 2026-08-03 (math-v2.0).] [Section 2.1 below extends this addendum through 2026-08-02, when the two campaigns it describes closed.]
 
 ### 1. The organizing statement — the Master Theorem (G0)
 
