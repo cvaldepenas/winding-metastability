@@ -102,6 +102,8 @@ Release math-v2.0.1 (2026-08-09) is a DOCUMENTARY REPAIR release:
 zero mathematical change. It reconciles documentary surfaces that
 still asserted pre-seal state (with every superseded sentence marked
 in place, never silently rewritten), and was verified by three
-external delta gates ending SEAL-STATE-CLEAN. Full record:
+external delta gates ending SEAL-STATE-CLEAN. Version DOI:
+[10.5281/zenodo.21864619](https://doi.org/10.5281/zenodo.21864619).
+Full record:
 `formal-framework/governance/math-v2.0.1-tag-annotation.md` and the
 XE-19 / XE-19-R / XE-19-R2 verdicts.
