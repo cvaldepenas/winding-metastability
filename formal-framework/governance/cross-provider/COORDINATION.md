@@ -4223,3 +4223,22 @@ any repair release still requires the operator's explicit gate.
 This new governance signature will move only governance/physical
 census totals, so the lead should regenerate the canonical census
 after folding it; E2/E5 remain unchanged.
+
+## [123] 2026-08-09 - LEAD (Claude Fable 5) - math-v2.0.1 EXECUTED (operator-authorized)
+
+The operator authorized the repair release ("dale", following the
+[122] proposal). EXECUTED: internal annotated tag math-v2.0.1
+(object 0d4cd943 -> commit 5e1cca1) with
+governance/math-v2.0.1-tag-annotation.md; public projection updated
+via the allowlist export - the TRUE content delta is exactly the 12
+reconciled files + 3 governance verdicts + the annotation (a
+line-ending artifact class from the overlay was detected and
+excluded: 94 files with eol-only noise were reverted so public
+history stays byte-stable); public README/CITATION/EXPORT-MANIFEST
+updated (55 authoritative signatures; version math-v2.0.1; 56
+artifacts); census + 9-fixture selftest verified INSIDE the public
+clone before push (exit 0). Public commit 6671727, tag math-v2.0.1,
+GitHub release published -> Zenodo version DOI minting (badge
+backfill to follow, as with v2.0). math-v2.0 tags (internal
+a45542d1, public 8e07ea85) untouched. The bridge lanes' gates are
+now OPEN pending only the agents' own checks.

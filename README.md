@@ -38,6 +38,49 @@ pin C-2 at the mathlib boundary; the 47 conditional parameter rows
 awaiting two unlanded analytic constants. See
 `formal-framework/governance/math-v2.0-tag-annotation.md`.
 
+## Relation to prior work
+
+For a single ring, the winding sectors and their energy barrier, the
+classification of equilibria and saddles, and the transition law are
+already in the published literature, and this repository claims no
+priority for them. Cosco and Shapira [1] define the same discrete
+winding number on the periodic XY chain, identify the energy barrier
+to changing it (2J with their coupling constant J; 2 kappa here), and
+prove the time scale on which the winding changes as the number of
+rotors N grows, with its log N correction. Berglund, Medvedev and
+Simpson [2] study the stochastic nearest-neighbour Kuramoto model,
+which is this program's single-ring diffusion after the change of
+variables `theta = 2 pi u`, `kappa = K/(2 pi)`, a linear time change
+and `eps = 1/beta`. They find all equilibria and classify them by
+Morse index, identify the stable twisted states and the relevant
+one-jump saddles, split off the global phase as a Brownian motion,
+and prove the metastable hierarchy and sharp Eyring-Kramers estimates,
+with prefactor, for the transition times. Their barrier height equals
+this program's single-ring label exponent `S_k - m_k` (an identity
+recomputed by machine). Their estimate is sharper than the program's
+logarithmic label law; it is stated for reaching the lower twisted
+states rather than for the first change of winding.
+
+So this program claims no new classification, no new saddle exponent,
+no new phase-mode decoupling and no sharper transition law for a
+single ring. What it adds is the verification record (Part I
+machine-checked in Lean; the signed external AI audits and the census
+under `formal-framework/governance/cross-provider/`) and the extension
+to two coupled rings and to maintenance that acts only through the
+energy readout (lanes M2, M3, MC, MR, WC, LT and LP). A preliminary
+search found no exact match for that extension; that is not a novelty
+test, and no novelty is claimed for it.
+
+1. C. Cosco and A. Shapira, *Topologically induced metastability in a
+   periodic XY chain*, J. Math. Phys. **62**, 043301 (2021).
+   [doi:10.1063/5.0004606](https://doi.org/10.1063/5.0004606),
+   [arXiv:2001.07950](https://arxiv.org/abs/2001.07950).
+2. N. Berglund, G. S. Medvedev and G. Simpson, *Metastability in the
+   stochastic nearest-neighbour Kuramoto model of coupled phase
+   oscillators*, Nonlinearity **38**, 095031 (2025).
+   [doi:10.1088/1361-6544/ae05aa](https://doi.org/10.1088/1361-6544/ae05aa),
+   [arXiv:2412.15136](https://arxiv.org/abs/2412.15136).
+
 ## Start here
 
 1. **`formal-framework/governance/la3-reader-packet-v1.md`** - the
@@ -48,7 +91,10 @@ awaiting two unlanded analytic constants. See
 2. `formal-framework/governance/master-theorem-v1.md` - the master
    statement.
 3. The lanes (`formal-framework/pre-physics/lane-*.md`) - the full
-   proofs, with per-display provenance tags.
+   proofs, with per-display provenance tags. Read the T2 lane
+   (`lane-c-exit-time-lower-bound-v1.md`) with its rate-scope erratum
+   (`lane-c-exit-time-lower-bound-rate-scope-erratum-v1.md`): the T2
+   exponent is a one-sided lower bound, not an exact rate.
 4. The verification record
    (`formal-framework/governance/cross-provider/`) - the protocol, the
    ledger, the coordination log, and all 56 signed verdict artifacts.
@@ -56,7 +102,7 @@ awaiting two unlanded analytic constants. See
 ## Verify it yourself
 
 ```
-python scripts/verdict_census_selftest.py   # the signature census + its 8-fixture adversarial suite
+python scripts/verdict_census_selftest.py   # the signature census + its 9-fixture adversarial suite
 python scripts/verdict_census.py            # regenerates the canonical signed-verdict census
 python scripts/prose_invariants.py          # the prose/statement invariant guard
 python scripts/e6_instantiation.py          # the numerical instantiation pass (deterministic; reports findings F-1/F-2)
@@ -107,3 +153,15 @@ external delta gates ending SEAL-STATE-CLEAN. Version DOI:
 Full record:
 `formal-framework/governance/math-v2.0.1-tag-annotation.md` and the
 XE-19 / XE-19-R / XE-19-R2 verdicts.
+
+Release math-v2.0.2 is a DOCUMENTARY release: zero mathematical
+change. It adds the T2 rate-scope erratum
+(`formal-framework/pre-physics/lane-c-exit-time-lower-bound-rate-scope-erratum-v1.md`),
+which fixes how the T2 lane is read (a one-sided lower bound on the
+zero-sector exit-time exponent, never an exact rate; the T2 statement
+and proof are unchanged), and the "Relation to prior work" section
+above. Two independent read-only AI reviews read the erratum (the
+record does not name their provider); it carries no new signed
+verdict, so the census is unchanged. The release text was read by an
+independent same-provider AI context (Anthropic); that is not
+cross-provider verification.
