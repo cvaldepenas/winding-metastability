@@ -164,4 +164,5 @@ above. Two independent read-only AI reviews read the erratum (the
 record does not name their provider); it carries no new signed
 verdict, so the census is unchanged. The release text was read by an
 independent same-provider AI context (Anthropic); that is not
-cross-provider verification.
+cross-provider verification. Version DOI:
+[10.5281/zenodo.22986638](https://doi.org/10.5281/zenodo.22986638).
